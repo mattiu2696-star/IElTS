@@ -117,11 +117,17 @@ router.post('/submit', authenticate, [
       })
     }
 
-    // Grade with Claude AI
+    // Grade with Claude AI (fallback to mock if key invalid)
     let gradingResult
     if (process.env.CLAUDE_API_KEY && process.env.CLAUDE_API_KEY !== 'your-claude-api-key-here') {
-      gradingResult = await gradeEssayWithClaude(essay_text, essayType, lessonContent)
-    } else {
+      try {
+        gradingResult = await gradeEssayWithClaude(essay_text, essayType, lessonContent)
+      } catch (aiErr) {
+        console.error('[Claude AI Error]', aiErr.message)
+        gradingResult = null // will fall through to mock below
+      }
+    }
+    if (!gradingResult) {
       // Mock grading when no API key
       const base = Math.min(5.5 + wordCount / 500, 7.5)
       gradingResult = {
