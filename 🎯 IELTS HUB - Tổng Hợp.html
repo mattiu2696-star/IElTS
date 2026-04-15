@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎯 IELTS HUB – Tổng Hợp</title>
+<style>
+:root {
+  --primary: #1a237e; --primary-light: #e8eaf6; --primary-dark: #0d1257;
+  --orange: #e65100; --orange-light: #fff3e0;
+  --green: #1b5e20; --green-light: #e8f5e9;
+  --red: #b71c1c; --red-light: #ffebee;
+  --purple: #4a148c; --purple-light: #f3e5f5;
+  --teal: #006064; --teal-light: #e0f7fa;
+  --brown: #4e342e; --brown-light: #efebe9;
+  --sidebar-w: 240px;
+  --bg: #f0f2f5; --card: #fff; --text: #1a1a1a; --sub: #555; --border: #e0e0e0;
+}
+[data-theme="dark"] {
+  --bg: #121212; --card: #1e1e1e; --text: #e0e0e0; --sub: #aaa; --border: #333;
+  --primary-light: #1a237e33; --orange-light: #e6510011; --green-light: #1b5e2011;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; font-size: 14px; }
+
+/* SIDEBAR */
+.sidebar {
+  width: var(--sidebar-w); background: var(--primary-dark); color: #fff;
+  height: 100vh; position: fixed; top: 0; left: 0; overflow-y: auto;
+  display: flex; flex-direction: column; z-index: 100; transition: transform 0.3s;
+}
+.sidebar-logo { padding: 20px 16px 14px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.sidebar-logo h1 { font-size: 1.1em; font-weight: 800; line-height: 1.3; }
+.sidebar-logo p { font-size: 0.75em; opacity: 0.7; margin-top: 4px; }
+.sidebar-search { padding: 12px; }
+.sidebar-search input {
+  width: 100%; padding: 8px 12px; border-radius: 20px; border: none;
+  background: rgba(255,255,255,0.12); color: #fff; font-size: 0.88em; outline: none;
+}
+.sidebar-search input::placeholder { color: rgba(255,255,255,0.5); }
+.nav-section { padding: 8px 0; }
+.nav-label { font-size: 0.7em; text-transform: uppercase; letter-spacing: 1px; opacity: 0.5; padding: 8px 16px 4px; }
+.nav-item {
+  display: flex; align-items: center; gap: 10px; padding: 9px 16px; cursor: pointer;
+  font-size: 0.88em; opacity: 0.8; transition: all 0.15s; border-left: 3px solid transparent;
+}
+.nav-item:hover { background: rgba(255,255,255,0.08); opacity: 1; }
+.nav-item.active { background: rgba(255,255,255,0.15); opacity: 1; border-left-color: #fff; font-weight: 700; }
+.nav-icon { font-size: 1.1em; width: 20px; text-align: center; }
+.sidebar-footer { margin-top: auto; padding: 12px 16px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.75em; opacity: 0.5; }
+
+/* MAIN */
+.main { margin-left: var(--sidebar-w); flex: 1; min-height: 100vh; }
+.topbar {
+  background: var(--card); border-bottom: 1px solid var(--border);
+  padding: 12px 28px; display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 50; box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.topbar-title { font-weight: 800; font-size: 1.05em; color: var(--primary); }
+.topbar-actions { display: flex; gap: 10px; align-items: center; }
+.icon-btn { background: none; border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px; cursor: pointer; font-size: 0.85em; color: var(--text); transition: all 0.15s; }
+.icon-btn:hover { background: var(--primary-light); border-color: var(--primary); }
+.content { padding: 24px 28px; }
+
+/* PAGE */
+.page { display: none; }
+.page.active { display: block; }
+
+/* CARDS */
+.card { background: var(--card); border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); margin-bottom: 20px; overflow: hidden; border: 1px solid var(--border); }
+.card-header { padding: 14px 20px; font-weight: 800; font-size: 0.95em; display: flex; align-items: center; gap: 8px; }
+.card-body { padding: 18px 20px; }
+.ch-blue { background: var(--primary); color: #fff; }
+.ch-orange { background: var(--orange); color: #fff; }
+.ch-green { background: var(--green); color: #fff; }
+.ch-purple { background: var(--purple); color: #fff; }
+.ch-red { background: var(--red); color: #fff; }
+.ch-teal { background: var(--teal); color: #fff; }
+.ch-brown { background: var(--brown); color: #fff; }
+
+/* GRID */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+.grid4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+@media(max-width:800px) { .grid2,.grid3,.grid4 { grid-template-columns: 1fr; } }
+
+/* TABLES */
+table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+th { background: var(--primary-light); padding: 9px 12px; text-align: left; font-weight: 700; border-bottom: 2px solid var(--border); color: var(--primary); }
+td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+tr:hover td { background: rgba(0,0,0,0.02); }
+
+/* TAGS */
+.tag { display: inline-block; border-radius: 4px; padding: 2px 8px; font-size: 0.78em; font-weight: 700; margin: 2px; }
+.t-blue { background: var(--primary-light); color: var(--primary); }
+.t-orange { background: var(--orange-light); color: var(--orange); }
+.t-green { background: var(--green-light); color: var(--green); }
+.t-red { background: var(--red-light); color: var(--red); }
+.t-purple { background: var(--purple-light); color: var(--purple); }
+.t-must { background: #ffebee; color: #c62828; }
+
+/* BOXES */
+.info-box { border-radius: 8px; padding: 12px 16px; margin: 10px 0; font-size: 0.92em; line-height: 1.6; }
+.ib-yellow { background: #fff8e1; border-left: 4px solid #f9a825; }
+.ib-blue { background: var(--primary-light); border-left: 4px solid var(--primary); }
+.ib-green { background: var(--green-light); border-left: 4px solid #43a047; }
+.ib-red { background: var(--red-light); border-left: 4px solid #e53935; }
+.ib-orange { background: var(--orange-light); border-left: 4px solid var(--orange); }
+.formula { background: #f8f9fa; border: 1px solid #e0e0e0; border-left: 4px solid var(--primary); border-radius: 0 6px 6px 0; padding: 10px 14px; font-family: 'Courier New', monospace; font-size: 0.88em; margin: 8px 0; line-height: 1.7; }
+
+/* VOCAB CHIPS */
+.chip-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.chip { background: var(--primary-light); color: var(--primary); border-radius: 20px; padding: 4px 12px; font-size: 0.82em; font-weight: 600; cursor: pointer; transition: all 0.15s; border: 1px solid transparent; }
+.chip:hover { background: var(--primary); color: #fff; }
+.chip.orange { background: var(--orange-light); color: var(--orange); }
+.chip.orange:hover { background: var(--orange); color: #fff; }
+.chip.green { background: var(--green-light); color: var(--green); }
+.chip.green:hover { background: var(--green); color: #fff; }
+.chip.purple { background: var(--purple-light); color: var(--purple); }
+.chip.purple:hover { background: var(--purple); color: #fff; }
+
+/* SEARCH RESULTS */
+.search-result { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; margin-bottom: 10px; cursor: pointer; transition: all 0.15s; }
+.search-result:hover { border-color: var(--primary); box-shadow: 0 2px 8px rgba(26,35,126,0.1); }
+.sr-section { font-size: 0.75em; color: var(--sub); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+.sr-title { font-weight: 700; margin: 3px 0; }
+.sr-preview { font-size: 0.88em; color: var(--sub); }
+.highlight-text { background: #fff176; border-radius: 2px; }
+
+/* CHECKLIST */
+.cl-item { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--border); cursor: pointer; border-radius: 6px; padding-left: 6px; }
+.cl-item:hover { background: rgba(0,0,0,0.02); }
+.cl-item:last-child { border-bottom: none; }
+.cl-item input { width: 18px; height: 18px; cursor: pointer; flex-shrink: 0; margin-top: 1px; accent-color: var(--green); }
+.cl-item label { cursor: pointer; font-size: 0.93em; line-height: 1.5; flex: 1; }
+.cl-item.checked label { text-decoration: line-through; color: #aaa; }
+
+/* WRITING AREA */
+.write-area { width: 100%; min-height: 150px; border: 2px solid var(--border); border-radius: 8px; padding: 12px; font-family: inherit; font-size: 0.95em; resize: vertical; background: var(--card); color: var(--text); line-height: 1.6; }
+.write-area:focus { border-color: var(--primary); outline: none; }
+.wc-bar { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.82em; color: var(--sub); }
+.model-btn { background: var(--green); color: #fff; border: none; border-radius: 8px; padding: 8px 16px; cursor: pointer; font-size: 0.85em; font-weight: 700; margin-top: 10px; }
+.model-answer { background: var(--green-light); border: 1.5px solid #81c784; border-radius: 10px; padding: 16px; margin-top: 12px; font-size: 0.92em; line-height: 1.7; display: none; }
+.model-answer h4 { color: var(--green); margin-bottom: 8px; }
+
+/* TIMER */
+.timer-row { display: flex; align-items: center; gap: 12px; padding: 10px 20px; background: #f8f9fa; border-top: 1px solid var(--border); }
+.timer-display { font-size: 1.1em; font-weight: 800; color: var(--red); min-width: 56px; }
+.tbtn { border: none; border-radius: 8px; padding: 7px 14px; cursor: pointer; font-size: 0.84em; font-weight: 700; }
+.tbtn.start { background: var(--red); color: #fff; }
+.tbtn.reset { background: #e0e0e0; color: #333; }
+
+/* PROGRESS BAR */
+.progress-container { margin: 8px 0; }
+.progress-label { display: flex; justify-content: space-between; font-size: 0.82em; color: var(--sub); margin-bottom: 4px; }
+.progress-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 4px; transition: width 0.5s; }
+
+/* DASHBOARD STATS */
+.stat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+@media(max-width:700px) { .stat-grid { grid-template-columns: repeat(2,1fr); } }
+.stat-card { border-radius: 12px; padding: 16px; text-align: center; }
+.stat-num { font-size: 2em; font-weight: 800; }
+.stat-lbl { font-size: 0.8em; margin-top: 4px; opacity: 0.8; }
+
+/* MOBILE */
+.menu-toggle { display: none; background: none; border: none; font-size: 1.4em; cursor: pointer; color: var(--text); }
+@media(max-width:768px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .menu-toggle { display: block; }
+  .content { padding: 16px 14px; }
+  .topbar { padding: 10px 14px; }
+}
+.overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 90; }
+.overlay.active { display: block; }
+
+/* FLIP CARD */
+.flip-cards { display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: 12px; }
+.flip-card { height: 100px; perspective: 800px; cursor: pointer; }
+.flip-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
+.flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+.flip-front,.flip-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 10px; display: flex; align-items: center; justify-content: center; padding: 12px; text-align: center; font-size: 0.9em; font-weight: 600; }
+.flip-front { background: var(--primary); color: #fff; }
+.flip-back { background: var(--green-light); color: var(--green); transform: rotateY(180deg); font-size: 0.82em; }
+</style>
+</head>
+<body>
+
+<!-- OVERLAY (mobile) -->
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <h1>🎯 IELTS HUB</h1>
+    <p>Band 7.0+ · Writing</p>
+  </div>
+  <div class="sidebar-search">
+    <input type="text" id="sidebarSearch" placeholder="🔍 Tìm kiếm..." oninput="handleSearch(this.value)">
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">Tổng Quan</div>
+    <div class="nav-item active" onclick="nav('home')"><span class="nav-icon">🏠</span> Dashboard</div>
+    <div class="nav-item" onclick="nav('roadmap')"><span class="nav-icon">🗺️</span> Lộ Trình 12 Tuần</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">Writing Task 1</div>
+    <div class="nav-item" onclick="nav('modA')"><span class="nav-icon">📈</span> Module A – Trend</div>
+    <div class="nav-item" onclick="nav('modB')"><span class="nav-icon">📊</span> Module B – Comparison</div>
+    <div class="nav-item" onclick="nav('modC')"><span class="nav-icon">⚙️</span> Module C – Process</div>
+    <div class="nav-item" onclick="nav('modD')"><span class="nav-icon">🗺️</span> Module D – Map</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">Writing Task 2</div>
+    <div class="nav-item" onclick="nav('wt2')"><span class="nav-icon">📝</span> Essay – 4 Dạng Bài</div>
+    <div class="nav-item" onclick="nav('peel')"><span class="nav-icon">🧱</span> PEEL Structure</div>
+    <div class="nav-item" onclick="nav('topics')"><span class="nav-icon">📚</span> Từ Vựng Chủ Đề</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">Công Cụ</div>
+    <div class="nav-item" onclick="nav('cheatsheet')"><span class="nav-icon">📋</span> Cheat Sheet</div>
+    <div class="nav-item" onclick="nav('checklist')"><span class="nav-icon">✅</span> Checklist Chấm Bài</div>
+    <div class="nav-item" onclick="nav('practice')"><span class="nav-icon">✍️</span> Luyện Viết</div>
+    <div class="nav-item" onclick="nav('flashcard')"><span class="nav-icon">🃏</span> Flashcards</div>
+    <div class="nav-item" onclick="nav('search')"><span class="nav-icon">🔍</span> Tìm Kiếm</div>
+  </div>
+  <div class="sidebar-footer">Dựa trên tài liệu IB1, IC1, IC2 của bạn</div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+      <span class="topbar-title" id="pageTitle">🏠 Dashboard</span>
+    </div>
+    <div class="topbar-actions">
+      <button class="icon-btn" onclick="toggleDark()">🌙 Dark</button>
+      <button class="icon-btn" onclick="window.print()">🖨️ In</button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ===== HOME ===== -->
+    <div id="page-home" class="page active">
+      <div class="stat-grid" style="margin-bottom:20px;">
+        <div class="stat-card" style="background:var(--primary-light);">
+          <div class="stat-num" style="color:var(--primary);">12</div>
+          <div class="stat-lbl" style="color:var(--primary);">Tuần học</div>
+        </div>
+        <div class="stat-card" style="background:var(--orange-light);">
+          <div class="stat-num" style="color:var(--orange);">4</div>
+          <div class="stat-lbl" style="color:var(--orange);">Module WT1</div>
+        </div>
+        <div class="stat-card" style="background:var(--green-light);">
+          <div class="stat-num" style="color:var(--green);">4</div>
+          <div class="stat-lbl" style="color:var(--green);">Dạng Essay</div>
+        </div>
+        <div class="stat-card" style="background:var(--purple-light);">
+          <div class="stat-num" style="color:var(--purple);">9</div>
+          <div class="stat-lbl" style="color:var(--purple);">Chủ đề từ vựng</div>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <div class="card-header ch-blue">📅 Tiến Độ Học – Tuần Hiện Tại</div>
+          <div class="card-body">
+            <div style="font-size:0.88em;color:var(--sub);margin-bottom:12px;">Cập nhật tuần bạn đang học:</div>
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+              <label style="font-size:0.9em;font-weight:700;">Tuần:</label>
+              <select id="weekSelector" onchange="updateProgress()" style="padding:6px 12px;border-radius:8px;border:1px solid var(--border);font-size:0.9em;background:var(--card);color:var(--text);">
+                <option value="1">Tuần 1 – Trend: Nền tảng</option>
+                <option value="2">Tuần 2 – Trend: Nâng cao</option>
+                <option value="3">Tuần 3 – Trend: Luyện tổng hợp</option>
+                <option value="4">Tuần 4 – Comparison: Nền tảng</option>
+                <option value="5">Tuần 5 – Comparison: Nâng cao</option>
+                <option value="6">Tuần 6 – Comparison: Luyện tổng hợp</option>
+                <option value="7">Tuần 7 – Process: Nền tảng</option>
+                <option value="8">Tuần 8 – Process + Map</option>
+                <option value="9">Tuần 9 – Essay: Phân tích đề</option>
+                <option value="10">Tuần 10 – Essay: Body paragraphs</option>
+                <option value="11">Tuần 11 – Essay: Viết hoàn chỉnh</option>
+                <option value="12">Tuần 12 – Ôn tập + Thi thử</option>
+              </select>
+            </div>
+            <div class="progress-container">
+              <div class="progress-label"><span>Tiến độ tổng thể</span><span id="pct">8%</span></div>
+              <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:8%;background:var(--primary);"></div></div>
+            </div>
+            <div class="info-box ib-blue" style="margin-top:14px;" id="weekTip">
+              <strong>Tuần 1 – Hôm nay học:</strong> Từ vựng xu hướng (tăng/giảm/ổn định) + 4 cấu trúc câu cơ bản. Viết 10 câu về Line Graph.
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header ch-orange">🔥 Truy Cập Nhanh</div>
+          <div class="card-body">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+              <button onclick="nav('modA')" style="background:var(--primary-light);color:var(--primary);border:none;border-radius:10px;padding:14px;cursor:pointer;font-weight:700;font-size:0.88em;text-align:left;">📈 Module A<br><span style="font-weight:400;font-size:0.85em;">Trend</span></button>
+              <button onclick="nav('modB')" style="background:var(--orange-light);color:var(--orange);border:none;border-radius:10px;padding:14px;cursor:pointer;font-weight:700;font-size:0.88em;text-align:left;">📊 Module B<br><span style="font-weight:400;font-size:0.85em;">Comparison</span></button>
+              <button onclick="nav('modC')" style="background:var(--green-light);color:var(--green);border:none;border-radius:10px;padding:14px;cursor:pointer;font-weight:700;font-size:0.88em;text-align:left;">⚙️ Module C<br><span style="font-weight:400;font-size:0.85em;">Process</span></button>
+              <button onclick="nav('modD')" style="background:var(--teal-light);color:var(--teal);border:none;border-radius:10px;padding:14px;cursor:pointer;font-weight:700;font-size:0.88em;text-align:left;">🗺️ Module D<br><span style="font-weight:400;font-size:0.85em;">Map</span></button>
+              <button onclick="nav('wt2')" style="background:var(--red-light);color:var(--red);border:none;border-radius:10px;padding:14px;cursor:pointer;font-weight:700;font-size:0.88em;text-align:left;">📝 Task 2<br><span style="font-weight:400;font-size:0.85em;">Essay</span></button>
+              <button onclick="nav('practice')" style="background:var(--purple-light);color:var(--purple);border:none;border-radius:10px;padding:14px;cursor:pointer;font-weight:700;font-size:0.88em;text-align:left;">✍️ Luyện viết<br><span style="font-weight:400;font-size:0.85em;">Bài tập có đồng hồ</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header ch-green">📌 Quy Trình Làm Bài Thi – Nhớ Thuộc Lòng</div>
+        <div class="card-body">
+          <div class="grid4">
+            <div style="background:var(--primary-light);border-radius:10px;padding:14px;text-align:center;">
+              <div style="font-size:1.6em;font-weight:800;color:var(--primary);">①</div>
+              <div style="font-weight:700;margin:4px 0;">ANALYZE</div>
+              <div style="font-size:0.82em;color:var(--sub);">4–5 phút · Xác định dạng bài, topic, structure</div>
+            </div>
+            <div style="background:var(--orange-light);border-radius:10px;padding:14px;text-align:center;">
+              <div style="font-size:1.6em;font-weight:800;color:var(--orange);">②</div>
+              <div style="font-weight:700;margin:4px 0;">OUTLINE</div>
+              <div style="font-size:0.82em;color:var(--sub);">5–8 phút · Brainstorm, chọn 2 ý chính, vẽ sơ đồ</div>
+            </div>
+            <div style="background:var(--green-light);border-radius:10px;padding:14px;text-align:center;">
+              <div style="font-size:1.6em;font-weight:800;color:var(--green);">③</div>
+              <div style="font-weight:700;margin:4px 0;">NON-STOP WRITE</div>
+              <div style="font-size:0.82em;color:var(--sub);">WT1: 20' · WT2: 30' · Không dừng tra từ!</div>
+            </div>
+            <div style="background:var(--red-light);border-radius:10px;padding:14px;text-align:center;">
+              <div style="font-size:1.6em;font-weight:800;color:var(--red);">④</div>
+              <div style="font-weight:700;margin:4px 0;">CORRECTION</div>
+              <div style="font-size:0.82em;color:var(--sub);">3–5 phút · Sửa grammar, spelling, cohesion</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== ROADMAP ===== -->
+    <div id="page-roadmap" class="page">
+      <div class="card">
+        <div class="card-header ch-blue">🗺️ Lộ Trình 12 Tuần – Band 7.0+</div>
+        <div class="card-body">
+          <table>
+            <thead><tr><th>Tuần</th><th>Module</th><th>Nội Dung Chính</th><th>Mục Tiêu</th></tr></thead>
+            <tbody>
+              <tr><td><strong>1</strong></td><td><span class="tag t-blue">Module A</span></td><td>Từ vựng xu hướng · 4 cấu trúc câu cơ bản · Trích dẫn số liệu</td><td>10 câu xu hướng đúng</td></tr>
+              <tr><td><strong>2</strong></td><td><span class="tag t-blue">Module A</span></td><td>Câu nâng cao: After/Having/Despite · Time expression · after which</td><td>1 bài Line Graph hoàn chỉnh</td></tr>
+              <tr><td><strong>3</strong></td><td><span class="tag t-blue">Module A</span></td><td>Luyện Bar chart + Pie chart + Table · Tự chấm bài</td><td>150+ từ trong 20 phút</td></tr>
+              <tr><td><strong>4</strong></td><td><span class="tag t-orange">Module B</span></td><td>Superlative · Comparative cơ bản · Mức độ so sánh</td><td>10 câu so sánh đúng</td></tr>
+              <tr><td><strong>5</strong></td><td><span class="tag t-orange">Module B</span></td><td>Twice/12% higher · outnumber · Equal comparison · Ranking</td><td>1 bài Pie Chart so sánh</td></tr>
+              <tr><td><strong>6</strong></td><td><span class="tag t-orange">Module B</span></td><td>Luyện tổng hợp Comparison · 4 loại câu trong 1 bài</td><td>150+ từ trong 18 phút</td></tr>
+              <tr><td><strong>7</strong></td><td><span class="tag t-green">Module C</span></td><td>Passive voice · Connector trình tự · Verb phrases Process</td><td>Mô tả 1 quy trình đủ bước</td></tr>
+              <tr><td><strong>8</strong></td><td><span class="tag t-green">Module C</span> <span class="tag" style="background:#e0f7fa;color:#006064;">Module D</span></td><td>Process nâng cao · Map vocabulary · Spatial language · Tenses</td><td>1 bài Process + 1 bài Map</td></tr>
+              <tr><td><strong>9</strong></td><td><span class="tag t-red">Task 2</span></td><td>Phân tích 4 dạng đề · Paraphrase · Thesis statement</td><td>Phân tích đúng 10 đề thật</td></tr>
+              <tr><td><strong>10</strong></td><td><span class="tag t-red">Task 2</span></td><td>PEEL structure · Brainstorm · Cohesive devices · Collocation</td><td>3 body paragraphs hoàn chỉnh</td></tr>
+              <tr><td><strong>11</strong></td><td><span class="tag t-red">Task 2</span></td><td>Full essay 250+ từ · Chủ đề: Work, Education, Health, Tech</td><td>2 bài full/tuần + tự chấm</td></tr>
+              <tr><td><strong>12</strong></td><td><span class="tag t-purple">Thi Thử</span></td><td>Đề thật WT1+WT2 · Sửa lỗi · Xác định điểm yếu</td><td>3 bộ đề thi thử hoàn chỉnh</td></tr>
+            </tbody>
+          </table>
+          <div class="info-box ib-yellow" style="margin-top:14px;">
+            <strong>💡 Lịch học mỗi ngày (2.5h):</strong> 30' ôn từ vựng → 45' học lý thuyết → 45' viết bài → 20' tự sửa → 20' đọc bài mẫu. Ngày thứ 7: thi thử có tính giờ.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MODULE A: TREND ===== -->
+    <div id="page-modA" class="page">
+      <div class="card">
+        <div class="card-header ch-blue">📈 Module A – Graphs WITH TREND · Dấu hiệu: ≥ 2 mốc thời gian</div>
+        <div class="card-body">
+          <div class="info-box ib-yellow"><strong>🔍 Nhận biết:</strong> Có <strong>ít nhất 2 mốc thời gian</strong> (year/month/week/day/hour) hoặc age groups. Dạng bài: Line Graph, Bar Chart, Pie Chart (2 mốc), Table.</div>
+          <div class="grid2" style="margin-top:14px;">
+            <div>
+              <h4 style="margin-bottom:10px;color:var(--primary);">VERB – Động Từ Xu Hướng</h4>
+              <table>
+                <tr><th>Ý nghĩa</th><th>Verb thường</th><th>Verb mạnh</th></tr>
+                <tr><td>↑ Tăng</td><td>increase, rise, grow</td><td>rocket, leap, shoot up, soar, surge, double</td></tr>
+                <tr><td>↓ Giảm</td><td>decrease, fall, drop, decline</td><td>plunge, plummet, slump, dip</td></tr>
+                <tr><td>— Ổn định</td><td>remain stable/constant/the same at, level off at, stabilize at</td><td></td></tr>
+                <tr><td>~ Dao động</td><td>fluctuate, vary</td><td>be erratic</td></tr>
+                <tr><td>📍 Vị trí</td><td>peak at, stand at, begin/start at, end/finish at</td><td>reach a peak/trough/high/low of</td></tr>
+              </table>
+              <h4 style="margin:14px 0 8px;color:var(--primary);">ADJ/ADV – Mức Độ Thay Đổi</h4>
+              <table>
+                <tr><th>Mức</th><th>Adjective / Adverb</th></tr>
+                <tr><td>🟢 Nhỏ</td><td>slight/slightly · gradual/gradually · marginal/marginally · minimal/minimally · steady/steadily</td></tr>
+                <tr><td>🟡 Vừa</td><td>moderate/moderately · notable/notably</td></tr>
+                <tr><td>🔴 Lớn</td><td>sharp/sharply · steep/steeply · dramatic/dramatically · significant/significantly · substantial/substantially · considerable/considerably · exponential/exponentially</td></tr>
+              </table>
+            </div>
+            <div>
+              <h4 style="margin-bottom:10px;color:var(--primary);">4 Cấu Trúc Câu Cơ Bản</h4>
+              <div class="formula">① S + V + <em>adv</em> + time<br>The income of RB <strong>increased dramatically</strong> from 2005 to 2010.</div>
+              <div class="formula">② There was + <em>adj</em> + NOUN + in S + time<br>There was a <strong>dramatic increase</strong> in the income of RB from 2005 to 2010.</div>
+              <div class="formula">③ The period + saw/witnessed + Noun Phrase<br>The period 2005–2010 <strong>witnessed</strong> a dramatic increase in RB's income.</div>
+              <div class="formula">④ NOUN + was seen/witnessed + in S + time (Passive)<br>A <strong>dramatic increase</strong> was seen in the income of RB from 2005 to 2010.</div>
+              <h4 style="margin:14px 0 8px;color:var(--primary);">Câu Nâng Cao – Band 7+</h4>
+              <div class="formula">Chung chủ (S1=S2):<br>After VING1, S V2<br>Having VPII, S V2<br>Despite VING1, S V2<br>S V1, before VING2</div>
+              <div class="formula">Khác chủ (S1≠S2):<br>S1 V1, <strong>after which</strong> S2 V2<br>S1 V1, <strong>followed by</strong> NOUN PHRASE<br>S1 V1, <strong>compared with/opposed to</strong> NOUN</div>
+              <h4 style="margin:14px 0 8px;color:var(--primary);">Trích Dẫn Số Liệu</h4>
+              <div class="formula">from…to · at · by (verb) / of (noun) · between…and</div>
+              <h4 style="margin:14px 0 8px;color:var(--primary);">Time Expression</h4>
+              <div class="chip-list">
+                <span class="chip">from 2000 to 2005</span><span class="chip">between X and Y</span><span class="chip">until 2010</span>
+                <span class="chip">over a 5-year period</span><span class="chip">in the first/last N years</span><span class="chip">after 5 years</span>
+                <span class="chip">5 years later</span><span class="chip">from 2000 onwards</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MODULE B: COMPARISON ===== -->
+    <div id="page-modB" class="page">
+      <div class="card">
+        <div class="card-header ch-orange">📊 Module B – Graphs WITHOUT TREND · So Sánh</div>
+        <div class="card-body">
+          <div class="info-box ib-yellow"><strong>🔍 Nhận biết:</strong> Chỉ có <strong>0 hoặc 1 mốc thời gian</strong> – tập trung so sánh giữa các nhóm/đối tượng.</div>
+          <div class="grid2" style="margin-top:14px;">
+            <div>
+              <h4 style="margin-bottom:10px;color:var(--orange);">1. Superlative (Cao/Thấp nhất)</h4>
+              <div class="formula">The highest percentage in [group] <strong>belongs to</strong> [X].<br>[X] <strong>accounts for</strong> the highest percentage.<br>The highest % of time <strong>is spent on</strong> [X] in [group].<br>[Group] spend <strong>the highest %</strong> of their time [V-ing].</div>
+              <h4 style="margin:12px 0 8px;color:var(--orange);">2. Comparative – Cơ Bản</h4>
+              <div class="formula">The % of [X] <strong>is higher than</strong> that of/on [Y].<br>A <strong>higher %</strong> of time is spent on [X] than on [Y].<br><strong>More time</strong> is spent on [X] than on [Y].</div>
+              <h4 style="margin:12px 0 8px;color:var(--orange);">3. Comparative – Nâng Cao (Với Mức Độ)</h4>
+              <div class="formula">GENERAL: far/much &gt;&lt; slightly/minimally<br>DETAILED: figure + unit (12% / by 12%)<br>TIMES: twice/three times higher than<br><br>The % of [X] is <strong>much/twice/12% higher than</strong> on [Y].<br>A <strong>much higher %</strong> of time is spent on [X] than on [Y].</div>
+            </div>
+            <div>
+              <h4 style="margin-bottom:10px;color:var(--orange);">4. Verb Phrases Đặc Biệt</h4>
+              <div class="formula"><strong>outnumber</strong> somebody by something<br>→ Women outnumber men <strong>by four to one</strong>.<br><br><strong>surpass</strong> B by ± chênh lệch<br>→ [X] surpassed [Y] by 12%.<br><br><strong>be superior to</strong> = greater in number than<br>→ The % of [X] <strong>is superior to</strong> that on [Y].</div>
+              <h4 style="margin:12px 0 8px;color:var(--orange);">5. Equal Comparison</h4>
+              <div class="formula">Degree: nearly/almost / exactly/precisely / twice/half<br><br>A, B, C recorded <strong>nearly equal/equivalent</strong> figures.<br>[X] holds <strong>the first/second place</strong> in [group].<br>The first position <strong>is taken/occupied/held by</strong> A.</div>
+              <h4 style="margin:12px 0 8px;color:var(--orange);">6. Ranking & Connector</h4>
+              <div class="formula">A <strong>comes top of the list</strong>, followed by B and C.<br><strong>While</strong> S1 V1, S2 V2.<br>S1 V1 <strong>opposed to / compared with</strong> figure for S2.<br><strong>In comparison with</strong> S2, S1 V1.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MODULE C: PROCESS ===== -->
+    <div id="page-modC" class="page">
+      <div class="card">
+        <div class="card-header ch-green">⚙️ Module C – Process · Quy Trình</div>
+        <div class="card-body">
+          <div class="info-box ib-yellow"><strong>🔍 Nhận biết:</strong> <strong>Human:</strong> industry, agriculture, construction, services. <strong>Nature:</strong> life cycle (animals), natural resources, weather.</div>
+          <div class="grid2" style="margin-top:14px;">
+            <div>
+              <h4 style="margin-bottom:8px;color:var(--green);">Ngữ Pháp Cốt Lõi</h4>
+              <div class="formula">Tense: Present Simple<br>Voice: Passive (S + BE + V-PII)<br><br>ACTIVE: People pick tomatoes.<br>PASSIVE: Tomatoes <strong>are picked</strong> and put in baskets.</div>
+              <h4 style="margin:12px 0 8px;color:var(--green);">Connector Trình Tự</h4>
+              <table>
+                <tr><th>Chức năng</th><th>Connector</th></tr>
+                <tr><td>Bắt đầu</td><td>First / Initially / To begin with</td></tr>
+                <tr><td>Tiếp theo</td><td>Then / Next / After that / Following this</td></tr>
+                <tr><td>Sau đó</td><td>Subsequently / The following step involves</td></tr>
+                <tr><td>Song song</td><td>Simultaneously / Meanwhile / At the same time</td></tr>
+                <tr><td>Lựa chọn</td><td>Alternatively</td></tr>
+                <tr><td>Kết thúc</td><td>Finally / Ultimately / Once this stage is complete</td></tr>
+              </table>
+              <h4 style="margin:12px 0 8px;color:var(--green);">Diễn Đạt Mục Đích</h4>
+              <div class="formula">for + NOUN: <em>for flavor enhancement</em><br>to / in order to + VERB: <em>to ensure quality</em><br>so that + S+V: <em>so that it can be sold</em><br>with a view to + VING: <em>with a view to improving</em></div>
+            </div>
+            <div>
+              <h4 style="margin-bottom:8px;color:var(--green);">Từ Vựng Life Cycle</h4>
+              <div class="formula"><strong>Breeding:</strong> lay/deposit eggs · hatch · emerge · spawn · breed<br><strong>Development:</strong> develop = grow up · feed on = consume · enlarge · mature = reach adulthood · feed on<br><strong>Movement:</strong> migrate = move = travel · live in = occupy<br><strong>Kết thúc:</strong> Having completed all these steps, the life cycle begins again.</div>
+              <h4 style="margin:12px 0 8px;color:var(--green);">Bước Tiếp Cận (How to Approach)</h4>
+              <div class="info-box ib-green">
+                <ol style="margin-left:18px;line-height:2;">
+                  <li><strong>Analyze:</strong> WHAT – WHERE – WHEN</li>
+                  <li><strong>Skim:</strong> Title · số stages · starting & ending points · footnotes</li>
+                  <li><strong>Outline:</strong> Ghi verbs (passive) + extra details ra nháp</li>
+                  <li><strong>Write:</strong> Non-stop, dùng passive + connectors</li>
+                </ol>
+              </div>
+              <h4 style="margin:12px 0 8px;color:var(--green);">Extra Details (Band 7+)</h4>
+              <div class="formula">with + NOUN: <em>with brand name, ingredients, and expiry date</em><br>which/where + relative clause: <em>where ketchup can be purchased</em><br>2–4 stages thêm extra details là đủ cho Band 7</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MODULE D: MAP ===== -->
+    <div id="page-modD" class="page">
+      <div class="card">
+        <div class="card-header ch-teal">🗺️ Module D – Map · Bản Đồ (MỚI)</div>
+        <div class="card-body">
+          <div class="info-box ib-yellow"><strong>🔍 Nhận biết:</strong> Bản đồ thường xuất hiện cùng nhau (before/after) hoặc có thể kết hợp với Process. Mô tả <strong>sự thay đổi địa lý</strong> hoặc <strong>vị trí</strong>.</div>
+          <div class="grid2" style="margin-top:14px;">
+            <div>
+              <h4 style="margin-bottom:8px;color:var(--teal);">Từ Vựng Vị Trí (Spatial Vocab)</h4>
+              <div class="chip-list">
+                <span class="chip" style="background:var(--teal-light);color:var(--teal);">to the north/south/east/west of</span>
+                <span class="chip" style="background:var(--teal-light);color:var(--teal);">in the north/centre/south</span>
+                <span class="chip" style="background:var(--teal-light);color:var(--teal);">adjacent to</span>
+                <span class="chip" style="background:var(--teal-light);color:var(--teal);">next to / beside</span>
+                <span class="chip" style="background:var(--teal-light);color:var(--teal);">opposite</span>
+                <span class="chip" style="background:var(--teal-light);color:var(--teal);">between X and Y</span>
+                <span class="chip" style="background:var(--teal-light);color:var(--teal);">along the river/road</span>
+                <span class="chip" style="background:var(--teal-light);color:var(--teal);">on the outskirts of</span>
+                <span class="chip" style="background:var(--teal-light);color:var(--teal);">in the vicinity of</span>
+                <span class="chip" style="background:var(--teal-light);color:var(--teal);">surrounded by</span>
+                <span class="chip" style="background:var(--teal-light);color:var(--teal);">in the far north/corner</span>
+              </div>
+              <h4 style="margin:12px 0 8px;color:var(--teal);">Từ Vựng Thay Đổi (Change Vocab)</h4>
+              <table>
+                <tr><th>Loại thay đổi</th><th>Cụm từ</th></tr>
+                <tr><td>Xây mới</td><td>was built / was constructed / was developed / was added</td></tr>
+                <tr><td>Phá/dỡ bỏ</td><td>was demolished / was knocked down / was removed / disappeared</td></tr>
+                <tr><td>Thay thế</td><td>was replaced by / gave way to / was converted into</td></tr>
+                <tr><td>Mở rộng</td><td>was extended / was expanded / was widened</td></tr>
+                <tr><td>Đổi tên/dùng</td><td>was renamed / was transformed into / was turned into</td></tr>
+                <tr><td>Không đổi</td><td>remained / stayed the same / was retained / was unchanged</td></tr>
+              </table>
+            </div>
+            <div>
+              <h4 style="margin-bottom:8px;color:var(--teal);">Thì Động Từ Cho Map</h4>
+              <div class="formula"><strong>Past Simple:</strong> mô tả trong quá khứ<br>→ A hospital <strong>was built</strong> in 1990.<br><br><strong>Present Perfect (Passive):</strong> thay đổi đến hiện tại<br>→ The forest <strong>has been cleared</strong>.<br><br><strong>Used to be:</strong> trước đây là...<br>→ The area <strong>used to be</strong> farmland.<br><br><strong>Now/Currently:</strong> hiện tại<br>→ The site <strong>is now</strong> a shopping mall.</div>
+              <h4 style="margin:12px 0 8px;color:var(--teal);">Cấu Trúc Câu Map – Band 7+</h4>
+              <div class="formula">Where once there was [X], there is now [Y].<br>[X], which <strong>used to be</strong> [old], has been <strong>converted into</strong> [new].<br>The [area] <strong>was transformed from</strong> [A] <strong>into</strong> [B].<br>[Building] was <strong>replaced by</strong> [new building] on the [north] side.<br>The road <strong>was extended</strong> to connect [A] with [B].</div>
+              <h4 style="margin:12px 0 8px;color:var(--teal);">Bước Tiếp Cận Map</h4>
+              <div class="info-box ib-blue">
+                <ol style="margin-left:18px;line-height:2;">
+                  <li><strong>Overview:</strong> Tổng kết thay đổi lớn nhất (mở rộng? phát triển? thu hẹp?)</li>
+                  <li><strong>Nhóm theo vị trí:</strong> North → South → East → West, hoặc Center → Outskirts</li>
+                  <li><strong>Nhóm theo loại thay đổi:</strong> Added / Removed / Retained</li>
+                  <li>Dùng <strong>cả 2 thì</strong>: past simple + present perfect</li>
+                </ol>
+              </div>
+              <h4 style="margin:12px 0 8px;color:var(--teal);">Connector Mô Tả Map</h4>
+              <div class="chip-list">
+                <span class="chip" style="background:var(--teal-light);color:var(--teal);">Meanwhile</span>
+                <span class="chip" style="background:var(--teal-light);color:var(--teal);">In addition</span>
+                <span class="chip" style="background:var(--teal-light);color:var(--teal);">Furthermore</span>
+                <span class="chip" style="background:var(--teal-light);color:var(--teal);">By contrast</span>
+                <span class="chip" style="background:var(--teal-light);color:var(--teal);">On the other hand</span>
+                <span class="chip" style="background:var(--teal-light);color:var(--teal);">Similarly</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== WRITING TASK 2 ===== -->
+    <div id="page-wt2" class="page">
+      <div class="card">
+        <div class="card-header ch-red">📝 Writing Task 2 – 4 Dạng Essay</div>
+        <div class="card-body">
+          <table>
+            <thead><tr><th>Dạng bài</th><th>Dấu hiệu nhận biết</th><th>Thesis Statement</th><th>Body 1</th><th>Body 2</th><th>Conclusion</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Opinion</strong></td><td>To what extent do you agree? / What is your opinion?</td><td>Nêu thẳng quan điểm cá nhân</td><td>Defense 1</td><td>Defense 2</td><td>Restate opinion + Recommendation</td></tr>
+              <tr><td><strong>Discursive</strong></td><td>Discuss both views and give your opinion</td><td>KHÔNG nêu quan điểm – "Both views will be discussed"</td><td>View 1</td><td>View 2</td><td>Nêu quan điểm cá nhân + Summarize</td></tr>
+              <tr><td><strong>Problem-Solution</strong></td><td>What are the causes/problems? What are the solutions/effects?</td><td>Nêu tổng quát problems/solutions</td><td>Problem / Cause</td><td>Solution / Effect</td><td>Restate purpose + Summarize</td></tr>
+              <tr><td><strong>Mixed</strong></td><td>Do the advantages outweigh the disadvantages?</td><td>Kết hợp Discursive + Opinion</td><td>Advantages</td><td>Disadvantages</td><td>Restate: outweigh or not</td></tr>
+            </tbody>
+          </table>
+          <div class="grid2" style="margin-top:16px;">
+            <div>
+              <h4 style="margin-bottom:8px;color:var(--red);">Lead-in (Paraphrase) – 2 Cách</h4>
+              <div class="formula"><strong>Cách 1 – Đổi ngữ pháp:</strong><br>"Young people socialize online" → "An increasing number of young individuals are turning to digital platforms for social interaction"<br><br><strong>Cách 2 – Đổi từ (synonym):</strong><br>Dùng thesaurus.com / Cambridge để tìm synonym</div>
+            </div>
+            <div>
+              <h4 style="margin-bottom:8px;color:var(--red);">Cohesive Devices – Không Lặp Lại!</h4>
+              <table>
+                <tr><th>Chức năng</th><th>Từ nối</th></tr>
+                <tr><td>Bổ sung</td><td>Furthermore · Moreover · In addition · Additionally</td></tr>
+                <tr><td>Đối lập</td><td>However · Nevertheless · On the other hand · In contrast</td></tr>
+                <tr><td>Nguyên nhân</td><td>Because · Since · As · Due to · Owing to</td></tr>
+                <tr><td>Kết quả</td><td>Therefore · Thus · As a result · Consequently · This means that</td></tr>
+                <tr><td>Ví dụ</td><td>For example · For instance · To illustrate · Such as</td></tr>
+                <tr><td>Kết luận</td><td>In conclusion · To sum up · Overall · In summary</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PEEL ===== -->
+    <div id="page-peel" class="page">
+      <div class="card">
+        <div class="card-header ch-purple">🧱 PEEL Structure – Cách Viết Body Paragraph Band 7+</div>
+        <div class="card-body">
+          <div class="info-box ib-blue"><strong>💡 PEEL = Point → Explanation → Example → Link</strong> · Mỗi body paragraph nên đầy đủ 4 phần này để đạt Band 7+. Viết 4–6 câu/paragraph.</div>
+          <div class="grid2" style="margin-top:14px;">
+            <div>
+              <div style="background:var(--primary-light);border-radius:10px;padding:16px;margin-bottom:12px;">
+                <div style="font-size:1.2em;font-weight:800;color:var(--primary);">P – Point</div>
+                <div style="font-size:0.88em;color:var(--sub);margin:4px 0 8px;">Topic sentence – phát biểu ý chính của paragraph</div>
+                <div class="formula" style="font-size:0.88em;">One clear, direct sentence answering the essay question.<br>→ "Working for a single organization throughout one's career offers significant advantages in terms of career stability."</div>
+              </div>
+              <div style="background:var(--orange-light);border-radius:10px;padding:16px;margin-bottom:12px;">
+                <div style="font-size:1.2em;font-weight:800;color:var(--orange);">E – Explanation</div>
+                <div style="font-size:0.88em;color:var(--sub);margin:4px 0 8px;">Giải thích tại sao/như thế nào – 1-2 câu</div>
+                <div class="formula" style="font-size:0.88em;">→ "This is because long-term employees tend to develop deep institutional knowledge and are more likely to receive promotions and salary increases, leading to greater financial security."</div>
+              </div>
+              <div style="background:var(--green-light);border-radius:10px;padding:16px;margin-bottom:12px;">
+                <div style="font-size:1.2em;font-weight:800;color:var(--green);">E – Example</div>
+                <div style="font-size:0.88em;color:var(--sub);margin:4px 0 8px;">Ví dụ cụ thể – 1-2 câu (thực tế / giả thuyết)</div>
+                <div class="formula" style="font-size:0.88em;">→ "For example, in Japan, the tradition of lifelong employment has been linked to low staff turnover and high levels of employee loyalty, which in turn contributes to corporate stability."</div>
+              </div>
+              <div style="background:var(--purple-light);border-radius:10px;padding:16px;">
+                <div style="font-size:1.2em;font-weight:800;color:var(--purple);">L – Link</div>
+                <div style="font-size:0.88em;color:var(--sub);margin:4px 0 8px;">Kết nối về câu hỏi đề – 1 câu</div>
+                <div class="formula" style="font-size:0.88em;">→ "Therefore, it is clear that long-term employment can provide employees with a more secure and rewarding professional life."</div>
+              </div>
+            </div>
+            <div>
+              <h4 style="margin-bottom:10px;color:var(--purple);">7 Cách Phát Triển Ý (Supporting Ideas)</h4>
+              <table>
+                <tr><th>#</th><th>Cách</th><th>Starter phrases</th></tr>
+                <tr><td>①</td><td>Reasons (Why)</td><td>This is because... / One reason is that...</td></tr>
+                <tr><td>②</td><td>Effects/Results</td><td>As a result... / This leads to... / Consequently...</td></tr>
+                <tr><td>③</td><td>Examples</td><td>For example... / For instance... / To illustrate...</td></tr>
+                <tr><td>④</td><td>Descriptions</td><td>Specifically... / In particular... / More precisely...</td></tr>
+                <tr><td>⑤</td><td>Comparison</td><td>In contrast... / Compared with... / Unlike...</td></tr>
+                <tr><td>⑥</td><td>Hypothesis</td><td>If... then... / Should this happen... / Without this...</td></tr>
+                <tr><td>⑦</td><td>Facts/Figures</td><td>Studies show that... / According to research... / Statistics indicate...</td></tr>
+              </table>
+              <h4 style="margin:14px 0 8px;color:var(--purple);">Sentence Starters Hay – Band 7+</h4>
+              <div class="chip-list">
+                <span class="chip purple">It is widely acknowledged that</span>
+                <span class="chip purple">There is no denying that</span>
+                <span class="chip purple">It stands to reason that</span>
+                <span class="chip purple">One of the most significant</span>
+                <span class="chip purple">A key advantage of this is</span>
+                <span class="chip purple">This is particularly evident in</span>
+                <span class="chip purple">From a practical standpoint</span>
+                <span class="chip purple">In the long run</span>
+                <span class="chip purple">To a large extent</span>
+                <span class="chip purple">It could be argued that</span>
+              </div>
+              <div class="info-box ib-orange" style="margin-top:14px;">
+                <strong>⚠️ Tránh những cụm này (Examiner ghét):</strong><br>
+                ✗ "In today's modern world..." ✗ "This essay will discuss..."<br>
+                ✗ "As we all know..." ✗ "In a nutshell..."<br>
+                ✗ "In my humble opinion..." ✗ "Last but not least..."
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== TOPICS VOCAB ===== -->
+    <div id="page-topics" class="page">
+      <div class="card">
+        <div class="card-header ch-brown">📚 Từ Vựng Theo Chủ Đề – 9 Topics IELTS</div>
+        <div class="card-body">
+          <p style="color:var(--sub);font-size:0.88em;margin-bottom:16px;">Click vào chủ đề để xem từ vựng chi tiết</p>
+          <div id="topicBtns" style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;">
+            <button onclick="showTopic('work')" class="tbtn-topic active" data-topic="work">💼 Work</button>
+            <button onclick="showTopic('education')" class="tbtn-topic" data-topic="education">🎓 Education</button>
+            <button onclick="showTopic('health')" class="tbtn-topic" data-topic="health">🏥 Health</button>
+            <button onclick="showTopic('environment')" class="tbtn-topic" data-topic="environment">🌍 Environment</button>
+            <button onclick="showTopic('technology')" class="tbtn-topic" data-topic="technology">💻 Technology</button>
+            <button onclick="showTopic('crime')" class="tbtn-topic" data-topic="crime">⚖️ Crime</button>
+            <button onclick="showTopic('media')" class="tbtn-topic" data-topic="media">📱 Media</button>
+            <button onclick="showTopic('society')" class="tbtn-topic" data-topic="society">🏙️ Society</button>
+            <button onclick="showTopic('food')" class="tbtn-topic" data-topic="food">🍎 Food</button>
+          </div>
+          <div id="topicContent"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== CHEAT SHEET ===== -->
+    <div id="page-cheatsheet" class="page">
+      <div class="card">
+        <div class="card-header ch-teal">📋 Quick Reference – Cheat Sheet</div>
+        <div class="card-body">
+          <div class="grid2">
+            <div>
+              <h4 style="color:var(--primary);margin-bottom:8px;">WT1 – 4 Module (Dấu Hiệu Nhận Biết)</h4>
+              <table>
+                <tr><th>Module</th><th>Dấu hiệu</th><th>Ngôn ngữ chính</th></tr>
+                <tr><td>A – Trend</td><td>≥2 mốc thời gian</td><td>Verbs of trend + 4 sentence structures</td></tr>
+                <tr><td>B – Comparison</td><td>0-1 mốc thời gian</td><td>Superlative, Comparative, Equal, Ranking</td></tr>
+                <tr><td>C – Process</td><td>Sơ đồ quy trình</td><td>Passive voice + connectors trình tự</td></tr>
+                <tr><td>D – Map</td><td>Bản đồ trước/sau</td><td>Spatial vocab + change vocab + tenses</td></tr>
+              </table>
+              <h4 style="color:var(--red);margin:14px 0 8px;">WT2 – Công Thức Thesis Statement</h4>
+              <div class="formula">Opinion: "I strongly believe that [position] because [reason 1] and [reason 2]."<br>Discursive: "Both perspectives have their own merits, and this essay will examine each in turn before drawing a conclusion."<br>Problem-Solution: "This essay will examine the primary causes of this phenomenon and propose viable solutions."</div>
+            </div>
+            <div>
+              <h4 style="color:var(--green);margin-bottom:8px;">Số Từ & Thời Gian Mục Tiêu</h4>
+              <table>
+                <tr><th>Phần</th><th>Số từ</th><th>Thời gian</th></tr>
+                <tr><td>WT1 tối thiểu</td><td>150 từ</td><td>20 phút</td></tr>
+                <tr><td>WT1 Band 7+</td><td>170–190 từ</td><td>18–20 phút</td></tr>
+                <tr><td>WT2 tối thiểu</td><td>250 từ</td><td>40 phút</td></tr>
+                <tr><td>WT2 Band 7+</td><td>270–290 từ</td><td>35–38 phút</td></tr>
+              </table>
+              <h4 style="color:var(--orange);margin:14px 0 8px;">Paraphrase Cụm Hay Dùng</h4>
+              <table>
+                <tr><th>Gốc</th><th>Paraphrase</th></tr>
+                <tr><td>shows</td><td>illustrates / depicts / reveals / demonstrates</td></tr>
+                <tr><td>many people</td><td>a growing number of individuals / a significant proportion</td></tr>
+                <tr><td>nowadays</td><td>in recent years / in the contemporary world / increasingly</td></tr>
+                <tr><td>problems</td><td>challenges / issues / difficulties / concerns</td></tr>
+                <tr><td>important</td><td>crucial / significant / vital / essential / indispensable</td></tr>
+                <tr><td>good / beneficial</td><td>advantageous / constructive / favorable / positive</td></tr>
+                <tr><td>bad / harmful</td><td>detrimental / adverse / damaging / negative</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== CHECKLIST ===== -->
+    <div id="page-checklist" class="page">
+      <div class="grid2">
+        <div class="card">
+          <div class="card-header ch-blue">📊 WT1 Checklist</div>
+          <div class="card-body">
+            <p style="font-size:0.82em;color:var(--sub);margin-bottom:10px;">Click để tick ✓</p>
+            <div onclick="tick(this)" class="cl-item"><input type="checkbox"><label>Xác định dạng: Trend/Comparison/Process/Map</label></div>
+            <div onclick="tick(this)" class="cl-item"><input type="checkbox"><label>Đọc title, units, axis labels, footnotes</label></div>
+            <div onclick="tick(this)" class="cl-item"><input type="checkbox"><label>Chọn 2-3 điểm nổi bật cho Overview</label></div>
+            <div onclick="tick(this)" class="cl-item"><input type="checkbox"><label>Paragraph 1: Paraphrase đề (không copy)</label></div>
+            <div onclick="tick(this)" class="cl-item"><input type="checkbox"><label><strong>Paragraph 2: Overview</strong> <span class="tag t-must">BẮT BUỘC</span></label></div>
+            <div onclick="tick(this)" class="cl-item"><input type="checkbox"><label>Body: Chi tiết có số liệu + đơn vị</label></div>
+            <div onclick="tick(this)" class="cl-item"><input type="checkbox"><label>Dùng ≥3 cấu trúc câu khác nhau</label></div>
+            <div onclick="tick(this)" class="cl-item"><input type="checkbox"><label>Câu nâng cao: After/Having/Despite/after which</label></div>
+            <div onclick="tick(this)" class="cl-item"><input type="checkbox"><label>Paraphrase tên biến (figure for X / % of Y)</label></div>
+            <div onclick="tick(this)" class="cl-item"><input type="checkbox"><label>Đủ 150+ từ (target: 170-190)</label></div>
+            <div onclick="tick(this)" class="cl-item"><input type="checkbox"><label>Kiểm tra S-V agreement, article, spelling</label></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header ch-red">📝 WT2 Checklist</div>
+          <div class="card-body">
+            <p style="font-size:0.82em;color:var(--sub);margin-bottom:10px;">Click để tick ✓</p>
+            <div onclick="tick(this)" class="cl-item"><input type="checkbox"><label>Xác định dạng: Opinion/Discursive/Problem-Solution</label></div>
+            <div onclick="tick(this)" class="cl-item"><input type="checkbox"><label>Lên outline 5-8 phút trước khi viết</label></div>
+            <div onclick="tick(this)" class="cl-item"><input type="checkbox"><label>Intro – Lead-in: Paraphrase đề</label></div>
+            <div onclick="tick(this)" class="cl-item"><input type="checkbox"><label><strong>Intro – Thesis:</strong> Trả lời THẲNG câu hỏi</label></div>
+            <div onclick="tick(this)" class="cl-item"><input type="checkbox"><label>Body 1: Topic sentence + PEEL structure</label></div>
+            <div onclick="tick(this)" class="cl-item"><input type="checkbox"><label>Body 2: Topic sentence + PEEL structure</label></div>
+            <div onclick="tick(this)" class="cl-item"><input type="checkbox"><label>Cohesive devices đa dạng (≥4 loại khác nhau)</label></div>
+            <div onclick="tick(this)" class="cl-item"><input type="checkbox"><label>Từ vựng học thuật, tránh lặp từ</label></div>
+            <div onclick="tick(this)" class="cl-item"><input type="checkbox"><label>Conclusion: Restate + Recommendation (không ý mới)</label></div>
+            <div onclick="tick(this)" class="cl-item"><input type="checkbox"><label>Đủ 250+ từ (target: 270-290)</label></div>
+            <div onclick="tick(this)" class="cl-item"><input type="checkbox"><label>Kiểm tra tense consistency, grammar, spelling</label></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header ch-green">🏆 Tự Chấm Điểm</div>
+        <div class="card-body">
+          <div class="grid4">
+            <div style="text-align:center;background:var(--primary-light);border-radius:10px;padding:14px;">
+              <div style="font-size:0.82em;font-weight:700;color:var(--primary);margin-bottom:8px;">Task Achievement</div>
+              <select id="sc1" onchange="calcBand()" style="width:100%;padding:6px;border-radius:6px;border:1px solid var(--border);font-weight:700;color:var(--primary);background:var(--card);">
+                <option value="">—</option><option>5.0</option><option>5.5</option><option>6.0</option><option>6.5</option><option>7.0</option><option>7.5</option><option>8.0</option>
+              </select>
+            </div>
+            <div style="text-align:center;background:var(--orange-light);border-radius:10px;padding:14px;">
+              <div style="font-size:0.82em;font-weight:700;color:var(--orange);margin-bottom:8px;">Coherence & Cohesion</div>
+              <select id="sc2" onchange="calcBand()" style="width:100%;padding:6px;border-radius:6px;border:1px solid var(--border);font-weight:700;color:var(--orange);background:var(--card);">
+                <option value="">—</option><option>5.0</option><option>5.5</option><option>6.0</option><option>6.5</option><option>7.0</option><option>7.5</option><option>8.0</option>
+              </select>
+            </div>
+            <div style="text-align:center;background:var(--green-light);border-radius:10px;padding:14px;">
+              <div style="font-size:0.82em;font-weight:700;color:var(--green);margin-bottom:8px;">Lexical Resource</div>
+              <select id="sc3" onchange="calcBand()" style="width:100%;padding:6px;border-radius:6px;border:1px solid var(--border);font-weight:700;color:var(--green);background:var(--card);">
+                <option value="">—</option><option>5.0</option><option>5.5</option><option>6.0</option><option>6.5</option><option>7.0</option><option>7.5</option><option>8.0</option>
+              </select>
+            </div>
+            <div style="text-align:center;background:var(--purple-light);border-radius:10px;padding:14px;">
+              <div style="font-size:0.82em;font-weight:700;color:var(--purple);margin-bottom:8px;">Grammatical Range</div>
+              <select id="sc4" onchange="calcBand()" style="width:100%;padding:6px;border-radius:6px;border:1px solid var(--border);font-weight:700;color:var(--purple);background:var(--card);">
+                <option value="">—</option><option>5.0</option><option>5.5</option><option>6.0</option><option>6.5</option><option>7.0</option><option>7.5</option><option>8.0</option>
+              </select>
+            </div>
+          </div>
+          <div id="bandResult" style="text-align:center;margin-top:16px;font-size:1.1em;font-weight:700;color:var(--sub);">Chọn đủ 4 tiêu chí để tính điểm</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PRACTICE ===== -->
+    <div id="page-practice" class="page">
+      <div class="card" style="margin-bottom:16px;">
+        <div class="card-header ch-purple">✍️ Ngân Hàng Bài Tập – Chọn Dạng Bài</div>
+        <div class="card-body" style="padding-bottom:8px;">
+          <!-- Main category tabs -->
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">
+            <button class="cat-tab active" id="ctab-wt1graph" onclick="switchCat('wt1graph')">📊 WT1 – Biểu Đồ</button>
+            <button class="cat-tab" id="ctab-wt1diagram" onclick="switchCat('wt1diagram')">⚙️ WT1 – Sơ Đồ</button>
+            <button class="cat-tab" id="ctab-wt2" onclick="switchCat('wt2')">📝 Writing Task 2</button>
+            <button class="tbtn reset" style="border-radius:8px;margin-left:auto;" onclick="loadRandom()">🎲 Ngẫu Nhiên</button>
+          </div>
+
+          <!-- WT1 GRAPH sub-types -->
+          <div id="cpanel-wt1graph" class="cpanel">
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">
+              <button class="type-tab active" id="ttab-linegraph" onclick="switchType('wt1graph','linegraph')">📈 Line Graph</button>
+              <button class="type-tab" id="ttab-bar" onclick="switchType('wt1graph','bar')">📊 Bar Chart</button>
+              <button class="type-tab" id="ttab-pie" onclick="switchType('wt1graph','pie')">🥧 Pie Chart</button>
+              <button class="type-tab" id="ttab-table" onclick="switchType('wt1graph','table')">📋 Table</button>
+              <button class="type-tab" id="ttab-mixed" onclick="switchType('wt1graph','mixed')">🔀 Mixed Charts</button>
+            </div>
+            <div id="exgrid-wt1graph" class="ex-grid"></div>
+          </div>
+
+          <!-- WT1 DIAGRAM sub-types -->
+          <div id="cpanel-wt1diagram" class="cpanel" style="display:none;">
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">
+              <button class="type-tab active" id="ttab-process" onclick="switchType('wt1diagram','process')">⚙️ Process</button>
+              <button class="type-tab" id="ttab-map" onclick="switchType('wt1diagram','map')">🗺️ Map</button>
+            </div>
+            <div id="exgrid-wt1diagram" class="ex-grid"></div>
+          </div>
+
+          <!-- WT2 sub-types -->
+          <div id="cpanel-wt2" class="cpanel" style="display:none;">
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">
+              <button class="type-tab active" id="ttab-opinion" onclick="switchType('wt2','opinion')">💬 Opinion</button>
+              <button class="type-tab" id="ttab-discursive" onclick="switchType('wt2','discursive')">⚖️ Discursive</button>
+              <button class="type-tab" id="ttab-problem" onclick="switchType('wt2','problem')">🔧 Problem-Solution</button>
+              <button class="type-tab" id="ttab-twopart" onclick="switchType('wt2','twopart')">❓ Two-Part Q</button>
+            </div>
+            <div id="exgrid-wt2" class="ex-grid"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Writing area (loaded dynamically) -->
+      <div id="exerciseArea"></div>
+    </div>
+
+    <!-- ===== FLASHCARDS ===== -->
+    <div id="page-flashcard" class="page">
+      <div class="card">
+        <div class="card-header ch-orange">🃏 Flashcards – Từ Vựng Xu Hướng</div>
+        <div class="card-body">
+          <p style="font-size:0.88em;color:var(--sub);margin-bottom:14px;">Click vào thẻ để xem nghĩa tiếng Việt</p>
+          <div class="flip-cards" id="flashcardGrid"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SEARCH ===== -->
+    <div id="page-search" class="page">
+      <div class="card">
+        <div class="card-header ch-teal">🔍 Tìm Kiếm Nội Dung</div>
+        <div class="card-body">
+          <input type="text" id="mainSearch" placeholder="Nhập từ khóa để tìm kiếm (vd: superlative, passive, conclusion...)" oninput="handleSearch(this.value)" style="width:100%;padding:12px 16px;border-radius:10px;border:2px solid var(--border);font-size:1em;background:var(--card);color:var(--text);">
+          <div id="searchResults" style="margin-top:16px;"></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end content -->
+</div><!-- end main -->
+
+<style>
+.tbtn-topic { padding:9px 16px; border:2px solid var(--border); border-radius:20px; background:var(--card); color:var(--text); cursor:pointer; font-size:0.88em; font-weight:600; transition:all 0.15s; }
+.tbtn-topic:hover, .tbtn-topic.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+/* Practice page tabs */
+.cat-tab { padding:9px 18px; border:2px solid var(--primary); border-radius:8px; background:var(--card); color:var(--primary); cursor:pointer; font-size:0.9em; font-weight:700; transition:all 0.15s; }
+.cat-tab.active, .cat-tab:hover { background:var(--primary); color:#fff; }
+.type-tab { padding:7px 14px; border:1.5px solid var(--border); border-radius:20px; background:var(--card); color:var(--sub); cursor:pointer; font-size:0.83em; font-weight:600; transition:all 0.15s; }
+.type-tab.active, .type-tab:hover { background:var(--purple); color:#fff; border-color:var(--purple); }
+/* Exercise grid cards */
+.ex-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px; }
+.ex-card { background:var(--card); border:1.5px solid var(--border); border-radius:10px; padding:14px 16px; cursor:pointer; transition:all 0.15s; position:relative; }
+.ex-card:hover { border-color:var(--purple); box-shadow:0 2px 10px rgba(74,20,140,0.12); transform:translateY(-1px); }
+.ex-card-tag { display:inline-block; padding:3px 10px; border-radius:20px; font-size:0.72em; font-weight:700; margin-bottom:8px; }
+.ex-card-title { font-weight:700; font-size:0.92em; margin-bottom:5px; color:var(--text); }
+.ex-card-meta { font-size:0.78em; color:var(--sub); }
+.ex-card-difficulty { position:absolute; top:12px; right:12px; font-size:0.72em; font-weight:700; padding:2px 8px; border-radius:10px; }
+.diff-easy { background:#e8f5e9; color:#1b5e20; }
+.diff-medium { background:#fff3e0; color:#e65100; }
+.diff-hard { background:#ffebee; color:#c62828; }
+/* Model answer */
+.model-toggle { background:#1b5e20; color:#fff; border:none; border-radius:8px; padding:8px 16px; cursor:pointer; font-size:0.84em; font-weight:700; margin-top:10px; }
+.model-answer-box { background:#e8f5e9; border:1.5px solid #81c784; border-radius:10px; padding:16px 18px; margin-top:10px; display:none; font-size:0.9em; line-height:1.8; }
+.model-answer-box h4 { color:#1b5e20; font-weight:800; margin-bottom:10px; font-size:0.95em; }
+</style>
+
+<script>
+// ===== NAVIGATION =====
+const pageTitles = {
+  home:'🏠 Dashboard', roadmap:'🗺️ Lộ Trình 12 Tuần',
+  modA:'📈 Module A – Trend', modB:'📊 Module B – Comparison',
+  modC:'⚙️ Module C – Process', modD:'🗺️ Module D – Map',
+  wt2:'📝 Writing Task 2', peel:'🧱 PEEL Structure',
+  topics:'📚 Từ Vựng Chủ Đề', cheatsheet:'📋 Cheat Sheet',
+  checklist:'✅ Checklist', practice:'✍️ Luyện Viết',
+  flashcard:'🃏 Flashcards', search:'🔍 Tìm Kiếm'
+};
+function nav(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.getElementById('pageTitle').textContent = pageTitles[id] || id;
+  document.querySelectorAll('.nav-item').forEach(n => { if (n.getAttribute('onclick') && n.getAttribute('onclick').includes("'"+id+"'")) n.classList.add('active'); });
+  if (id === 'flashcard') loadFlashcards();
+  if (id === 'topics') showTopic('work');
+  closeSidebar();
+  window.scrollTo(0,0);
+}
+function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('overlay').classList.toggle('active'); }
+function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('overlay').classList.remove('active'); }
+function toggleDark() {
+  const d = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', d ? 'light' : 'dark');
+  document.querySelector('.icon-btn').textContent = d ? '🌙 Dark' : '☀️ Light';
+}
+
+// ===== WEEK PROGRESS =====
+const weekTips = {
+  1:"Tuần 1 – Hôm nay học: Từ vựng xu hướng (tăng/giảm/ổn định) + 4 cấu trúc câu cơ bản. Viết 10 câu về Line Graph.",
+  2:"Tuần 2 – Hôm nay học: Câu nâng cao (After/Having/Despite VING) + Time expression + after which / followed by.",
+  3:"Tuần 3 – Luyện tổng hợp: Viết bài hoàn chỉnh Line Graph, Bar Chart, Pie Chart, Table. Target: 150+ từ/20 phút.",
+  4:"Tuần 4 – Hôm nay học: Superlative + Comparative cơ bản + Mức độ (far/much/slightly). Viết 10 câu so sánh.",
+  5:"Tuần 5 – Hôm nay học: twice/12% higher than · outnumber · Equal comparison · Ranking. Viết 1 bài Pie Chart.",
+  6:"Tuần 6 – Luyện tổng hợp Comparison. Target: 150+ từ/18 phút với đủ 4 loại câu so sánh.",
+  7:"Tuần 7 – Hôm nay học: Passive voice Process + Connector trình tự + Verb phrases ketchup/life cycle.",
+  8:"Tuần 8 – Hôm nay học: Process nâng cao + Map vocabulary (spatial vocab, change vocab, tenses).",
+  9:"Tuần 9 – Hôm nay học: Phân tích 4 dạng đề Task 2 + Paraphrase Lead-in + Thesis statement.",
+  10:"Tuần 10 – Hôm nay học: PEEL structure + Brainstorm (15-45s/idea) + Cohesive devices đa dạng.",
+  11:"Tuần 11 – Viết full essay 250+ từ/40 phút. Chủ đề: Work, Education, Health, Technology. 2 bài/tuần.",
+  12:"Tuần 12 – Ôn tập tổng hợp: Làm 3 bộ đề thi thử (WT1+WT2) có tính giờ. Xác định điểm yếu còn lại."
+};
+function updateProgress() {
+  const w = parseInt(document.getElementById('weekSelector').value);
+  const pct = Math.round((w/12)*100);
+  document.getElementById('pct').textContent = pct + '%';
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('weekTip').innerHTML = '<strong>' + weekTips[w] + '</strong>';
+}
+
+// ===== CHECKLIST =====
+function tick(el) { const cb = el.querySelector('input'); cb.checked = !cb.checked; el.classList.toggle('checked', cb.checked); }
+
+// ===== SCORE CALC =====
+function calcBand() {
+  const scores = [document.getElementById('sc1'), document.getElementById('sc2'), document.getElementById('sc3'), document.getElementById('sc4')].map(s => parseFloat(s.value)).filter(v => !isNaN(v));
+  if (scores.length === 4) {
+    const avg = scores.reduce((a,b) => a+b, 0) / 4;
+    const rounded = Math.round(avg * 2) / 2;
+    const color = rounded >= 7 ? '#1b5e20' : rounded >= 6 ? '#e65100' : '#c62828';
+    document.getElementById('bandResult').innerHTML = `Band ước tính: <span style="font-size:1.4em;color:${color};">${rounded.toFixed(1)}</span> ${rounded >= 7 ? '🎉 Đạt mục tiêu!' : '→ Cần luyện thêm'}`;
+  }
+}
+
+// ===== FLASHCARDS =====
+const flashcardData = [
+  {front:"increase / rise", back:"Tăng (bình thường)\nIncome increased from 20k to 40k."},
+  {front:"surge / rocket / soar", back:"Tăng VỌT MẠNH\nSales surged dramatically in Q4."},
+  {front:"decrease / fall / drop", back:"Giảm (bình thường)\nThe figure fell from 80 to 60."},
+  {front:"plunge / plummet / slump", back:"Giảm SÂU MẠNH\nPrices plunged by 40% overnight."},
+  {front:"fluctuate / vary", back:"Dao động lên xuống\nTemperature fluctuated between 20–35°C."},
+  {front:"level off / stabilize at", back:"Ổn định, không đổi\nSales leveled off at $50 million."},
+  {front:"peak at", back:"Đạt đỉnh tại\nRevenue peaked at £120,000 in 2015."},
+  {front:"dramatic / dramatically", back:"Thay đổi LỚN\nA dramatic increase was recorded."},
+  {front:"gradual / gradually", back:"Thay đổi NHỎ, từ từ\nThe number rose gradually over 5 years."},
+  {front:"slight / slightly", back:"Thay đổi RẤT NHỎ\nThere was a slight decrease in 2012."},
+  {front:"outnumber by", back:"Nhiều hơn X gấp...\nWomen outnumber men by 2 to 1."},
+  {front:"surpass by", back:"Vượt qua X với chênh lệch\n[X] surpassed [Y] by 12%."},
+  {front:"accounts for", back:"Chiếm (tỉ lệ %)\nSocial media accounts for 24% of time."},
+  {front:"as ... as", back:"Bằng nhau (equal comparison)\nNearly as high as / almost as much as"},
+  {front:"are picked → passive", back:"= are collected\n(Process: Tomatoes are picked and sorted)"},
+  {front:"in order to / so as to", back:"Để (mục đích) + VERB\n...in order to ensure quality"},
+  {front:"subsequently", back:"Sau đó (connector Process)\nSubsequently, the mixture is boiled."},
+  {front:"was replaced by", back:"Bị thay thế bởi (Map)\nThe park was replaced by a car park."},
+  {front:"used to be", back:"Trước đây là (Map)\nThe area used to be farmland."},
+  {front:"has been converted into", back:"Đã được chuyển đổi thành (Map)\nThe factory has been converted into flats."},
+];
+function loadFlashcards() {
+  const g = document.getElementById('flashcardGrid');
+  g.innerHTML = flashcardData.map(c => `
+    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+      <div class="flip-inner">
+        <div class="flip-front">${c.front}</div>
+        <div class="flip-back">${c.back.replace(/\n/g,'<br>')}</div>
+      </div>
+    </div>`).join('');
+}
+
+// ===== TOPIC VOCAB =====
+const topicVocab = {
+  work: {
+    icon:'💼', color:'#1a237e',
+    groups:[
+      {name:'Danh Từ Quan Trọng', words:['work-life balance','job security','career advancement','redundancy','remote work / telecommuting','entrepreneurship','multinational corporation','productivity','workforce','freelancer','pension','wage gap','automation']},
+      {name:'Động Từ & Cụm Từ', words:['to pursue a career in','to be laid off / made redundant','to climb the corporate ladder','to work overtime','to apply for a position','to be self-employed','to telecommute','to outsource']},
+      {name:'Tính Từ & Trạng Từ', words:['competitive / fiercely competitive','skilled / unskilled','flexible / inflexible','demanding','rewarding','motivating']},
+      {name:'Ideas – Band 7', words:['Job satisfaction increases productivity.','Automation threatens low-skilled jobs.','Work-life balance is essential for mental health.','Remote work reduces commuting stress.']}
+    ]
+  },
+  education: {
+    icon:'🎓', color:'#1b5e20',
+    groups:[
+      {name:'Danh Từ Quan Trọng', words:['academic achievement','critical thinking','curriculum','extracurricular activities','higher education','vocational training','standardized testing','scholarship','tuition fee','literacy / numeracy','lifelong learning','peer learning']},
+      {name:'Động Từ & Cụm Từ', words:['to acquire knowledge','to foster creativity','to develop critical thinking','to pursue higher education','to drop out of school','to obtain a degree / qualification','to broaden horizons']},
+      {name:'Ideas – Band 7', words:['Education develops critical thinking skills.','Standardized testing stifles creativity.','Vocational training provides practical skills.','Access to education reduces inequality.']}
+    ]
+  },
+  health: {
+    icon:'🏥', color:'#b71c1c',
+    groups:[
+      {name:'Danh Từ Quan Trọng', words:['sedentary lifestyle','obesity epidemic','mental health','preventive healthcare','life expectancy','well-being','chronic disease','healthcare expenditure','physical activity','nutritional deficiency','stress']},
+      {name:'Động Từ & Cụm Từ', words:['to tackle obesity','to promote well-being','to raise awareness of','to lead a healthy lifestyle','to engage in regular exercise','to address mental health issues']},
+      {name:'Ideas – Band 7', words:['Sedentary lifestyles contribute to obesity.','Mental health awareness reduces stigma.','Preventive care reduces long-term costs.','Diet and exercise are key to longevity.']}
+    ]
+  },
+  environment: {
+    icon:'🌍', color:'#004d40',
+    groups:[
+      {name:'Danh Từ Quan Trọng', words:['carbon footprint','greenhouse gas emissions','renewable energy','deforestation','biodiversity','sustainable development','fossil fuels','climate change','global warming','pollution','conservation','ecosystem']},
+      {name:'Động Từ & Cụm Từ', words:['to reduce carbon emissions','to combat climate change','to adopt renewable energy','to preserve biodiversity','to implement green policies','to phase out fossil fuels']},
+      {name:'Ideas – Band 7', words:['Fossil fuels accelerate climate change.','Renewable energy reduces carbon emissions.','Deforestation destroys biodiversity.','Government policies drive sustainability.']}
+    ]
+  },
+  technology: {
+    icon:'💻', color:'#0d47a1',
+    groups:[
+      {name:'Danh Từ Quan Trọng', words:['artificial intelligence','digital divide','cybersecurity','data privacy','social media addiction','automation','online socialization','virtual reality','e-commerce','smartphone dependence','algorithm']},
+      {name:'Động Từ & Cụm Từ', words:['to bridge the digital divide','to harness technology','to safeguard data','to disrupt traditional industries','to become overly reliant on','to raise privacy concerns']},
+      {name:'Ideas – Band 7', words:['AI automates repetitive tasks.','Social media increases social isolation.','Technology bridges geographical barriers.','Digital literacy is essential in modern society.']}
+    ]
+  },
+  crime: {
+    icon:'⚖️', color:'#4a148c',
+    groups:[
+      {name:'Danh Từ Quan Trọng', words:['juvenile delinquency','recidivism','rehabilitation','deterrence','white-collar crime','cybercrime','criminal justice system','incarceration','law enforcement','crime rate','prevention']},
+      {name:'Động Từ & Cụm Từ', words:['to deter crime','to rehabilitate offenders','to impose stricter penalties','to reduce recidivism','to tackle the root causes of crime','to invest in crime prevention']},
+      {name:'Ideas – Band 7', words:['Poverty is a root cause of crime.','Rehabilitation reduces reoffending.','Stricter laws act as a deterrent.','Education prevents juvenile delinquency.']}
+    ]
+  },
+  media: {
+    icon:'📱', color:'#bf360c',
+    groups:[
+      {name:'Danh Từ Quan Trọng', words:['social media influence','media bias','misinformation','freedom of the press','censorship','advertising revenue','mainstream media','user-generated content','digital journalism','online privacy']},
+      {name:'Động Từ & Cụm Từ', words:['to spread misinformation','to regulate social media','to hold the media accountable','to raise public awareness','to manipulate public opinion','to exercise freedom of expression']},
+      {name:'Ideas – Band 7', words:['Social media spreads misinformation rapidly.','Media literacy helps identify fake news.','Press freedom is essential in democracy.','Advertising influences consumer behavior.']}
+    ]
+  },
+  society: {
+    icon:'🏙️', color:'#37474f',
+    groups:[
+      {name:'Danh Từ Quan Trọng', words:['urbanization','aging population','social inequality','wealth gap','community cohesion','immigration','cultural diversity','social mobility','gender equality','discrimination','globalization']},
+      {name:'Động Từ & Cụm Từ', words:['to address social inequality','to promote gender equality','to integrate immigrants','to foster community cohesion','to bridge the wealth gap','to tackle discrimination']},
+      {name:'Ideas – Band 7', words:['Urbanization creates infrastructure pressure.','An aging population strains pension systems.','Immigration enriches cultural diversity.','Education promotes social mobility.']}
+    ]
+  },
+  food: {
+    icon:'🍎', color:'#558b2f',
+    groups:[
+      {name:'Danh Từ Quan Trọng', words:['food security','malnutrition','processed food','organic farming','dietary habits','fast food culture','food waste','caloric intake','nutritional value','food labeling','sustainable agriculture']},
+      {name:'Động Từ & Cụm Từ', words:['to address food insecurity','to promote healthy eating','to reduce food waste','to adopt a balanced diet','to regulate food labeling','to shift toward plant-based diets']},
+      {name:'Ideas – Band 7', words:['Processed food contributes to obesity.','Food waste wastes valuable resources.','Organic farming supports sustainability.','Food labeling helps consumers make choices.']}
+    ]
+  }
+};
+function showTopic(id) {
+  document.querySelectorAll('.tbtn-topic').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.tbtn-topic[data-topic="${id}"]`).classList.add('active');
+  const t = topicVocab[id];
+  document.getElementById('topicContent').innerHTML = `
+    <div class="card" style="border-left:5px solid ${t.color};">
+      <div style="padding:14px 20px;font-weight:800;font-size:1em;color:${t.color};">${t.icon} ${id.charAt(0).toUpperCase()+id.slice(1)} Vocabulary</div>
+      <div class="card-body">
+        <div class="grid2">
+          ${t.groups.map(g => `
+            <div>
+              <h4 style="color:${t.color};margin-bottom:8px;">${g.name}</h4>
+              <div class="chip-list">
+                ${g.words.map(w => `<span class="chip" style="background:${t.color}11;color:${t.color};border:1px solid ${t.color}33;" onclick="navigator.clipboard&&navigator.clipboard.writeText('${w}')" title="Click để copy">${w}</span>`).join('')}
+              </div>
+            </div>`).join('')}
+        </div>
+      </div>
+    </div>`;
+}
+
+// ===== EXERCISE BANK =====
+const exerciseBank = {
+  linegraph:[
+    {id:'lg1',title:'Museums in City X (2005–2020)',topic:'Culture',difficulty:'easy',
+     gradeType:'trend',minutes:20,minWords:150,
+     prompt:'The graph below shows the number of visitors to three museums in City X between 2005 and 2020. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. <em>Write at least 150 words.</em>',
+     data:`<table><tr><th>Year</th><th>History Museum</th><th>Science Museum</th><th>Art Museum</th></tr><tr><td>2005</td><td>80,000</td><td>40,000</td><td>60,000</td></tr><tr><td>2010</td><td>100,000</td><td>55,000</td><td>50,000</td></tr><tr><td>2015</td><td>90,000</td><td>80,000</td><td>45,000</td></tr><tr><td>2020</td><td>70,000</td><td>130,000</td><td>70,000</td></tr></table>`,
+     hint:'Overview: Science Museum tăng mạnh nhất và vượt qua các bảo tàng khác vào 2020. History Museum tăng rồi giảm. Art Museum giảm rồi phục hồi.',
+     model:`<h4>📝 Model Answer (Band 7.5)</h4><p>The line graph illustrates the number of visitors to three museums in City X over a 15-year period from 2005 to 2020.</p><p>Overall, the Science Museum experienced the most dramatic increase, eventually becoming the most visited museum by 2020. In contrast, the History Museum, despite being the most popular initially, saw a decline in its later years, while the Art Museum showed a gradual decrease followed by a recovery.</p><p>In 2005, the History Museum attracted the highest number of visitors at 80,000, compared to 60,000 for the Art Museum and just 40,000 for the Science Museum. Over the next decade, the History Museum's figures rose to a peak of 100,000 in 2010 before declining steadily to 70,000 by 2020. Meanwhile, the Science Museum grew consistently, surpassing the Art Museum in approximately 2012 and reaching 130,000 visitors in 2020 — more than triple its 2005 figure.</p><p>The Art Museum followed a different trajectory, falling from 60,000 to a low of 45,000 in 2015, before recovering to 70,000 in 2020, matching the History Museum's final figure.</p>`},
+    {id:'lg2',title:'Internet Usage in 4 Countries (2000–2020)',topic:'Technology',difficulty:'medium',
+     gradeType:'trend',minutes:20,minWords:150,
+     prompt:'The graph below shows the percentage of the population using the internet in four countries between 2000 and 2020. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. <em>Write at least 150 words.</em>',
+     data:`<table><tr><th>Year</th><th>USA</th><th>UK</th><th>Brazil</th><th>India</th></tr><tr><td>2000</td><td>44%</td><td>26%</td><td>3%</td><td>0.5%</td></tr><tr><td>2005</td><td>68%</td><td>62%</td><td>13%</td><td>2%</td></tr><tr><td>2010</td><td>79%</td><td>83%</td><td>37%</td><td>8%</td></tr><tr><td>2015</td><td>87%</td><td>90%</td><td>60%</td><td>18%</td></tr><tr><td>2020</td><td>91%</td><td>95%</td><td>74%</td><td>45%</td></tr></table>`,
+     hint:'Overview: Tất cả 4 nước đều tăng, nhưng với tốc độ khác nhau. UK vượt USA vào 2010. India có mức tăng % lớn nhất tương đối nhưng vẫn thấp nhất tuyệt đối.',
+     model:`<h4>📝 Model Answer (Band 7.0)</h4><p>The line graph compares internet usage rates across four countries — the USA, UK, Brazil and India — over a 20-year period from 2000 to 2020.</p><p>Overall, all four countries recorded significant increases in internet penetration. The USA and UK consistently maintained the highest usage rates, while India, despite starting from an extremely low base, showed a remarkable upward trend.</p><p>In 2000, the USA led with 44% of the population online, well ahead of the UK at 26%. Brazil and India had minimal usage at 3% and 0.5% respectively. By 2010, the UK had overtaken the USA, reaching 83% compared to 79%, and this gap widened further by 2020, when UK usage stood at 95% against 91% for the USA.</p><p>Brazil's internet adoption accelerated substantially, climbing from 3% to 74% over the period. India showed the steepest growth in relative terms — from just 0.5% to 45% — although it remained the lowest of the four countries throughout.</p>`},
+    {id:'lg3',title:'Coffee & Tea Consumption in UK (1990–2020)',topic:'Lifestyle',difficulty:'medium',
+     gradeType:'trend',minutes:20,minWords:150,
+     prompt:'The graph below shows the average cups of coffee and tea consumed per person per day in the UK between 1990 and 2020. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. <em>Write at least 150 words.</em>',
+     data:`<table><tr><th>Year</th><th>Tea (cups/day)</th><th>Coffee (cups/day)</th></tr><tr><td>1990</td><td>4.2</td><td>1.0</td></tr><tr><td>1995</td><td>4.0</td><td>1.3</td></tr><tr><td>2000</td><td>3.8</td><td>1.8</td></tr><tr><td>2005</td><td>3.5</td><td>2.2</td></tr><tr><td>2010</td><td>3.2</td><td>2.6</td></tr><tr><td>2015</td><td>3.0</td><td>3.1</td></tr><tr><td>2020</td><td>2.8</td><td>3.4</td></tr></table>`,
+     hint:'Overview: Tea giảm đều đặn; Coffee tăng đều đặn; Coffee vượt Tea khoảng năm 2014. Đây là xu hướng trái chiều (opposing trends).',
+     model:`<h4>📝 Model Answer</h4><p>The line graph illustrates changes in the daily consumption of tea and coffee per person in the UK from 1990 to 2020.</p><p>Overall, the two beverages showed contrasting trends over the period. Tea consumption declined steadily, while coffee intake rose consistently, with coffee eventually surpassing tea around 2014–2015.</p><p>In 1990, tea was by far the more popular drink, with an average of 4.2 cups consumed daily compared to just 1.0 cup of coffee. Tea declined gradually but consistently throughout the period, falling to 2.8 cups by 2020 — a drop of approximately one-third. Coffee, however, followed the opposite trajectory, more than tripling from 1.0 to 3.4 cups per day.</p><p>The most notable crossover occurred around 2015, when coffee consumption (3.1 cups) marginally overtook tea (3.0 cups) for the first time. By 2020, the gap had widened slightly, with coffee at 3.4 cups and tea at 2.8 cups per day.</p>`},
+  ],
+  bar:[
+    {id:'b1',title:'Employment by Sector – UK (2000 vs 2020)',topic:'Work/Economy',difficulty:'easy',
+     gradeType:'comparison',minutes:20,minWords:150,
+     prompt:'The bar chart below shows the percentage of people employed in four sectors in the United Kingdom in 2000 and 2020. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. <em>Write at least 150 words.</em>',
+     data:`<table><tr><th>Sector</th><th>2000</th><th>2020</th></tr><tr><td>Services</td><td>62%</td><td>80%</td></tr><tr><td>Manufacturing</td><td>22%</td><td>9%</td></tr><tr><td>Construction</td><td>8%</td><td>6%</td></tr><tr><td>Agriculture</td><td>8%</td><td>5%</td></tr></table>`,
+     hint:'Overview: Services tăng mạnh và chiếm tỷ lệ lớn nhất. Manufacturing giảm mạnh nhất. Construction và Agriculture cũng giảm nhẹ.',
+     model:`<h4>📝 Model Answer</h4><p>The bar chart compares the proportion of workers in four employment sectors in the UK in 2000 and 2020.</p><p>Overall, the services sector dominated employment in both years and grew significantly over the period, while manufacturing experienced the most dramatic decline. The remaining sectors — construction and agriculture — both saw modest reductions.</p><p>In 2000, services already accounted for the largest share of employment at 62%, and this figure rose substantially to 80% by 2020. Manufacturing was the second largest sector in 2000 at 22%; however, it fell sharply to just 9% in 2020 — a drop of 13 percentage points. Construction declined slightly from 8% to 6%, while agriculture also decreased marginally from 8% to 5% over the same period.</p><p>Notably, by 2020, the combined workforce in manufacturing, construction and agriculture (20%) was only one quarter of the services sector alone.</p>`},
+    {id:'b2',title:'Weekly Leisure Time – Men vs Women',topic:'Lifestyle',difficulty:'medium',
+     gradeType:'comparison',minutes:20,minWords:150,
+     prompt:'The bar chart shows the average number of hours per week that men and women spend on different leisure activities. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. <em>Write at least 150 words.</em>',
+     data:`<table><tr><th>Activity</th><th>Men (hrs/week)</th><th>Women (hrs/week)</th></tr><tr><td>Watching TV</td><td>15</td><td>13</td></tr><tr><td>Exercise/Sport</td><td>8</td><td>4</td></tr><tr><td>Reading</td><td>3</td><td>6</td></tr><tr><td>Social media</td><td>5</td><td>9</td></tr><tr><td>Cooking/Hobbies</td><td>4</td><td>7</td></tr></table>`,
+     hint:'Overview: TV là hoạt động phổ biến nhất cho cả hai giới. Men dành nhiều thời gian hơn cho thể thao và TV; Women nhiều hơn cho reading, social media và hobbies.',
+     model:`<h4>📝 Model Answer</h4><p>The bar chart illustrates how many hours per week men and women typically devote to five different leisure activities.</p><p>Overall, watching television was the most time-consuming leisure activity for both genders. Men generally allocated more time to physical activity and television, while women spent considerably more hours on reading, social media and cooking or hobbies.</p><p>Watching TV dominated leisure time for both groups, with men spending 15 hours per week compared to 13 hours for women — the smallest gender gap across all categories. Men also spent significantly more time on exercise and sport (8 hours), double the figure for women (4 hours).</p><p>In contrast, women devoted more time to the remaining three activities. They spent 9 hours per week on social media, compared to just 5 hours for men, and 7 hours on cooking and hobbies versus 4 hours. Reading was also more popular among women at 6 hours, compared to only 3 hours for men.</p>`},
+    {id:'b3',title:'Renewable Energy Production by Country (2010–2020)',topic:'Environment',difficulty:'hard',
+     gradeType:'comparison',minutes:20,minWords:150,
+     prompt:'The bar chart shows the amount of electricity (in gigawatt-hours) produced from renewable sources in five countries in 2010 and 2020. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. <em>Write at least 150 words.</em>',
+     data:`<table><tr><th>Country</th><th>2010 (GWh)</th><th>2020 (GWh)</th></tr><tr><td>China</td><td>700</td><td>2,200</td></tr><tr><td>USA</td><td>550</td><td>900</td></tr><tr><td>Germany</td><td>180</td><td>450</td></tr><tr><td>India</td><td>120</td><td>520</td></tr><tr><td>UK</td><td>60</td><td>300</td></tr></table>`,
+     hint:'Overview: Tất cả đều tăng. China tăng nhiều nhất cả tuyệt đối và tương đối. UK tăng 5 lần. India tăng hơn 4 lần. Dùng approximate language.',
+     model:`<h4>📝 Model Answer</h4><p>The bar chart compares renewable electricity generation in five countries in 2010 and 2020, measured in gigawatt-hours.</p><p>Overall, all five countries recorded substantial increases in renewable energy production over the decade. China dominated production in both years and experienced the largest absolute growth, while the UK and India showed the most impressive relative gains.</p><p>China produced 700 GWh of renewable electricity in 2010, already the highest figure, and more than tripled this to 2,200 GWh by 2020 — a rise of 1,500 GWh. The USA ranked second in both years, increasing from 550 to 900 GWh. Germany more than doubled its output from 180 to 450 GWh, while India grew even more dramatically from 120 to 520 GWh — a rise of over 330%. The UK, although starting from the lowest base at just 60 GWh, expanded fivefold to 300 GWh by 2020.</p>`},
+  ],
+  pie:[
+    {id:'p1',title:'Transport Modes – City A vs City B',topic:'Transport',difficulty:'easy',
+     gradeType:'comparison',minutes:20,minWords:150,
+     prompt:'The pie charts show the percentage of people using different modes of transport in City A and City B. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. <em>Write at least 150 words.</em>',
+     data:`<table><tr><th>Mode</th><th>City A</th><th>City B</th></tr><tr><td>Car</td><td>45%</td><td>20%</td></tr><tr><td>Bus</td><td>20%</td><td>35%</td></tr><tr><td>Train/Metro</td><td>15%</td><td>30%</td></tr><tr><td>Bicycle</td><td>10%</td><td>12%</td></tr><tr><td>Walking</td><td>10%</td><td>3%</td></tr></table>`,
+     hint:'Overview: City A = car-dependent; City B = public-transport-oriented. Bicycle gần như bằng nhau ở cả hai thành phố.',
+     model:`<h4>📝 Model Answer</h4><p>The two pie charts illustrate the proportion of residents using five different modes of transport in City A and City B.</p><p>Overall, the most striking difference between the two cities is that City A is heavily car-dependent, while City B relies predominantly on public transport. The share of bicycle use was nearly identical in both cities.</p><p>In City A, private car use accounted for the largest proportion at 45%, more than double the figure in City B (20%). Walking was also more common in City A at 10% compared to just 3% in City B. In contrast, residents in City B made significantly greater use of buses (35% versus 20%) and train or metro services (30% compared to 15%). Together, public transport accounted for 65% of City B's transport mix, compared to only 35% in City A.</p><p>Bicycle use was remarkably similar in both cities, at 10% and 12% respectively, suggesting that cycling culture is comparable regardless of the wider transport system.</p>`},
+    {id:'p2',title:'Household Expenditure – UK vs Brazil',topic:'Economy',difficulty:'medium',
+     gradeType:'comparison',minutes:20,minWords:150,
+     prompt:'The pie charts show the proportion of household income spent on different categories in the UK and Brazil. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. <em>Write at least 150 words.</em>',
+     data:`<table><tr><th>Category</th><th>UK</th><th>Brazil</th></tr><tr><td>Housing/Rent</td><td>30%</td><td>18%</td></tr><tr><td>Food</td><td>18%</td><td>38%</td></tr><tr><td>Transport</td><td>14%</td><td>12%</td></tr><tr><td>Healthcare</td><td>6%</td><td>14%</td></tr><tr><td>Entertainment</td><td>16%</td><td>8%</td></tr><tr><td>Other</td><td>16%</td><td>10%</td></tr></table>`,
+     hint:'Overview: UK chi nhiều hơn cho housing và entertainment; Brazil chi nhiều hơn cho food và healthcare. Transport gần tương đương.',
+     model:`<h4>📝 Model Answer</h4><p>The pie charts compare how households in the UK and Brazil distribute their spending across six categories.</p><p>Overall, housing represented the largest expenditure for UK households, while food was the dominant cost for Brazilian families. The two countries showed notably different priorities, reflecting the contrasting economic and social contexts.</p><p>In the UK, housing or rent accounted for 30% of household income — the single largest category — while food spending at 18% was considerably lower than in Brazil, where it constituted 38% of expenditure. Entertainment was also a more significant outgoing in the UK (16%) compared to Brazil (8%).</p><p>Conversely, Brazilian households allocated a far higher proportion to food and healthcare (14%) compared to the UK (6%), suggesting that basic necessities consume a larger share of income. Transport spending was fairly comparable in both countries at 14% in the UK and 12% in Brazil.</p>`},
+  ],
+  table:[
+    {id:'t1',title:'Tourist Arrivals by Region (2005–2020)',topic:'Tourism',difficulty:'medium',
+     gradeType:'comparison',minutes:20,minWords:150,
+     prompt:'The table below shows the number of international tourist arrivals (in millions) in five regions of the world in 2005, 2010 and 2020. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. <em>Write at least 150 words.</em>',
+     data:`<table><tr><th>Region</th><th>2005</th><th>2010</th><th>2020</th></tr><tr><td>Europe</td><td>440</td><td>475</td><td>310</td></tr><tr><td>Asia-Pacific</td><td>155</td><td>205</td><td>190</td></tr><tr><td>Americas</td><td>133</td><td>150</td><td>98</td></tr><tr><td>Middle East</td><td>36</td><td>55</td><td>30</td></tr><tr><td>Africa</td><td>35</td><td>50</td><td>28</td></tr></table>`,
+     hint:'Overview: Europe luôn dẫn đầu nhưng giảm mạnh vào 2020 (COVID). Tất cả đều tăng từ 2005-2010 rồi giảm vào 2020. Asia-Pacific tăng ổn định nhất.',
+     model:`<h4>📝 Model Answer</h4><p>The table presents data on international tourist arrivals in five world regions across three separate years: 2005, 2010 and 2020.</p><p>Overall, Europe consistently attracted the greatest number of tourists throughout the period, and all five regions showed growth between 2005 and 2010, followed by a notable decline in 2020.</p><p>Europe received 440 million visitors in 2005, rising to 475 million in 2010, before falling sharply to 310 million in 2020 — likely due to the COVID-19 pandemic. Asia-Pacific was the second most visited region, growing steadily from 155 million to 205 million between 2005 and 2010, before a slight decrease to 190 million in 2020, making it the most resilient region.</p><p>The Americas followed a similar pattern, increasing from 133 million to 150 million, then dropping to 98 million. The Middle East and Africa, though significantly smaller in tourist volumes, both roughly doubled between 2005 and 2010 before falling back in 2020 to below their 2005 levels.</p>`},
+    {id:'t2',title:'Average Monthly Salary by Profession',topic:'Work',difficulty:'easy',
+     gradeType:'comparison',minutes:20,minWords:150,
+     prompt:'The table below shows the average monthly salary (in USD) for six professions in three countries. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. <em>Write at least 150 words.</em>',
+     data:`<table><tr><th>Profession</th><th>USA</th><th>UK</th><th>Vietnam</th></tr><tr><td>Doctor</td><td>$8,500</td><td>$5,200</td><td>$800</td></tr><tr><td>Engineer</td><td>$5,200</td><td>$3,800</td><td>$600</td></tr><tr><td>Teacher</td><td>$3,500</td><td>$2,800</td><td>$350</td></tr><tr><td>Nurse</td><td>$3,200</td><td>$2,400</td><td>$280</td></tr><tr><td>Accountant</td><td>$4,500</td><td>$3,200</td><td>$500</td></tr><tr><td>Farmer</td><td>$2,100</td><td>$1,800</td><td>$150</td></tr></table>`,
+     hint:'Overview: USA cao nhất, Vietnam thấp nhất ở mọi ngành nghề. Doctors được trả cao nhất ở cả 3 nước; Farmers thấp nhất.',
+     model:`<h4>📝 Model Answer</h4><p>The table compares the average monthly earnings of workers in six professions across three countries: the USA, UK and Vietnam.</p><p>Overall, the USA offered the highest salaries in every profession, followed by the UK, with Vietnam significantly lower across all categories. Regardless of country, doctors were consistently the highest earners while farmers received the lowest wages.</p><p>In the USA, doctors earned the most at $8,500 per month, approximately 1.6 times the UK figure of $5,200 and over ten times Vietnam's $800. Engineers ranked second in all three countries, at $5,200, $3,800 and $600 respectively. Accountants occupied the third position in the USA at $4,500, followed by teachers ($3,500) and nurses ($3,200).</p><p>Vietnam displayed the starkest pay gaps in relative terms: a Vietnamese doctor earned just $800 — similar to an American farmer at $2,100 in a different economic context — highlighting the substantial international salary disparities even within the same profession.</p>`},
+  ],
+  mixed:[
+    {id:'m1',title:'Energy Sources & CO₂ Emissions',topic:'Environment',difficulty:'hard',
+     gradeType:'comparison',minutes:20,minWords:150,
+     prompt:'The pie chart shows the proportion of electricity generated by different energy sources in Country X, and the bar chart shows the average CO₂ emissions (tonnes per GWh) for each energy type. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. <em>Write at least 150 words.</em>',
+     data:`<strong>Pie chart – Energy mix:</strong><table><tr><th>Source</th><th>%</th></tr><tr><td>Coal</td><td>40%</td></tr><tr><td>Natural Gas</td><td>25%</td></tr><tr><td>Nuclear</td><td>15%</td></tr><tr><td>Wind/Solar</td><td>12%</td></tr><tr><td>Hydro</td><td>8%</td></tr></table><br><strong>Bar chart – CO₂ (tonnes/GWh):</strong><table><tr><th>Source</th><th>CO₂</th></tr><tr><td>Coal</td><td>820</td></tr><tr><td>Natural Gas</td><td>490</td></tr><tr><td>Nuclear</td><td>12</td></tr><tr><td>Wind/Solar</td><td>11</td></tr><tr><td>Hydro</td><td>4</td></tr></table>`,
+     hint:'Kết hợp 2 biểu đồ: Coal chiếm 40% nhưng có CO₂ cao nhất (820). Hydro chiếm 8% nhưng CO₂ thấp nhất (4). Đây là mâu thuẫn chính cần highlight trong Overview.',
+     model:`<h4>📝 Model Answer</h4><p>The two charts provide information about the electricity generation mix in Country X and the corresponding carbon dioxide emissions of each energy source.</p><p>Overall, fossil fuels — particularly coal — dominated electricity production despite having the highest CO₂ emissions, while low-carbon sources such as hydro and wind/solar, which are the cleanest options, accounted for only a small fraction of the energy mix.</p><p>According to the pie chart, coal was the largest electricity source at 40%, followed by natural gas at 25%. However, the bar chart reveals that coal is also the most polluting, emitting 820 tonnes of CO₂ per gigawatt-hour, and natural gas produces 490 tonnes. Together, these two fossil fuels generated 65% of electricity while contributing the vast majority of emissions.</p><p>In contrast, nuclear, wind/solar and hydro — which together accounted for 35% of generation — produced only 12, 11 and 4 tonnes of CO₂ respectively, making them dramatically cleaner alternatives. This contrast highlights a significant tension between the current energy mix and environmental sustainability goals.</p>`},
+    {id:'m2',title:'Company Sales & Profit (2015–2022)',topic:'Business',difficulty:'hard',
+     gradeType:'trend',minutes:20,minWords:150,
+     prompt:'The line graph shows annual sales (in £ millions) of a company from 2015 to 2022, and the bar chart shows the profit margin (%) for the same period. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. <em>Write at least 150 words.</em>',
+     data:`<strong>Line graph – Sales (£m):</strong><table><tr><th>Year</th><th>Sales</th></tr><tr><td>2015</td><td>£40m</td></tr><tr><td>2016</td><td>£45m</td></tr><tr><td>2017</td><td>£52m</td></tr><tr><td>2018</td><td>£48m</td></tr><tr><td>2019</td><td>£60m</td></tr><tr><td>2020</td><td>£38m</td></tr><tr><td>2021</td><td>£55m</td></tr><tr><td>2022</td><td>£70m</td></tr></table><br><strong>Bar chart – Profit margin (%):</strong><table><tr><th>Year</th><th>Margin</th></tr><tr><td>2015</td><td>12%</td></tr><tr><td>2016</td><td>15%</td></tr><tr><td>2017</td><td>18%</td></tr><tr><td>2018</td><td>10%</td></tr><tr><td>2019</td><td>20%</td></tr><tr><td>2020</td><td>5%</td></tr><tr><td>2021</td><td>14%</td></tr><tr><td>2022</td><td>22%</td></tr></table>`,
+     hint:'Hai biểu đồ có cùng xu hướng chung (tăng rồi giảm 2020 do COVID, phục hồi 2021-2022). Dip năm 2018 và 2020 là key features cần đề cập.',
+     model:`<h4>📝 Model Answer</h4><p>The line graph and bar chart together illustrate a company's annual sales and profit margin between 2015 and 2022.</p><p>Overall, both sales and profit margins showed an upward general trend over the period, despite two notable dips — one in 2018 and a more severe one in 2020. By 2022, both figures reached their highest recorded levels.</p><p>Sales grew from £40 million in 2015 to a 2017 peak of £52 million, before falling to £48 million in 2018. They recovered strongly to £60 million in 2019, then dropped sharply to £38 million in 2020 — the lowest figure in the period. Following this, sales rebounded impressively, reaching £70 million by 2022.</p><p>The profit margin closely mirrored this pattern. It rose from 12% to 18% between 2015 and 2017, dipped to 10% in 2018, peaked at 20% in 2019, and then collapsed to just 5% in 2020 before recovering to a high of 22% in 2022.</p>`},
+  ],
+  process:[
+    {id:'pr1',title:'Coffee Bean Production',topic:'Manufacturing',difficulty:'easy',
+     gradeType:'process',minutes:20,minWords:150,
+     prompt:'The diagram below shows the process of producing coffee from harvest to final product. Summarise the information by selecting and reporting the main features. <em>Write at least 150 words.</em>',
+     data:`<ol style="margin-left:20px;line-height:2.2;font-size:0.92em;"><li>Harvest ripe coffee cherries from trees</li><li>Sort: remove damaged/unripe cherries</li><li>Pulping: remove outer skin using pulping machine</li><li>Fermentation: soak beans 24–48 hours to remove mucilage</li><li>Washing: rinse beans thoroughly with clean water</li><li>Drying: sun-dry or machine-dry to 11% moisture content</li><li>Hulling: remove the remaining parchment layer</li><li>Grading & sorting by size and weight</li><li>Roasting: at 200°C until golden-brown colour</li><li>Grinding & packaging into sealed bags</li><li>Distribute to cafés and supermarkets</li></ol>`,
+     hint:'Overview: 11 giai đoạn, từ thu hoạch đến phân phối. Key point: dùng passive voice liên tục (are harvested, are sorted, are washed...). Chia 2 đoạn: wet processing (1-6) và dry/finishing (7-11).',
+     model:`<h4>📝 Model Answer</h4><p>The diagram illustrates the eleven stages involved in producing coffee, from the initial harvest through to distribution to consumers.</p><p>Overall, the process involves both wet and dry stages, beginning with the picking of cherries and ending with the packaging and distribution of the finished product. It is a linear process with no recycling of materials.</p><p>In the first stage, ripe coffee cherries are harvested from trees and then sorted to remove any damaged or unripe specimens. The cherries subsequently undergo pulping, during which the outer skin is removed using a machine. The exposed beans are then fermented by soaking in water for between 24 and 48 hours, after which they are washed thoroughly to eliminate any remaining mucilage. The beans are subsequently dried — either under the sun or mechanically — until they reach a moisture content of 11%.</p><p>In the final stages, the dried beans are hulled to strip away the parchment layer, graded by size and weight, and then roasted at approximately 200°C. Finally, the roasted beans are ground, packaged into sealed bags and distributed to cafés and supermarkets.</p>`},
+    {id:'pr2',title:'Water Purification Process',topic:'Environment',difficulty:'medium',
+     gradeType:'process',minutes:20,minWords:150,
+     prompt:'The diagram shows how water from a river is treated and made safe for drinking. Summarise the information by selecting and reporting the main features. <em>Write at least 150 words.</em>',
+     data:`<ol style="margin-left:20px;line-height:2.2;font-size:0.92em;"><li>River water is pumped into the treatment facility</li><li>Screening: large debris removed by metal grilles</li><li>Sedimentation: water held in tanks, particles sink to bottom</li><li>Chemical treatment: aluminium sulphate added to cause flocculation (small particles clump together)</li><li>Filtration Stage 1: water passes through sand filters</li><li>Filtration Stage 2: water passes through activated carbon filters (removes odour/taste)</li><li>Chlorination: chlorine added to kill bacteria and viruses</li><li>pH adjustment: lime added to balance acidity</li><li>Fluoridation: fluoride added for dental health</li><li>Clean water stored in reservoir and pumped to homes</li></ol>`,
+     hint:'10 giai đoạn. Chia 3 nhóm: Physical removal (1-3), Chemical treatment (4-6), Final adjustments (7-10). Overview: raw water từng bước được làm sạch qua physical, chemical và biological methods.',
+     model:`<h4>📝 Model Answer</h4><p>The diagram depicts the ten-stage process through which raw river water is purified to a standard safe for human consumption.</p><p>Overall, the treatment process can be divided into three main phases: physical removal of solids, chemical treatment and purification, and final adjustment before distribution. The process is linear, with water progressively becoming cleaner at each stage.</p><p>Initially, river water is pumped into the treatment facility, where it passes through metal grilles that screen out large pieces of debris. It then enters sedimentation tanks, where heavier particles settle to the bottom naturally. Aluminium sulphate is subsequently added to cause flocculation, a process in which smaller particles clump together and become easier to remove.</p><p>The water is then filtered twice: first through sand, and then through activated carbon, which removes residual odours and taste. In the final phase, chlorine is added to eliminate any remaining bacteria and viruses. The pH level is then balanced using lime, and fluoride is added for dental health benefits before the treated water is stored in a reservoir and distributed to homes.</p>`},
+    {id:'pr3',title:'Life Cycle of a Salmon',topic:'Nature',difficulty:'medium',
+     gradeType:'process',minutes:20,minWords:150,
+     prompt:'The diagram below illustrates the life cycle of the Atlantic salmon. Summarise the information by selecting and reporting the main features. <em>Write at least 150 words.</em>',
+     data:`<ol style="margin-left:20px;line-height:2.2;font-size:0.92em;"><li>Female lays eggs in gravel beds of freshwater rivers (autumn)</li><li>Eggs hatch after 3–5 months → Alevins (tiny fish, still attached to yolk sac)</li><li>Yolk sac absorbed → Fry emerge and begin feeding on insects</li><li>Fry grow into Parr (after ~1 year, develop distinctive markings)</li><li>Parr become Smolts – body adapts to saltwater over 1–2 years</li><li>Smolts migrate to the ocean (North Atlantic)</li><li>Salmon live and grow in ocean for 1–4 years, feeding on fish/shrimp</li><li>Adult salmon return to their birthplace river to spawn (breed)</li><li>After spawning, most adults die (completing the cycle)</li></ol>`,
+     hint:'Đây là life cycle (vòng tròn), không phải linear process. Điều này rất quan trọng trong Overview: "The cycle begins/completes when...". Dùng cả active và passive voice cho sinh vật.',
+     model:`<h4>📝 Model Answer</h4><p>The diagram illustrates the complete life cycle of the Atlantic salmon, from egg to adult, in a cyclical process that takes place in both freshwater and marine environments.</p><p>Overall, the salmon's life cycle involves nine distinct stages spanning several years, beginning and ending in freshwater rivers. The cycle is characterised by a remarkable journey from rivers to the ocean and back again.</p><p>The cycle begins in autumn when females deposit their eggs in the gravel beds of freshwater rivers. After three to five months, the eggs hatch into tiny alevins, which are still nourished by an attached yolk sac. Once the yolk sac is absorbed, the young fish — known as fry — begin feeding independently on insects. Over approximately one year, the fry develop into parr, identifiable by distinctive body markings.</p><p>The parr then gradually adapt to saltwater during a transitional stage as smolts, before migrating to the North Atlantic Ocean. The salmon spend one to four years feeding and maturing in the ocean. Upon reaching adulthood, they navigate back to their original birthplace river to spawn. Following reproduction, the majority of adults die, completing the cycle.</p>`},
+  ],
+  map:[
+    {id:'mp1',title:'Town Centre Changes (1990–2020)',topic:'Development',difficulty:'easy',
+     gradeType:'map',minutes:20,minWords:150,
+     prompt:'The maps below show a town centre in 1990 and the same area in 2020. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. <em>Write at least 150 words.</em>',
+     data:`<table><tr><th>Location</th><th>1990</th><th>2020</th></tr><tr><td>North</td><td>Factory</td><td>Shopping mall</td></tr><tr><td>South</td><td>Farmland</td><td>Housing estate</td></tr><tr><td>East</td><td>Small park</td><td>Expanded park + Café</td></tr><tr><td>West</td><td>Hospital</td><td>Hospital (unchanged)</td></tr><tr><td>Centre</td><td>Market</td><td>Car park</td></tr><tr><td>North-West</td><td>(undeveloped)</td><td>New school</td></tr></table>`,
+     hint:'Overview: The town has undergone significant development – industrial → retail, farmland → residential. Only the hospital remained unchanged. Dùng past simple passive: was replaced by, was converted into, was demolished.',
+     model:`<h4>📝 Model Answer</h4><p>The two maps illustrate how a town centre changed between 1990 and 2020.</p><p>Overall, the town underwent significant transformation over the 30-year period, with industrial and agricultural land giving way to retail, residential and educational facilities. The hospital was the only building to remain unchanged.</p><p>The most notable change occurred in the north, where a factory was demolished and replaced by a large shopping mall. To the south, farmland was converted into a housing estate, indicating considerable residential expansion. In the north-west, a previously undeveloped area was used to construct a new school, suggesting population growth in the area.</p><p>The central market was replaced by a car park, reflecting the increased reliance on private vehicles. Meanwhile, the park in the east was expanded in size and a café was added to serve visitors. The hospital in the west remained in its original location, retaining its function without any apparent modification.</p>`},
+    {id:'mp2',title:'Sports Centre Layout Changes',topic:'Facilities',difficulty:'medium',
+     gradeType:'map',minutes:20,minWords:150,
+     prompt:'The plans below show a sports centre before and after renovations were carried out. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. <em>Write at least 150 words.</em>',
+     data:`<table><tr><th>Area</th><th>Before Renovation</th><th>After Renovation</th></tr><tr><td>Entrance (front)</td><td>Small reception desk</td><td>Larger reception + café</td></tr><tr><td>Left wing</td><td>Swimming pool (25m)</td><td>Swimming pool (50m, extended)</td></tr><tr><td>Right wing</td><td>2 tennis courts</td><td>1 tennis court + gym</td></tr><tr><td>Rear left</td><td>Changing rooms</td><td>Changing rooms (expanded)</td></tr><tr><td>Rear right</td><td>Storage room</td><td>Yoga/fitness studio</td></tr><tr><td>Outdoor</td><td>Car park (20 spaces)</td><td>Car park (40 spaces, doubled)</td></tr></table>`,
+     hint:'Overview: The renovations expanded and modernised the facility. Pool was extended; right wing was partially converted; outdoor parking doubled. Mix of changes: some areas expanded, one converted, one unchanged in function.',
+     model:`<h4>📝 Model Answer</h4><p>The two floor plans show the layout of a sports centre before and after a series of renovations.</p><p>Overall, the renovations resulted in an expanded and more diverse facility, with improved amenities for both fitness and leisure. The swimming pool was significantly enlarged and the outdoor car park doubled in capacity, while existing space was reorganised to accommodate a gym and a yoga studio.</p><p>At the entrance, the small reception desk was replaced by a larger reception area with an adjoining café. The swimming pool on the left side of the building was extended from 25 to 50 metres in length. In the right wing, one of the original two tennis courts was converted into a gym, leaving one court remaining. The changing rooms at the rear left were expanded to meet increased demand, while the storage room at the rear right was transformed into a yoga and fitness studio. Finally, the outdoor car park was doubled from 20 to 40 spaces to accommodate more visitors.</p>`},
+  ],
+  opinion:[
+    {id:'op1',title:'History vs Science in Schools',topic:'Education',difficulty:'medium',
+     gradeType:'opinion',minutes:40,minWords:250,
+     prompt:'"Some people say history is one of the most important school subjects. Other people think that, in today\'s world, subjects like Science and Technology are more important than history." <strong>Do you agree or disagree? Give your own opinion.</strong> <em>Write at least 250 words.</em>',
+     data:`<div class="info-box ib-blue"><strong>💡 Dạng bài: Opinion (Agree/Disagree)</strong><br>→ Nêu quan điểm RÕ RÀNG trong Intro (Thesis statement)<br>→ Dùng "I believe / I argue / I contend that..."<br>→ Body 1: lý do 1 ủng hộ quan điểm + example<br>→ Body 2: lý do 2 + đề cập quan điểm đối lập (concession)<br>→ Conclusion: restate thesis + broader implication</div>`,
+     hint:'Gợi ý: "Science drives economic growth; History teaches critical thinking. I believe a balanced curriculum is optimal." · Target 270–290 từ · Tránh lặp "important"',
+     model:`<h4>📝 Model Answer (Band 7.5)</h4><p>In today's rapidly evolving world, there is ongoing debate about whether history or subjects such as science and technology should take precedence in school curricula. While I acknowledge the cultural value of history, I firmly believe that science and technology are more vital for preparing students for contemporary challenges.</p><p>The most compelling argument for prioritising science and technology lies in their direct relevance to modern employment and economic growth. In an increasingly digitalised economy, proficiency in coding, engineering and data analysis has become indispensable. Nations that invest in STEM education consistently demonstrate higher levels of innovation and productivity. For instance, countries such as South Korea and Finland, which emphasise science in their curricula, have developed highly competitive economies. Without a strong scientific foundation, students risk being ill-equipped for the demands of the 21st-century workplace.</p><p>Proponents of history argue that it fosters critical thinking and cultural identity, which are equally essential. Understanding past events enables citizens to learn from historical mistakes and make informed political decisions. These are valid points, and I concede that history should not be eliminated from school programmes entirely. However, these skills can be developed across a range of subjects, whereas the technical knowledge gained from science cannot easily be substituted.</p><p>In conclusion, while history offers important insights into human culture and society, I believe that science and technology are fundamentally more important in equipping young people with the skills needed to thrive in today's world. Schools should therefore prioritise STEM education while retaining history as a complementary subject.</p>`},
+    {id:'op2',title:'Social Media: More Harm Than Good?',topic:'Technology',difficulty:'medium',
+     gradeType:'opinion',minutes:40,minWords:250,
+     prompt:'"Social media has done more harm than good to society." <strong>To what extent do you agree or disagree with this statement?</strong> <em>Write at least 250 words.</em>',
+     data:`<div class="info-box ib-blue"><strong>💡 Dạng bài: Opinion (To what extent)</strong><br>→ Có thể chọn: Strongly agree / Partially agree / Strongly disagree<br>→ Dù chọn gì, phải nêu RÕ trong Intro<br>→ "I partially agree" → Body 1: harms, Body 2: benefits nhưng outweighed<br>→ "I strongly disagree" → Body 1: benefit 1, Body 2: benefit 2, Body 3: concession + rebuttal</div>`,
+     hint:'Topics to consider: mental health, misinformation, cyberbullying vs connectivity, business opportunities, political awareness. Avoid fence-sitting — pick a clear position.',
+     model:`<h4>📝 Model Answer</h4><p>Social media has transformed the way people communicate, access information and conduct business over the past two decades. While I acknowledge that it carries certain risks, I largely disagree with the view that it has done more harm than good, as its benefits to connectivity and information sharing outweigh its drawbacks.</p><p>The most significant advantage of social media is its ability to connect people across geographical boundaries. Individuals can maintain relationships with family and friends regardless of distance, and marginalised communities have gained platforms to share their experiences and advocate for change. Furthermore, social media has democratised information, enabling citizens to access news instantly and hold governments and corporations accountable. Small businesses have also leveraged platforms like Instagram and Facebook to reach global audiences at minimal cost.</p><p>Admittedly, social media is not without its problems. Research has linked excessive use to anxiety, depression and poor self-esteem, particularly among teenagers. The rapid spread of misinformation is also a genuine concern, as unverified content can influence public opinion and even affect election outcomes. Cyberbullying represents another serious issue that has caused considerable psychological harm to young users.</p><p>Nevertheless, these negative consequences stem largely from a lack of digital literacy and inadequate platform regulation, rather than from social media itself. With appropriate education and governance, the harms can be substantially mitigated.</p><p>In conclusion, while social media presents real challenges that must be addressed, I believe its overall contribution to society is positive. The key lies in responsible usage and effective regulation.</p>`},
+    {id:'op3',title:'Living in Cities vs Rural Areas',topic:'Society',difficulty:'easy',
+     gradeType:'opinion',minutes:40,minWords:250,
+     prompt:'"Living in a big city is better than living in the countryside." <strong>Do you agree or disagree?</strong> Give specific reasons and examples. <em>Write at least 250 words.</em>',
+     data:`<div class="info-box ib-blue"><strong>💡 Dạng bài: Opinion (Agree/Disagree)</strong><br>→ Chú ý: Đây là câu hỏi về ý kiến cá nhân. Không cần viết "both sides" đều nhau<br>→ Chọn một phía và bảo vệ nó mạnh mẽ<br>→ Vẫn nên có 1 concession paragraph để cho thấy tư duy phản biện</div>`,
+     hint:'City arguments: career opportunities, education, healthcare, entertainment. Countryside: fresh air, community spirit, lower cost of living, mental wellbeing. Gợi ý: partially agree.',
+     model:`<h4>📝 Model Answer</h4><p>The question of whether urban or rural living offers a superior quality of life has long been debated. Personally, I partially agree that cities provide greater opportunities, though the countryside offers lifestyle advantages that many people find equally compelling.</p><p>Those who favour city living point to the abundance of professional opportunities and services available. Urban centres house the headquarters of major companies, offering diverse career prospects that are simply unavailable in rural settings. Cities also boast world-class hospitals, universities and cultural institutions, making them attractive to ambitious individuals seeking advancement. For instance, young professionals often migrate to capital cities precisely because of the concentration of opportunities they offer.</p><p>On the other hand, rural areas offer a pace of life that many find preferable, particularly for raising families. The countryside typically offers cleaner air, lower noise pollution and a stronger sense of community — factors that contribute significantly to mental wellbeing. Research suggests that people living in rural environments report lower stress levels and greater life satisfaction. Moreover, the cost of living in the countryside is often considerably lower, allowing residents to enjoy a comfortable lifestyle on more modest incomes.</p><p>In conclusion, while cities undeniably offer superior professional and educational opportunities, the countryside provides a healthier and often more fulfilling living environment for many people. Whether urban or rural life is "better" ultimately depends on an individual's priorities, values and stage of life.</p>`},
+  ],
+  discursive:[
+    {id:'d1',title:'Should University Education Be Free?',topic:'Education',difficulty:'medium',
+     gradeType:'discursive',minutes:40,minWords:250,
+     prompt:'"Some people think that university education should be free for all students, while others believe students should pay for their own education." <strong>Discuss both views and give your own opinion.</strong> <em>Write at least 250 words.</em>',
+     data:`<div class="info-box ib-blue"><strong>💡 Dạng bài: Discursive (Discuss both views + Opinion)</strong><br>→ KHÔNG được chỉ viết một phía<br>→ Body 1: View 1 (free education – arguments FOR)<br>→ Body 2: View 2 (fee-paying – arguments FOR)<br>→ Conclusion: Your opinion + Balanced summary<br>→ Thesis: "Both views have merit, but I believe..."</div>`,
+     hint:'Free: equality, social mobility, economic benefit. Fees: sustainability, personal responsibility, quality. Your opinion at the end should be clear and reasoned.',
+     model:`<h4>📝 Model Answer</h4><p>The funding of university education is a contentious issue, with some arguing that it should be provided free of charge while others contend that students should bear the cost themselves. Both perspectives have merit, though I ultimately believe that a mixed funding model is the most equitable solution.</p><p>Proponents of free university education argue that it promotes social equality by removing financial barriers that prevent talented students from lower-income backgrounds from accessing higher education. If tuition fees are high, those from disadvantaged families may be deterred from pursuing degrees, thereby perpetuating social inequality. Furthermore, a well-educated population generates broader economic benefits — including higher productivity and innovation — that ultimately justify public investment in tertiary education.</p><p>Conversely, those who favour fee-paying systems argue that education is an individual investment from which graduates directly benefit through higher lifetime earnings. Expecting all taxpayers, including those who did not attend university, to subsidise higher education for others raises questions of fairness. Moreover, fee-paying institutions tend to be better funded and more accountable to students, which can drive improvements in teaching quality and facilities.</p><p>In conclusion, while free education would promote equality and social mobility, the financial burden on governments is considerable. I believe the most effective approach is a income-contingent loan system, in which graduates repay fees only once they are earning above a certain threshold. This balances accessibility with fiscal sustainability.</p>`},
+    {id:'d2',title:'Zoos: Should They Exist?',topic:'Environment/Animals',difficulty:'medium',
+     gradeType:'discursive',minutes:40,minWords:250,
+     prompt:'"Some people believe that zoos are cruel and should be abolished. Others argue that zoos play an important role in protecting endangered species." <strong>Discuss both views and give your own opinion.</strong> <em>Write at least 250 words.</em>',
+     data:`<div class="info-box ib-blue"><strong>💡 Dạng bài: Discursive</strong><br>→ View 1 (Against zoos): animal welfare, unnatural habitat, psychological harm<br>→ View 2 (For zoos): conservation, breeding programs, education, research<br>→ Thesis: Bạn có thể argue rằng modern zoos (accredited) are acceptable nhưng traditional zoos should be reformed</div>`,
+     hint:'Key vocabulary: conservation, captivity, biodiversity, endangered species, rehabilitation, natural habitat, animal welfare, breeding programme, wildlife sanctuary.',
+     model:`<h4>📝 Model Answer</h4><p>The ethical status of zoos has become an increasingly contentious debate. While critics argue that keeping animals in captivity is inherently cruel, supporters maintain that zoos perform a vital conservation function. I believe that modern, accredited zoos can be justified, provided they prioritise animal welfare and genuine conservation goals.</p><p>Those opposed to zoos argue that confining wild animals to artificial enclosures causes significant psychological harm. Animals such as elephants and primates are known to exhibit stress-related behaviours in captivity, including repetitive pacing. Furthermore, even the most sophisticated zoo cannot replicate the natural habitat, social structures and freedoms that animals experience in the wild. Critics argue that wildlife sanctuaries or in-situ conservation efforts are both more ethical and more effective.</p><p>However, proponents point out that accredited zoos play an indispensable role in protecting species from extinction. Captive breeding programmes have been instrumental in saving animals such as the Arabian oryx and California condor from complete extinction. Zoos also fund substantial field conservation projects and conduct research that directly benefits wild populations. Additionally, they serve as educational institutions that foster public awareness of biodiversity loss and the importance of conservation.</p><p>In conclusion, while the concerns about animal welfare are legitimate, I believe that responsibly managed zoos — those that genuinely contribute to conservation and meet high welfare standards — serve an important purpose in today's world, where habitat destruction threatens countless species. However, zoos that merely exist for entertainment should be reformed or phased out.</p>`},
+  ],
+  problem:[
+    {id:'pb1',title:'Traffic Congestion in Cities',topic:'Society/Transport',difficulty:'medium',
+     gradeType:'problem',minutes:40,minWords:250,
+     prompt:'"Traffic congestion is a serious problem in many cities around the world. What are the main causes of this problem, and what measures can be taken to address it?"<em>Write at least 250 words.</em>',
+     data:`<div class="info-box ib-blue"><strong>💡 Dạng bài: Problem-Solution (Causes & Measures)</strong><br>→ Intro: paraphrase + thesis (preview causes AND solutions)<br>→ Body 1: 2–3 causes with explanation<br>→ Body 2: 2–3 solutions corresponding to causes<br>→ Conclusion: restate + optimistic outlook<br>→ Avoid: listing solutions without linking them to causes</div>`,
+     hint:'Causes: car dependency, poor public transport, urban sprawl, population growth. Solutions: congestion charges, investment in metro/buses, cycling infrastructure, remote work policies, urban planning.',
+     model:`<h4>📝 Model Answer</h4><p>Traffic congestion has become one of the most pressing urban challenges worldwide, wasting time, increasing pollution and reducing quality of life. This essay will examine the principal causes of this problem and propose several practical solutions.</p><p>The primary cause of urban congestion is the over-reliance on private vehicles. As car ownership has risen with growing affluence, roads have become increasingly overcrowded. Compounding this, many cities suffer from inadequate public transport infrastructure, leaving residents with little viable alternative to driving. Urban sprawl — whereby residential areas expand far from commercial centres — further necessitates long commutes, typically by car. Population growth in major cities naturally increases the volume of vehicles on already strained road networks.</p><p>To address these issues, governments should implement a combination of demand reduction and supply improvement measures. Congestion pricing — charging drivers to enter city centres during peak hours — has proven effective in cities such as London and Stockholm, reducing traffic volumes by up to 30%. Simultaneously, investment in reliable, affordable public transport, particularly metro systems and bus rapid transit, provides commuters with an attractive alternative. Expanding dedicated cycling lanes and pedestrian zones can encourage active travel for shorter journeys. Finally, promoting flexible and remote working arrangements, accelerated by the COVID-19 pandemic, can significantly reduce peak-hour commute volumes.</p><p>In conclusion, traffic congestion stems from a complex interplay of car dependency, poor infrastructure and population growth. A multi-pronged approach combining financial disincentives, public transport investment and policy reform is essential to create more liveable, sustainable cities.</p>`},
+    {id:'pb2',title:'Youth Unemployment',topic:'Work/Economy',difficulty:'hard',
+     gradeType:'problem',minutes:40,minWords:250,
+     prompt:'"Youth unemployment is a growing problem in many countries. What are the causes of this problem, and what solutions can governments and businesses offer?"<em>Write at least 250 words.</em>',
+     data:`<div class="info-box ib-blue"><strong>💡 Dạng bài: Problem-Solution</strong><br>→ Causes: skill mismatch, automation, lack of experience (catch-22), economic downturns<br>→ Solutions: vocational training, apprenticeships, entrepreneurship support, tax incentives for businesses hiring young workers<br>→ Nhớ link solutions với causes!</div>`,
+     hint:'Key vocabulary: youth unemployment, skill mismatch, vocational training, apprenticeship, entrepreneurship, labour market, automation, precarious employment, economic inactivity.',
+     model:`<h4>📝 Model Answer</h4><p>High youth unemployment rates pose a significant threat to both individual wellbeing and broader economic development. This essay will analyse the principal factors contributing to this problem and suggest measures that governments and businesses can adopt to address it.</p><p>One of the most significant causes is the mismatch between the skills acquired through formal education and those demanded by employers. Many graduates emerge with theoretical knowledge but lack the practical competencies required in the modern workplace. Automation further exacerbates the problem by displacing entry-level roles that have traditionally served as stepping stones for young workers. The paradox of experience — where employers require experience that young people are unable to gain without initial employment — creates a difficult cycle for school leavers and graduates alike.</p><p>To combat these issues, governments should expand vocational training and apprenticeship programmes that equip young people with industry-relevant skills while providing them with real workplace exposure. Businesses should be incentivised through tax reductions or subsidies to hire and train young workers. Entrepreneurship initiatives, including grants, mentoring and simplified regulatory frameworks for start-ups, can also empower young people to create their own employment. Additionally, collaboration between universities and employers to co-design curricula would help close the skills gap.</p><p>In conclusion, youth unemployment arises from structural mismatches between education systems and the labour market, compounded by technological change. A coordinated response involving investment in training, employer engagement and entrepreneurship support is essential to ensure that young people can participate fully in the economy.</p>`},
+  ],
+  twopart:[
+    {id:'tp1',title:'Why Do People Emigrate? What Are the Effects?',topic:'Society',difficulty:'medium',
+     gradeType:'twopart',minutes:40,minWords:250,
+     prompt:'"Many people choose to leave their home countries to live and work abroad. Why do people make this decision? What are the effects of this trend on both the countries people leave and the countries they move to?" <em>Write at least 250 words.</em>',
+     data:`<div class="info-box ib-blue"><strong>💡 Dạng bài: Two-Part Question</strong><br>→ PHẢI trả lời CẢ HAI câu hỏi!<br>→ Intro: paraphrase + thesis nêu cả 2 phần sẽ được thảo luận<br>→ Body 1: Lý do tại sao người ta di cư<br>→ Body 2: Tác động (lên cả nước xuất xứ VÀ nước đến)<br>→ Conclusion: Tóm tắt cả hai phần</div>`,
+     hint:'Reasons: better job opportunities, education, political instability, higher wages, family reunification, quality of life. Effects on home country: brain drain, remittances. Effects on destination: skills gain, cultural diversity, pressure on services.',
+     model:`<h4>📝 Model Answer</h4><p>International migration has increased dramatically in recent decades, driven by a complex set of motivations. This essay will explore the reasons why people choose to relocate abroad and examine the consequences for both origin and destination countries.</p><p>The decision to emigrate is typically driven by the pursuit of improved economic prospects. Many people from developing nations are attracted by higher wages, better employment opportunities and greater career advancement prospects available in wealthier countries. Educational opportunities also play a significant role, with students moving abroad to access world-class universities. Political instability, conflict and persecution are powerful push factors that compel individuals to seek safety elsewhere. Additionally, the desire to reunite with family members who have previously emigrated motivates many people to follow similar paths.</p><p>The effects of this trend are wide-ranging. For origin countries, emigration often results in a "brain drain", whereby educated and skilled workers leave, depriving the domestic economy of valuable human capital. However, the remittances sent home by migrants represent a significant source of income for many developing economies, often exceeding foreign aid. For destination countries, immigrants provide much-needed labour, particularly in sectors facing skills shortages, and contribute to cultural diversity. However, large-scale immigration can place pressure on public services such as housing, healthcare and education, and may generate social tensions if not managed effectively.</p><p>In conclusion, people emigrate primarily in search of better economic and educational opportunities or to escape difficult conditions. The effects are significant for both sending and receiving nations, bringing economic benefits alongside social and logistical challenges.</p>`},
+    {id:'tp2',title:'Why Are People Less Active? What Can Governments Do?',topic:'Health',difficulty:'easy',
+     gradeType:'twopart',minutes:40,minWords:250,
+     prompt:'"In many countries, people are becoming less physically active. Why is this happening? What measures can governments take to tackle this problem?" <em>Write at least 250 words.</em>',
+     data:`<div class="info-box ib-blue"><strong>💡 Dạng bài: Two-Part Question</strong><br>→ Body 1: Reasons why people are less active (WHY)<br>→ Body 2: Government measures (WHAT CAN BE DONE)<br>→ Mỗi body paragraph nên có ít nhất 2 points + examples<br>→ Tránh: chỉ trả lời 1 trong 2 câu hỏi</div>`,
+     hint:'Reasons: sedentary jobs, technology/screen time, urban design (car-centric cities), time pressure, cost of gyms. Measures: build parks and cycling paths, subsidise sport, PE in schools, tax unhealthy foods, workplace wellness.',
+     model:`<h4>📝 Model Answer</h4><p>Physical inactivity has become a widespread public health concern in both developed and developing nations. This essay will examine the factors contributing to increasingly sedentary lifestyles and propose measures that governments can implement to address the problem.</p><p>Several interconnected factors explain why people are exercising less. Firstly, the shift towards desk-based, technology-driven occupations means that a growing proportion of the workforce spends the majority of their working day seated. Advances in entertainment technology — particularly smartphones, streaming services and video games — have also created compelling alternatives to outdoor activity during leisure time. Furthermore, urban environments designed primarily for car use, with few safe cycling routes or green spaces, discourage walking and cycling as modes of transport. Finally, the time pressures of modern life, combined with long working hours, leave many individuals feeling that they lack the time or energy for regular exercise.</p><p>Governments can take a variety of measures to reverse this trend. Investment in public infrastructure — including parks, cycling lanes and pedestrian zones — makes physical activity safer and more accessible for all citizens. Mandating physical education in schools and funding community sports programmes can instil healthy habits from an early age. Financial incentives, such as subsidised gym memberships or tax reductions for employees who cycle to work, can make exercise more attractive. Governments might also consider taxing unhealthy sedentary behaviours indirectly through levies on products such as sugar-sweetened beverages, using the revenue to fund public health initiatives.</p><p>In conclusion, declining physical activity levels are the product of technological, environmental and social changes. Targeted government intervention — encompassing infrastructure investment, education and financial incentives — is essential to promote healthier, more active populations.</p>`},
+  ]
+};
+
+// Current state
+let activeCat = 'wt1graph', activeType = 'linegraph';
+let activeTimer = null;
+
+// Category/type mappings
+const catTypes = {
+  wt1graph: ['linegraph','bar','pie','table','mixed'],
+  wt1diagram: ['process','map'],
+  wt2: ['opinion','discursive','problem','twopart']
+};
+const typeLabels = {
+  linegraph:'📈 Line Graph', bar:'📊 Bar Chart', pie:'🥧 Pie Chart',
+  table:'📋 Table', mixed:'🔀 Mixed Charts', process:'⚙️ Process',
+  map:'🗺️ Map', opinion:'💬 Opinion', discursive:'⚖️ Discursive',
+  problem:'🔧 Problem-Solution', twopart:'❓ Two-Part Q'
+};
+const typeColors = {
+  linegraph:'#1a237e', bar:'#e65100', pie:'#6a1b9a', table:'#37474f',
+  mixed:'#004d40', process:'#1b5e20', map:'#006064', opinion:'#b71c1c',
+  discursive:'#4e342e', problem:'#f57f17', twopart:'#0d47a1'
+};
+const diffLabels = {easy:'Cơ bản',medium:'Trung bình',hard:'Nâng cao'};
+
+function switchCat(cat) {
+  activeCat = cat;
+  document.querySelectorAll('.cat-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('ctab-'+cat).classList.add('active');
+  document.querySelectorAll('.cpanel').forEach(p=>p.style.display='none');
+  document.getElementById('cpanel-'+cat).style.display='';
+  // Pick first type in this cat
+  const firstType = catTypes[cat][0];
+  switchType(cat, firstType);
+}
+
+function switchType(cat, type) {
+  activeType = type;
+  document.querySelectorAll('.type-tab').forEach(b=>b.classList.remove('active'));
+  const tb = document.getElementById('ttab-'+type);
+  if(tb) tb.classList.add('active');
+  renderExGrid(cat, type);
+}
+
+function renderExGrid(cat, type) {
+  const gridId = 'exgrid-'+cat;
+  const grid = document.getElementById(gridId);
+  if(!grid) return;
+  const bank = exerciseBank[type] || [];
+  const color = typeColors[type] || '#1a237e';
+  grid.innerHTML = bank.map(ex => `
+    <div class="ex-card" onclick="loadExercise('${ex.id}')">
+      <span class="ex-card-difficulty diff-${ex.difficulty}">${diffLabels[ex.difficulty]}</span>
+      <div class="ex-card-tag" style="background:${color}22;color:${color};">${typeLabels[type]}</div>
+      <div class="ex-card-title">${ex.title}</div>
+      <div class="ex-card-meta">⏱ ${ex.minutes} phút · ✍️ tối thiểu ${ex.minWords} từ · 🏷 ${ex.topic}</div>
+    </div>`).join('');
+}
+
+function loadRandom() {
+  const allEx = Object.values(exerciseBank).flat();
+  const ex = allEx[Math.floor(Math.random()*allEx.length)];
+  loadExercise(ex.id);
+  nav('practice');
+}
+
+function loadExercise(exId) {
+  // Find exercise in bank
+  let ex = null;
+  for(const arr of Object.values(exerciseBank)){
+    const found = arr.find(e=>e.id===exId);
+    if(found){ex=found;break;}
+  }
+  if(!ex) return;
+  const color = typeColors[ex.gradeType] || '#4a148c';
+  document.getElementById('exerciseArea').innerHTML = `
+    <div class="card" style="margin-top:0;">
+      <div class="card-header" style="background:${color};color:#fff;">
+        ${typeLabels[ex.gradeType]||''} · ${ex.title}
+        <span style="font-size:0.78em;opacity:0.8;margin-left:12px;">🏷 ${ex.topic} · ${diffLabels[ex.difficulty]}</span>
+      </div>
+      <div class="card-body">
+        <div class="info-box ib-yellow" style="margin-bottom:12px;"><strong>📋 ĐỀ BÀI:</strong><br>${ex.prompt}</div>
+        <div class="info-box ib-blue" style="margin-bottom:12px;">${ex.data}</div>
+        <div class="info-box ib-green" style="margin-bottom:12px;"><strong>💡 Gợi ý phân tích:</strong> ${ex.hint}</div>
+        <textarea class="write-area" id="writeBox" oninput="countW(this,${ex.minWords})" placeholder="Viết bài của bạn tại đây... (${ex.minWords} từ tối thiểu, mục tiêu ${Math.round(ex.minWords*1.15)} từ)"></textarea>
+        <div class="wc-bar"><span>Số từ: <strong id="wcDisplay">0</strong> / ${ex.minWords} tối thiểu</span><span id="wcStatus">—</span></div>
+        <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+          <button class="tbtn start" style="background:${color};border-radius:8px;font-size:0.95em;padding:10px 22px;" onclick="gradeWriting('${ex.gradeType}',${ex.minWords})">🤖 Chấm Bài Tự Động</button>
+          <button class="tbtn reset" style="border-radius:8px;" onclick="document.getElementById('gradeResult').innerHTML=''">Xóa Kết Quả</button>
+          <button class="model-toggle" onclick="toggleModel('modelBox_${ex.id}')">👁 Xem Bài Mẫu</button>
+          <button class="tbtn reset" style="border-radius:8px;" onclick="loadRandom()">🎲 Bài Ngẫu Nhiên</button>
+        </div>
+        <div id="modelBox_${ex.id}" class="model-answer-box">${ex.model||'<em>Chưa có bài mẫu.</em>'}</div>
+        <div id="gradeResult" style="margin-top:16px;"></div>
+      </div>
+      <div class="timer-row">
+        <span>⏱ Timer:</span>
+        <span class="timer-display" id="timerDisplay">${String(ex.minutes).padStart(2,'0')}:00</span>
+        <button class="tbtn start" onclick="startTimer(${ex.minutes})">▶ Bắt đầu</button>
+        <button class="tbtn reset" onclick="resetTimer(${ex.minutes})">↺ Reset</button>
+        <span style="font-size:0.8em;color:var(--sub);margin-left:8px;">Mục tiêu: ${ex.minutes} phút</span>
+      </div>
+    </div>`;
+  window.scrollTo({top:document.getElementById('exerciseArea').offsetTop-80,behavior:'smooth'});
+}
+
+function toggleModel(id){
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.style.display=el.style.display==='block'?'none':'block';
+}
+
+// Initialise practice grids on page load
+function initPractice() {
+  switchCat('wt1graph');
+  // Pre-render all grids
+  Object.entries(catTypes).forEach(([cat,types])=>{
+    types.forEach(type=>renderExGrid(cat,type));
+  });
+  switchType('wt1graph','linegraph');
+}
+function countW(el, min) {
+  const words = el.value.trim().split(/\s+/).filter(w=>w.length>0).length;
+  document.getElementById('wcDisplay').textContent = words;
+  const st = document.getElementById('wcStatus');
+  if (words >= min) { st.textContent = '✅ Đủ từ!'; st.style.color = '#1b5e20'; }
+  else { st.textContent = `Cần thêm ${min-words} từ`; st.style.color = '#c62828'; }
+}
+
+// ===== ERROR DETECTION ENGINE =====
+function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function escAttr(s){return String(s).replace(/'/g,'&#39;').replace(/"/g,'&quot;');}
+
+function detectErrors(text){
+  const errors=[];
+  function addAll(rx,type,msg,suggest){
+    const re=new RegExp(rx.source,rx.flags.includes('g')?rx.flags:rx.flags+'g');
+    let m;while((m=re.exec(text))!==null){errors.push({start:m.index,end:m.index+m[0].length,word:m[0],type,msg,suggest});}
+  }
+  // 1. Contractions
+  addAll(/\b(don't|doesn't|can't|won't|isn't|aren't|wasn't|weren't|haven't|hasn't|hadn't|wouldn't|couldn't|shouldn't|I'm|I've|I'd|I'll|we're|they're|you're|there's|that's|what's|it's)\b/gi,'informal','❌ Tránh viết tắt trong IELTS Academic','Viết đầy đủ: don\'t→do not, can\'t→cannot, it\'s→it is, I\'m→I am');
+  // 2. Informal words
+  [
+    {rx:/\ba lot of\b/gi,s:'→ a large number of / a significant amount of'},
+    {rx:/\blots of\b/gi,s:'→ numerous / a considerable number of'},
+    {rx:/\breally\b/gi,s:'→ significantly / remarkably / considerably'},
+    {rx:/\bstuff\b/gi,s:'→ materials / elements / factors'},
+    {rx:/\bkids\b/gi,s:'→ children / young people'},
+    {rx:/\bgonna\b/gi,s:'→ going to'},
+    {rx:/\bwanna\b/gi,s:'→ want to'},
+    {rx:/\bgotta\b/gi,s:'→ have to / must'},
+    {rx:/\bokay\b/gi,s:'→ acceptable / satisfactory'},
+    {rx:/\bbig\b/gi,s:'→ significant / substantial / considerable'},
+    {rx:/\bgood\b/gi,s:'→ beneficial / advantageous / effective / positive'},
+    {rx:/\bbad\b/gi,s:'→ detrimental / harmful / adverse / negative'},
+    {rx:/\bthings\b/gi,s:'→ factors / aspects / elements / issues'},
+    {rx:/\bshow\b/gi,s:'→ illustrate / demonstrate / reveal / indicate'},
+    {rx:/\bget\b/gi,s:'→ obtain / acquire / receive / achieve (tùy ngữ cảnh)'},
+    {rx:/\bgot\b/gi,s:'→ obtained / achieved / received (tùy ngữ cảnh)'},
+    {rx:/\bsmall\b/gi,s:'→ minor / slight / minimal / limited'},
+    {rx:/\bvery important\b/gi,s:'→ crucial / essential / vital / of paramount importance'},
+    {rx:/\bI think\b/g,s:'→ It is argued that / I contend that / In my view'},
+  ].forEach(({rx,s})=>addAll(rx,'informal','⚠️ Từ không phù hợp IELTS Academic',s));
+  // 3. "a" before vowel sound (article error)
+  const vowelExcepts=/^(uni|use|user|usual|union|unit|unique|universe|universal|unity|usage|useful|utopia|euro|european|one)/i;
+  const artRx=/\ba\s+([aeiou][a-z]*)/gi;
+  let m2;while((m2=artRx.exec(text))!==null){
+    if(!vowelExcepts.test(m2[1])){errors.push({start:m2.index,end:m2.index+m2[0].length,word:m2[0],type:'grammar',msg:'❌ Lỗi mạo từ: dùng "an" trước âm nguyên âm',suggest:'→ an '+m2[1]});}
+  }
+  // 4. Double words
+  addAll(/\b(\w+)\s+\1\b/gi,'grammar','❌ Từ bị lặp đôi','→ Xóa một từ thừa');
+  // 5. Subject-verb agreement
+  [
+    {rx:/\bpeople\s+is\b/gi,s:'→ people ARE'},
+    {rx:/\bpeople\s+was\b/gi,s:'→ people WERE'},
+    {rx:/\beveryone\s+are\b/gi,s:'→ everyone IS'},
+    {rx:/\beveryone\s+were\b/gi,s:'→ everyone WAS'},
+    {rx:/\beverybody\s+are\b/gi,s:'→ everybody IS'},
+    {rx:/\bchildren\s+is\b/gi,s:'→ children ARE'},
+    {rx:/\bchildren\s+was\b/gi,s:'→ children WERE'},
+    {rx:/\bthe number of \w+ are\b/gi,s:'→ the number of ... IS'},
+    {rx:/\ba number of \w+ is\b/gi,s:'→ a number of ... ARE'},
+    {rx:/\bdata is\b/gi,s:'→ data ARE (data là số nhiều)'},
+    {rx:/\bmedia is\b/gi,s:'→ media ARE (media là số nhiều)'},
+  ].forEach(({rx,s})=>addAll(rx,'grammar','❌ Lỗi Subject-Verb Agreement',s));
+  // 6. "And"/"But" starting a sentence
+  addAll(/(?:^|\.\s+)(And |But )/gm,'style','⚠️ Không bắt đầu câu bằng "And" hoặc "But"','→ Dùng: Furthermore, / However, / In addition, / Moreover,');
+  // 7. "very + weak adj"
+  addAll(/\bvery\s+(good|bad|big|small|important|interesting|nice|great|difficult|easy|common|rare|high|low|fast|slow|new|old|long|short|hot|cold|beautiful|smart)\b/gi,'style','⚠️ "very + adj" yếu – dùng từ mạnh hơn','→ very important→crucial, very big→enormous, very good→excellent, very bad→terrible');
+  // 8. "different to" (wrong preposition)
+  addAll(/\bdifferent to\b/gi,'grammar','❌ Lỗi giới từ sau "different"','→ different FROM (không phải "different to")');
+  // 9. Double comparative ("more better")
+  addAll(/\bmore\s+(better|worse|higher|lower|greater|smaller|faster|slower|stronger|weaker)\b/gi,'grammar','❌ Lỗi so sánh kép (Double Comparative)','→ Bỏ "more", chỉ dùng comparative form');
+  // 10. "make" collocations
+  addAll(/\bmake a research\b/gi,'grammar','❌ Lỗi collocation: "make a research"','→ conduct research / carry out research');
+  addAll(/\bdo a mistake\b/gi,'grammar','❌ Lỗi collocation','→ make a mistake (không phải "do a mistake")');
+  // 11. Preposition errors
+  addAll(/\bdepend on\s+whether\b/gi,'grammar','⚠️ Kiểm tra: "depend on whether"','→ Correct. Nhưng dùng "depend" không có "s" sau "people/they"');
+  addAll(/\bsince \d{4}\b/gi,'style','💡 "since + year" cần present perfect','→ The number HAS increased since 2005 (dùng thì hoàn thành)');
+  // Sort & de-overlap
+  errors.sort((a,b)=>a.start-b.start);
+  const out=[];let last=-1;
+  for(const e of errors){if(e.start>=last){out.push(e);last=e.end;}}
+  return out;
+}
+
+function renderAnnotatedText(text,errors){
+  if(!errors.length)return`<div style="line-height:1.9;font-size:0.93em;white-space:pre-wrap;font-family:Georgia,serif;color:#1a1a1a;">${escHtml(text)}<br><br><span style="color:#1b5e20;font-size:0.88em;">✅ Không phát hiện lỗi phổ biến!</span></div>`;
+  const colorMap={grammar:{bg:'#ffebee',border:'#e53935',label:'Ngữ pháp'},informal:{bg:'#fff8e1',border:'#fb8c00',label:'Informal'},style:{bg:'#e8f5e9',border:'#43a047',label:'Văn phong'}};
+  let html='',pos=0;
+  for(const e of errors){
+    if(e.start>pos)html+=escHtml(text.slice(pos,e.start));
+    const c=colorMap[e.type]||colorMap.grammar;
+    html+=`<span class="err-mark" onclick="toggleTip(this)" style="background:${c.bg};border-bottom:2.5px solid ${c.border};cursor:pointer;border-radius:2px;padding:0 1px;position:relative;" data-msg="${escAttr(e.msg)}" data-sug="${escAttr(e.suggest)}" data-col="${escAttr(c.border)}" data-lab="${escAttr(c.label)}">${escHtml(e.word)}<span class="err-tip" style="display:none;position:absolute;bottom:calc(100% + 6px);left:0;z-index:999;background:#fff;border:2px solid ${c.border};border-radius:10px;padding:10px 13px;font-size:0.8em;box-shadow:0 4px 20px rgba(0,0,0,0.18);min-width:220px;max-width:300px;white-space:normal;line-height:1.5;pointer-events:none;"><strong style="color:${c.border};">${c.label}</strong><br>${escHtml(e.msg)}<br><span style="color:#1a237e;font-weight:600;">${escHtml(e.suggest)}</span></span></span>`;
+    pos=e.end;
+  }
+  if(pos<text.length)html+=escHtml(text.slice(pos));
+  return`<div style="line-height:1.9;font-size:0.93em;white-space:pre-wrap;font-family:Georgia,serif;color:#1a1a1a;">${html}</div>`;
+}
+
+function toggleTip(el){
+  const tip=el.querySelector('.err-tip');
+  if(!tip)return;
+  const isVisible=tip.style.display!=='none';
+  document.querySelectorAll('.err-tip').forEach(t=>t.style.display='none');
+  if(!isVisible)tip.style.display='block';
+}
+document.addEventListener('click',function(e){if(!e.target.closest('.err-mark'))document.querySelectorAll('.err-tip').forEach(t=>t.style.display='none');});
+
+// ===== GIBBERISH / VALIDITY CHECK =====
+const COMMON_EN = new Set('the a an is are was were be been being have has had do does did will would shall should may might can could of in to for on at by with from as into through and but or not that this these those it he she they we you i its their our his her my your which who what how when where if because although however therefore also more most some many much such no only than then there here both each other between while first last new old good great large small long high low take come make know think see look want give use find tell ask seem feel try write read learn change understand follow show hear play run move live believe hold bring happen speak spend grow open walk offer remember love consider appear build stay fall reach suggest raise pass sell require report decide since could without just now well back even still way people government country world system environment education technology health economy society business information'.split(' '));
+
+function checkEnglishValidity(words) {
+  const total = words.length;
+  if (total === 0) return {valid:false,reason:'Chưa có nội dung'};
+
+  // Count words with no vowels (gibberish like "sdf", "fs", "xcv")
+  const noVowel = words.filter(w => w.length > 1 && !/[aeiou]/i.test(w));
+  const noVowelRatio = noVowel.length / total;
+
+  // Count recognised English words
+  const knownCount = words.filter(w => COMMON_EN.has(w.toLowerCase())).length;
+  const knownRatio = knownCount / total;
+
+  // Average word length (gibberish tends to be very short)
+  const avgLen = words.reduce((s,w)=>s+w.length,0) / total;
+
+  // Heuristic: gibberish if >35% words have no vowels AND known word ratio < 5%
+  if (noVowelRatio > 0.35 && knownRatio < 0.08) {
+    return {valid:false, reason:`${Math.round(noVowelRatio*100)}% từ không có nguyên âm — không phải tiếng Anh hợp lệ`, noVowelRatio, knownRatio, avgLen};
+  }
+  // Also flag if almost no recognisable words at all
+  if (knownRatio < 0.03 && total > 20) {
+    return {valid:false, reason:'Gần như không có từ tiếng Anh nào được nhận dạng', noVowelRatio, knownRatio, avgLen};
+  }
+  return {valid:true, noVowelRatio, knownRatio, avgLen};
+}
+
+// ===== AUTO GRADING ENGINE =====
+function gradeWriting(type, minWords) {
+  const text = document.getElementById('writeBox').value.trim();
+  const allWords = text.split(/\s+/).filter(w=>w.length>0);
+  if (allWords.length < 30) {
+    document.getElementById('gradeResult').innerHTML = '<div class="info-box ib-red">⚠️ Vui lòng viết ít nhất 30 từ trước khi chấm bài.</div>';
+    return;
+  }
+
+  // ---- VALIDITY CHECK FIRST ----
+  const validity = checkEnglishValidity(allWords);
+  if (!validity.valid) {
+    document.getElementById('gradeResult').innerHTML = `
+      <div style="background:#b71c1c;color:#fff;border-radius:14px;padding:24px 28px;text-align:center;">
+        <div style="font-size:2.5em;margin-bottom:10px;">❌</div>
+        <div style="font-size:1.4em;font-weight:800;margin-bottom:8px;">Bài viết không hợp lệ</div>
+        <div style="font-size:0.95em;opacity:0.9;margin-bottom:16px;">${validity.reason}</div>
+        <div style="background:rgba(255,255,255,0.15);border-radius:10px;padding:14px 20px;font-size:0.88em;line-height:1.8;text-align:left;">
+          📊 Phân tích:<br>
+          • Từ không có nguyên âm: <strong>${Math.round((validity.noVowelRatio||0)*100)}%</strong> (ngưỡng cho phép: &lt;35%)<br>
+          • Từ tiếng Anh được nhận diện: <strong>${Math.round((validity.knownRatio||0)*100)}%</strong> (ngưỡng tối thiểu: 8%)<br>
+          • Độ dài từ trung bình: <strong>${(validity.avgLen||0).toFixed(1)} ký tự</strong>
+        </div>
+      </div>
+      <div style="background:#fff3e0;border:2px solid #fb8c00;border-radius:10px;padding:16px 20px;margin-top:14px;font-size:0.9em;line-height:1.8;">
+        <strong style="color:#e65100;">💡 Hệ thống chỉ chấm được bài viết tiếng Anh thật.</strong><br>
+        Vui lòng viết bài IELTS Writing thực sự vào ô trên, sau đó bấm "Chấm Bài Tự Động".
+      </div>`;
+    return;
+  }
+
+  // Run error detection
+  const detectedErrors = detectErrors(text);
+  const errByType = {grammar: detectedErrors.filter(e=>e.type==='grammar'), informal: detectedErrors.filter(e=>e.type==='informal'), style: detectedErrors.filter(e=>e.type==='style')};
+  const annotated = renderAnnotatedText(text, detectedErrors);
+  const tLow = text.toLowerCase();
+  const words = allWords;
+  const wc = words.length;
+
+  // ---- TASK ACHIEVEMENT ---- (base 4.0, max 9.0)
+  let ta = 4.0, taGood = [], taBad = [];
+  // Word count
+  if (wc >= minWords) { ta += 1.0; taGood.push(`✅ Đủ số từ: ${wc} từ (tối thiểu ${minWords})`); }
+  else if (wc >= minWords * 0.85) { ta += 0.5; taBad.push(`⚠️ Gần đủ từ: ${wc}/${minWords} — cần thêm ${minWords-wc} từ`); }
+  else { taBad.push(`❌ Thiếu từ nghiêm trọng: chỉ có ${wc}/${minWords} từ — mất điểm TA ngay!`); }
+  if (wc >= minWords * 1.15) { ta += 0.5; taGood.push('✅ Số từ tốt (vượt tối thiểu >15%)'); }
+
+  const overviewWords = ['overall','in general','generally speaking','it is clear that','it can be seen','it is evident','the most notable','the most striking','in summary','to summarise'];
+  const hasOverview = overviewWords.some(k => tLow.includes(k));
+  if (hasOverview) { ta++; taGood.push('✅ Có câu Overview/thesis statement'); }
+  else { taBad.push('❌ Thiếu Overview (WT1) hoặc Thesis statement (WT2) — quan trọng nhất!'); }
+
+  const paraphVocab = ['illustrates','depicts','reveals','demonstrates','presents','compares','highlights','outlines','shows how','represents'];
+  if (paraphVocab.some(k => tLow.includes(k))) { ta += 0.5; taGood.push('✅ Intro có paraphrase đề tốt'); }
+  else { taBad.push('⚠️ Intro: nên paraphrase đề bằng từ đồng nghĩa (illustrates, depicts, reveals...)'); }
+
+  if (type === 'trend' || type === 'comparison' || type === 'process' || type === 'map') {
+    const dataWords = tLow.match(/\d+[%,]?|\d+,\d+|\d+\.\d+/g) || [];
+    if (dataWords.length >= 4) { ta += 0.5; taGood.push(`✅ Có ${dataWords.length} số liệu cụ thể trong bài`); }
+    else { taBad.push(`⚠️ Chỉ có ${dataWords.length} số liệu — nên thêm số liệu cụ thể vào body paragraphs`); }
+  }
+  ta = Math.min(Math.max(ta, 4), 9);
+
+  // ---- COHERENCE & COHESION ---- (base 4.0)
+  let cc = 4.0, ccGood = [], ccBad = [];
+  const connectorList = [
+    {w:'furthermore',pts:1},{w:'moreover',pts:1},{w:'in addition',pts:1},{w:'additionally',pts:1},
+    {w:'however',pts:1},{w:'nevertheless',pts:1},{w:'on the other hand',pts:1},{w:'in contrast',pts:1},{w:'by contrast',pts:1},
+    {w:'as a result',pts:1},{w:'therefore',pts:1},{w:'consequently',pts:1},{w:'thus',pts:0.5},{w:'this means that',pts:1},
+    {w:'for example',pts:0.5},{w:'for instance',pts:0.5},{w:'to illustrate',pts:1},{w:'such as',pts:0.5},
+    {w:'while',pts:0.5},{w:'whereas',pts:1},{w:'despite',pts:1},{w:'although',pts:1},{w:'even though',pts:1},
+    {w:'similarly',pts:1},{w:'likewise',pts:1},{w:'in comparison',pts:1},{w:'compared with',pts:1},
+    {w:'in conclusion',pts:0.5},{w:'to sum up',pts:0.5},{w:'overall',pts:0.5},
+    {w:'after which',pts:1.5},{w:'followed by',pts:1.5},{w:'subsequently',pts:1},{w:'simultaneously',pts:1},
+    {w:'in particular',pts:1},{w:'specifically',pts:1}
+  ];
+  let connFound = connectorList.filter(c => tLow.includes(c.w));
+  let connScore = connFound.reduce((s,c) => s + c.pts, 0);
+  let connCount = connFound.length;
+  if (connCount >= 2) { cc++; ccGood.push(`✅ Có ${connCount} loại cohesive devices: ${connFound.slice(0,4).map(c=>c.w).join(', ')}...`); }
+  if (connCount >= 4) { cc += 0.5; ccGood.push('✅ Cohesive devices đa dạng tốt'); }
+  if (connCount >= 6) { cc += 0.5; ccGood.push('✅ Xuất sắc — nhiều loại connector khác nhau'); }
+  if (connCount < 2) { ccBad.push('❌ Quá ít cohesive devices — cần thêm: Furthermore, However, As a result...'); }
+  if (connCount >= 1 && connCount < 4) { ccBad.push('⚠️ Connector chưa đủ đa dạng — thêm 2-3 loại khác nhau'); }
+
+  // Check pronoun reference / repetition
+  const topWords = words.map(w=>w.toLowerCase().replace(/[^a-z]/g,'')).filter(w=>w.length>4);
+  const freq = {}; topWords.forEach(w => freq[w]=(freq[w]||0)+1);
+  const repeated = Object.entries(freq).filter(([w,c])=>c>=5 && !['which','their','there','these','those','about','people','other','between','within'].includes(w));
+  if (repeated.length > 0) ccBad.push(`⚠️ Lặp từ nhiều lần: "${repeated.slice(0,3).map(([w])=>w).join('", "')}" — dùng synonym thay thế`);
+  cc = Math.min(Math.max(cc, 4), 9);
+
+  // ---- LEXICAL RESOURCE ---- (base 4.0)
+  let lr = 4.0, lrGood = [], lrBad = [];
+  const cleanWords = words.map(w=>w.toLowerCase().replace(/[^a-z]/g,''));
+  const uniqueW = new Set(cleanWords.filter(w=>w.length>2));
+  const lexDensity = uniqueW.size / Math.max(wc, 1);
+  // Penalise: if known English ratio is low, word choice is poor
+  if (validity.knownRatio < 0.25) { lrBad.push(`⚠️ Từ vựng chưa đủ đa dạng/chính xác — chỉ ${Math.round(validity.knownRatio*100)}% từ được nhận diện`); }
+  else { lr += 0.5; }
+  if (lexDensity > 0.6) { lr++; lrGood.push(`✅ Từ vựng phong phú (${uniqueW.size} từ độc nhất / ${wc} từ tổng)`); }
+  if (lexDensity > 0.7) { lr += 0.5; lrGood.push('✅ Từ vựng đa dạng xuất sắc'); }
+  if (lexDensity < 0.5) { lrBad.push(`⚠️ Từ vựng còn đơn điệu — lexical density: ${(lexDensity*100).toFixed(0)}%`); }
+
+  const acadVocab = ['significant','substantial','considerable','dramatic','gradual','slight','notable','evident','apparent','prominent','prevalent','fundamental','crucial','essential','vital','inevitable','predominantly','consistently','remarkably','substantially'];
+  const acadFound = acadVocab.filter(w => tLow.includes(w));
+  if (acadFound.length >= 2) { lr++; lrGood.push(`✅ Từ học thuật tốt: ${acadFound.slice(0,4).join(', ')}`); }
+  if (acadFound.length >= 4) { lr += 0.5; lrGood.push('✅ Từ học thuật phong phú — band 7+ vocabulary'); }
+  if (acadFound.length < 2) { lrBad.push(`⚠️ Cần thêm từ học thuật: significant, substantial, considerable, dramatic...`); }
+
+  // Type-specific vocabulary
+  if (type === 'trend') {
+    const trendV = ['increased','decreased','rose','fell','dropped','declined','fluctuated','remained','stabilized','peaked','surged','plunged','leveled','doubled','tripled','dramatic','gradual','sharp','steady'];
+    const tf = trendV.filter(v => tLow.includes(v));
+    if (tf.length >= 4) { lr++; lrGood.push(`✅ Từ vựng xu hướng đa dạng: ${tf.slice(0,5).join(', ')}`); }
+    else { lrBad.push(`⚠️ Cần thêm từ xu hướng (chỉ có ${tf.length}): surge, plunge, level off, peak at...`); }
+  }
+  if (type === 'comparison') {
+    const compV = ['higher','lower','more','less','twice','outnumber','surpass','superior','proportion','percentage','whereas','while','compared'];
+    const cf = compV.filter(v => tLow.includes(v));
+    if (cf.length >= 4) { lr++; lrGood.push(`✅ Từ vựng so sánh đa dạng: ${cf.slice(0,4).join(', ')}`); }
+    else { lrBad.push(`⚠️ Cần thêm từ so sánh: higher than, outnumber, surpass, accounts for...`); }
+  }
+  if (type === 'process') {
+    const procV = ['are','is','was','were','initially','subsequently','finally','simultaneously','alternatively','in order to','so that'];
+    const pf = procV.filter(v => tLow.includes(v));
+    if (pf.length >= 5) { lr++; lrGood.push('✅ Từ vựng Process đa dạng'); }
+  }
+  if (type === 'map') {
+    const mapV = ['north','south','east','west','adjacent','opposite','replaced','demolished','converted','constructed','expanded','retained'];
+    const mf = mapV.filter(v => tLow.includes(v));
+    if (mf.length >= 3) { lr++; lrGood.push(`✅ Từ vựng Map tốt: ${mf.slice(0,4).join(', ')}`); }
+    else { lrBad.push(`⚠️ Cần thêm spatial vocab: adjacent to, was replaced by, was converted into...`); }
+  }
+  lr = Math.min(Math.max(lr, 4), 9);
+
+  // ---- GRAMMATICAL RANGE ---- (base 4.0)
+  let gr = 4.0, grGood = [], grBad = [];
+  // Penalise detected grammar errors
+  const grammarErrCount = errByType.grammar.length;
+  if (grammarErrCount >= 5) { gr -= 0.5; grBad.push(`❌ ${grammarErrCount} lỗi ngữ pháp nghiêm trọng được phát hiện — xem danh sách lỗi ở trên`); }
+  else if (grammarErrCount >= 2) { grBad.push(`⚠️ ${grammarErrCount} lỗi ngữ pháp — xem chi tiết ở phần lỗi`); }
+  else if (grammarErrCount === 0) { gr += 0.5; grGood.push('✅ Không phát hiện lỗi ngữ pháp phổ biến'); }
+  const passiveRx = /\b(is|are|was|were|has been|have been|had been|being)\s+[a-z]+ed\b/gi;
+  const passiveMatches = text.match(passiveRx) || [];
+  if (passiveMatches.length >= 2) { gr++; grGood.push(`✅ Passive voice: ${passiveMatches.length} lần (${passiveMatches.slice(0,3).join(', ')})`); }
+  if (passiveMatches.length >= 5) { gr += 0.5; grGood.push('✅ Passive voice sử dụng tốt và nhất quán'); }
+  if (passiveMatches.length < 2 && (type==='process'||type==='map')) { grBad.push('❌ Passive voice quá ít — Process/Map cần dùng passive nhiều hơn!'); }
+
+  const complexPat = ['although','even though','despite the fact','not only','both','either','neither','which','where','who','whose','when','while','whereas','having','after having','before'];
+  const complexFound = complexPat.filter(p => tLow.includes(p));
+  if (complexFound.length >= 3) { gr++; grGood.push(`✅ Câu phức tốt: ${complexFound.slice(0,4).join(', ')}`); }
+  if (complexFound.length >= 5) { gr += 0.5; grGood.push('✅ Cấu trúc câu đa dạng — band 7+ grammar'); }
+  if (complexFound.length < 2) { grBad.push('⚠️ Cần câu phức hơn: mệnh đề quan hệ (which/where), although, despite, having...'); }
+
+  // Advanced structures
+  const advPat = ['after which','followed by','having','despite','in spite of','not only.*but','rather than'];
+  const advFound = advPat.filter(p => new RegExp(p).test(tLow));
+  if (advFound.length >= 1) { gr++; grGood.push(`✅ Cấu trúc nâng cao: ${advFound.join(', ')}`); }
+
+  // Sentence length variety (rough check)
+  const sentences = text.split(/[.!?]+/).filter(s=>s.trim().length > 5);
+  const avgLen = sentences.length > 0 ? wc / sentences.length : 0;
+  if (avgLen >= 15 && avgLen <= 30) { gr += 0.5; grGood.push(`✅ Độ dài câu cân bằng tốt (TB ${avgLen.toFixed(0)} từ/câu)`); }
+  if (avgLen < 10) { grBad.push(`⚠️ Câu quá ngắn (TB ${avgLen.toFixed(0)} từ/câu) — cần viết câu dài và phức hơn`); }
+  if (avgLen > 35) { grBad.push(`⚠️ Câu quá dài (TB ${avgLen.toFixed(0)} từ/câu) — nên chia nhỏ và đa dạng độ dài`); }
+  gr = Math.min(Math.max(gr, 4), 9);
+
+  // ---- OVERALL BAND ----
+  const overall = Math.round(((ta + cc + lr + gr) / 4) * 2) / 2;
+  const bandColor = overall >= 7 ? '#1b5e20' : overall >= 6.5 ? '#e65100' : overall >= 6 ? '#f57c00' : '#c62828';
+  const bandMsg = overall >= 7.5 ? '🎉 Xuất sắc! Đạt mục tiêu Band 7.5+' : overall >= 7 ? '✅ Tốt! Đạt mục tiêu Band 7.0' : overall >= 6.5 ? '📈 Khá! Gần đạt Band 7 — tiếp tục cải thiện' : overall >= 6 ? '💪 Band 6 — cần luyện thêm' : overall >= 5 ? '⚠️ Band 5 — cần cải thiện nhiều, xem gợi ý bên dưới' : '❌ Dưới Band 5 — cần ôn lại kiến thức cơ bản';
+
+  // ---- RENDER RESULT ----
+  const errTotal = detectedErrors.length;
+  const errListHtml = detectedErrors.length === 0
+    ? '<div style="color:#1b5e20;font-weight:600;padding:10px 0;">✅ Không phát hiện lỗi phổ biến — bài viết khá sạch!</div>'
+    : detectedErrors.map((e,i)=>`<div style="display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid #f0f0f0;">
+        <div style="min-width:22px;height:22px;border-radius:50%;background:${e.type==='grammar'?'#e53935':e.type==='informal'?'#fb8c00':'#43a047'};color:#fff;font-size:0.72em;font-weight:800;display:flex;align-items:center;justify-content:center;">${i+1}</div>
+        <div>
+          <div style="font-size:0.82em;"><strong style="color:#1a237e;">"${escHtml(e.word)}"</strong> — ${escHtml(e.msg)}</div>
+          <div style="font-size:0.8em;color:#555;margin-top:2px;">${escHtml(e.suggest)}</div>
+        </div>
+      </div>`).join('');
+
+  document.getElementById('gradeResult').innerHTML = `
+    <!-- BAND SCORE HEADER -->
+    <div style="background:linear-gradient(135deg,#1a237e,#283593);color:#fff;border-radius:14px;padding:20px 24px;margin-bottom:16px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+        <div>
+          <div style="font-size:0.82em;opacity:0.8;margin-bottom:4px;">Kết Quả Chấm Tự Động</div>
+          <div style="font-size:2em;font-weight:800;">Band <span style="color:#ffd54f;">${overall.toFixed(1)}</span></div>
+          <div style="font-size:0.9em;opacity:0.9;margin-top:4px;">${bandMsg}</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;text-align:center;">
+          ${[['TA',ta,'Task Achievement'],['CC',cc,'Coherence'],['LR',lr,'Lexical'],['GR',gr,'Grammar']].map(([n,s,full])=>`
+            <div style="background:rgba(255,255,255,0.15);border-radius:8px;padding:10px 14px;" title="${full}">
+              <div style="font-size:0.7em;opacity:0.8;">${n}</div>
+              <div style="font-size:1.4em;font-weight:800;">${s.toFixed(1)}</div>
+            </div>`).join('')}
+        </div>
+      </div>
+      <div style="margin-top:14px;background:rgba(255,255,255,0.1);border-radius:8px;padding:10px 14px;font-size:0.85em;opacity:0.9;">
+        📝 Số từ: <strong>${wc}</strong> · Connector: <strong>${connCount} loại</strong> · Passive: <strong>${passiveMatches.length} lần</strong> · Câu phức: <strong>${complexFound.length} loại</strong> · Lỗi phát hiện: <strong>${errTotal}</strong>
+      </div>
+    </div>
+
+    <!-- ANNOTATED TEXT -->
+    <div style="background:#fff;border-radius:12px;border:1px solid #e0e0e0;margin-bottom:16px;overflow:hidden;">
+      <div style="padding:12px 18px;background:#37474f;color:#fff;font-weight:800;font-size:0.9em;display:flex;align-items:center;justify-content:space-between;">
+        <span>📄 Bài Viết Đã Chấm – Click vào từ được gạch chân để xem lỗi</span>
+        <div style="display:flex;gap:10px;font-size:0.82em;font-weight:600;">
+          <span style="background:#ffebee;color:#e53935;padding:3px 10px;border-radius:20px;">🔴 Ngữ pháp: ${errByType.grammar.length}</span>
+          <span style="background:#fff8e1;color:#fb8c00;padding:3px 10px;border-radius:20px;">🟠 Informal: ${errByType.informal.length}</span>
+          <span style="background:#e8f5e9;color:#43a047;padding:3px 10px;border-radius:20px;">🟢 Văn phong: ${errByType.style.length}</span>
+        </div>
+      </div>
+      <div style="padding:18px 20px;">${annotated}</div>
+    </div>
+
+    <!-- ERROR LIST -->
+    <div style="background:#fff;border-radius:12px;border:1px solid #e0e0e0;margin-bottom:16px;overflow:hidden;">
+      <div style="padding:12px 18px;background:#b71c1c;color:#fff;font-weight:800;font-size:0.9em;">📋 Danh Sách Lỗi Chi Tiết (${errTotal} lỗi phát hiện)</div>
+      <div style="padding:6px 18px 14px;">${errListHtml}</div>
+    </div>
+
+    <!-- 4 CRITERIA -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+      ${renderCrit('📌 Task Achievement', ta, taGood, taBad, '#1a237e')}
+      ${renderCrit('🔗 Coherence & Cohesion', cc, ccGood, ccBad, '#e65100')}
+      ${renderCrit('📚 Lexical Resource', lr, lrGood, lrBad, '#1b5e20')}
+      ${renderCrit('⚙️ Grammatical Range', gr, grGood, grBad, '#6a1b9a')}
+    </div>
+
+    <!-- ACTION TIPS -->
+    <div style="background:#fff8e1;border:2px solid #ffc107;border-radius:10px;padding:16px;margin-bottom:12px;">
+      <strong style="color:#e65100;">💡 3 Việc Cần Làm Ngay Để Tăng Điểm:</strong>
+      <ol style="margin:10px 0 0 20px;line-height:2.2;font-size:0.92em;">
+        ${generateTips(ta,cc,lr,gr,hasOverview,connCount,passiveMatches.length,acadFound.length,complexFound.length,wc,minWords,type)}
+      </ol>
+    </div>
+    <div style="background:#e8f5e9;border:1.5px solid #81c784;border-radius:10px;padding:14px;font-size:0.82em;color:#555;">
+      ℹ️ <strong>Lưu ý:</strong> Chấm điểm tự động dựa trên phân tích từ ngữ. Để được nhận xét chính xác từng câu, hãy copy bài và paste vào chat với Claude để chấm thủ công!
+    </div>`;
+}
+
+function renderCrit(name, score, good, bad, color) {
+  const barW = ((score - 4) / 4 * 100).toFixed(0);
+  return `<div style="background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:14px;border-left:4px solid ${color};">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <strong style="font-size:0.88em;">${name}</strong>
+      <span style="font-size:1.2em;font-weight:800;color:${color};">${score.toFixed(1)}</span>
+    </div>
+    <div style="height:6px;background:#f0f0f0;border-radius:3px;margin-bottom:10px;overflow:hidden;">
+      <div style="height:100%;width:${barW}%;background:${color};border-radius:3px;transition:width 0.8s;"></div>
+    </div>
+    ${good.map(g=>`<div style="font-size:0.82em;color:#1b5e20;margin-bottom:3px;">${g}</div>`).join('')}
+    ${bad.map(b=>`<div style="font-size:0.82em;color:#c62828;margin-bottom:3px;">${b}</div>`).join('')}
+  </div>`;
+}
+
+function generateTips(ta,cc,lr,gr,hasOv,conn,passive,acad,complex,wc,minW,type) {
+  let tips = [];
+  if (!hasOv) tips.push('<li><strong>Thêm câu Overview/Thesis ngay đầu body:</strong> Bắt đầu bằng "Overall, ..." hoặc "In general, ..."</li>');
+  if (wc < minW) tips.push(`<li><strong>Viết thêm ${minW-wc} từ nữa</strong> để đạt tối thiểu ${minW} từ — đây là điều kiện bắt buộc.</li>`);
+  if (conn < 4) tips.push('<li><strong>Thêm cohesive devices đa dạng hơn:</strong> dùng Furthermore, However, As a result, In contrast trong mỗi đoạn.</li>');
+  if (acad < 2) tips.push('<li><strong>Thay thế từ đơn giản bằng từ học thuật:</strong> "big" → "significant/substantial", "good" → "beneficial/advantageous"</li>');
+  if (complex < 3) tips.push('<li><strong>Viết câu phức hơn:</strong> Thêm mệnh đề quan hệ (which/where), or câu ghép (although, despite, having V-ed)</li>');
+  if ((type==='process'||type==='map') && passive < 2) tips.push('<li><strong>Dùng thêm Passive voice:</strong> "People build" → "was built", "Workers sort" → "are sorted"</li>');
+  if (ta < 6.5) tips.push('<li><strong>Bổ sung số liệu cụ thể:</strong> Mỗi câu trong body nên có số liệu (%, số lượng, năm) để support ý.</li>');
+  if (lr < 6.5) tips.push('<li><strong>Tránh lặp từ:</strong> Dùng thesaurus.com để tìm synonym, hoặc paraphrase cả cụm danh từ.</li>');
+  if (gr < 6.5) tips.push('<li><strong>Viết câu đa dạng độ dài:</strong> Xen kẽ câu ngắn và câu dài, tránh toàn câu đơn.</li>');
+  if (tips.length === 0) tips.push('<li>🎉 Bài viết tốt! Tiếp tục luyện để ổn định band này và vượt lên.</li>');
+  return tips.slice(0,3).join('');
+}
+function startTimer(mins) {
+  if (activeTimer) clearInterval(activeTimer);
+  let total = mins * 60;
+  const el = document.getElementById('timerDisplay');
+  activeTimer = setInterval(() => {
+    total--;
+    el.textContent = `${String(Math.floor(total/60)).padStart(2,'0')}:${String(total%60).padStart(2,'0')}`;
+    el.style.color = total <= 120 ? '#b71c1c' : '#b71c1c';
+    if (total <= 0) { clearInterval(activeTimer); el.textContent = '⏰ HẾT GIỜ!'; }
+  }, 1000);
+}
+function resetTimer(mins) {
+  if (activeTimer) { clearInterval(activeTimer); activeTimer = null; }
+  const el = document.getElementById('timerDisplay');
+  if (el) el.textContent = `${String(mins).padStart(2,'0')}:00`;
+}
+
+// ===== SEARCH =====
+const searchIndex = [
+  {section:'Module A', title:'Verb xu hướng: increase, rise, decrease, fall, fluctuate, surge, plunge', page:'modA'},
+  {section:'Module A', title:'4 cấu trúc câu: S+V, There was, The period saw, Passive voice', page:'modA'},
+  {section:'Module A', title:'Câu nâng cao: After/Having/Despite VING, after which, followed by', page:'modA'},
+  {section:'Module A', title:'Time expression: from...to, over a period of, in the first/last N years', page:'modA'},
+  {section:'Module A', title:'Mức độ thay đổi: dramatic, gradual, slight, sharp, substantial', page:'modA'},
+  {section:'Module B', title:'Superlative: belongs to, accounts for the highest percentage', page:'modB'},
+  {section:'Module B', title:'Comparative: higher than, lower than + degree (much/slightly/twice)', page:'modB'},
+  {section:'Module B', title:'Verb phrases: outnumber, surpass, be superior to', page:'modB'},
+  {section:'Module B', title:'Equal comparison: as...as, nearly/almost as much as', page:'modB'},
+  {section:'Module B', title:'Ranking: come top of the list, first position taken/occupied by', page:'modB'},
+  {section:'Module B', title:'Connector: While S1V1, S2V2 / opposed to / compared with', page:'modB'},
+  {section:'Module C', title:'Passive voice: are picked, is sent, are sorted (present simple)', page:'modC'},
+  {section:'Module C', title:'Connectors: First, Then, Subsequently, Simultaneously, Finally', page:'modC'},
+  {section:'Module C', title:'Mục đích: in order to, so that, for + noun, with a view to', page:'modC'},
+  {section:'Module C', title:'Life cycle vocabulary: hatch, emerge, mature, migrate, breed', page:'modC'},
+  {section:'Module D', title:'Spatial vocab: to the north/south, adjacent to, opposite, along the', page:'modD'},
+  {section:'Module D', title:'Change vocab: was built, was demolished, was replaced by, was converted into', page:'modD'},
+  {section:'Module D', title:'Map tenses: past simple, present perfect passive, used to be', page:'modD'},
+  {section:'Writing Task 2', title:'4 dạng bài: Opinion, Discursive, Problem-Solution, Mixed', page:'wt2'},
+  {section:'Writing Task 2', title:'Thesis statement cho Opinion vs Discursive vs Problem-Solution', page:'wt2'},
+  {section:'Writing Task 2', title:'Cohesive devices: Furthermore, However, As a result, Consequently', page:'wt2'},
+  {section:'PEEL', title:'PEEL structure: Point, Explanation, Example, Link', page:'peel'},
+  {section:'PEEL', title:'7 cách phát triển ý: Reasons, Effects, Examples, Comparison, Hypothesis', page:'peel'},
+  {section:'PEEL', title:'Sentence starters Band 7+: It is widely acknowledged, There is no denying', page:'peel'},
+  {section:'Từ Vựng', title:'Work vocabulary: work-life balance, redundancy, career advancement, productivity', page:'topics'},
+  {section:'Từ Vựng', title:'Education vocabulary: critical thinking, curriculum, vocational training, scholarship', page:'topics'},
+  {section:'Từ Vựng', title:'Health vocabulary: sedentary lifestyle, obesity, mental health, preventive healthcare', page:'topics'},
+  {section:'Từ Vựng', title:'Environment vocabulary: carbon footprint, renewable energy, deforestation, biodiversity', page:'topics'},
+  {section:'Từ Vựng', title:'Technology vocabulary: AI, digital divide, cybersecurity, social media addiction', page:'topics'},
+  {section:'Cheat Sheet', title:'Paraphrase: shows→illustrates, many people→a growing number, important→crucial', page:'cheatsheet'},
+  {section:'Cheat Sheet', title:'Word count: WT1 target 170-190 từ / WT2 target 270-290 từ', page:'cheatsheet'},
+];
+function handleSearch(q) {
+  if (!q.trim()) { const r = document.getElementById('searchResults'); if(r) r.innerHTML=''; return; }
+  const matches = searchIndex.filter(item => item.title.toLowerCase().includes(q.toLowerCase()) || item.section.toLowerCase().includes(q.toLowerCase()));
+  const container = document.getElementById('searchResults') || document.querySelector('#page-search .card-body');
+  const resultEl = document.getElementById('searchResults');
+  if (!resultEl) return;
+  if (matches.length === 0) { resultEl.innerHTML = '<p style="color:var(--sub);">Không tìm thấy kết quả. Thử từ khóa khác.</p>'; return; }
+  resultEl.innerHTML = `<p style="color:var(--sub);font-size:0.85em;margin-bottom:10px;">Tìm thấy ${matches.length} kết quả</p>` +
+    matches.map(m => `<div class="search-result" onclick="nav('${m.page}')">
+      <div class="sr-section">${m.section}</div>
+      <div class="sr-title">${m.title.replace(new RegExp(q,'gi'), s => `<span class="highlight-text">${s}</span>`)}</div>
+      <div class="sr-preview" style="color:var(--primary);font-size:0.8em;">→ Click để xem</div>
+    </div>`).join('');
+  // Also update sidebar search
+  document.getElementById('sidebarSearch').value = q;
+}
+</script>
+</body>
+</html>
