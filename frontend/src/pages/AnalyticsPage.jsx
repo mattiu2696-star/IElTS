@@ -1,0 +1,104 @@
+import { RadarChart, Radar, PolarGrid, PolarAngleAxis, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, LineChart, Line } from 'recharts'
+
+const radarData = [
+  { skill: 'Listening', score: 7.0 }, { skill: 'Reading', score: 6.5 },
+  { skill: 'Writing',   score: 6.0 }, { skill: 'Speaking', score: 6.5 },
+  { skill: 'Vocabulary', score: 7.0 }, { skill: 'Grammar', score: 6.0 },
+]
+
+const monthlyData = [
+  { month: 'Nov', band: 5.5 }, { month: 'Dec', band: 5.5 }, { month: 'Jan', band: 6.0 },
+  { month: 'Feb', band: 6.0 }, { month: 'Mar', band: 6.5 }, { month: 'Apr', band: 6.5 },
+]
+
+const accuracyData = [
+  { type: 'Task 1', rate: 78 }, { type: 'Task 2', rate: 65 },
+  { type: 'Reading', rate: 72 }, { type: 'Listening', rate: 80 },
+  { type: 'Vocabulary', rate: 85 }, { type: 'Speaking', rate: 68 },
+]
+
+const timeData = [
+  { module: 'Writing', hours: 12 }, { module: 'Vocabulary', hours: 8 },
+  { module: 'Reading', hours: 15 }, { module: 'Listening', hours: 6 },
+  { module: 'Speaking', hours: 7 },
+]
+
+export default function AnalyticsPage() {
+  return (
+    <div className="max-w-6xl mx-auto space-y-6 animate-slide-up">
+      <div>
+        <h2 className="text-xl font-bold text-slate-900 dark:text-white">Analytics</h2>
+        <p className="text-sm text-slate-500 mt-1">Track your learning progress over time</p>
+      </div>
+
+      <div className="grid lg:grid-cols-2 gap-6">
+        {/* Radar */}
+        <div className="card p-6">
+          <h3 className="font-semibold text-slate-900 dark:text-white mb-4">Skill Overview</h3>
+          <ResponsiveContainer width="100%" height={260}>
+            <RadarChart data={radarData}>
+              <PolarGrid stroke="#e2e8f0" />
+              <PolarAngleAxis dataKey="skill" tick={{ fontSize: 12 }} />
+              <Radar name="Score" dataKey="score" stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.2} />
+            </RadarChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* Band trend */}
+        <div className="card p-6">
+          <h3 className="font-semibold text-slate-900 dark:text-white mb-4">Band Score Progress</h3>
+          <ResponsiveContainer width="100%" height={260}>
+            <LineChart data={monthlyData}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+              <XAxis dataKey="month" tick={{ fontSize: 12 }} />
+              <YAxis domain={[5, 9]} tick={{ fontSize: 12 }} />
+              <Tooltip contentStyle={{ background: '#1e293b', border: 'none', borderRadius: 12, color: '#f1f5f9', fontSize: 12 }} />
+              <Line type="monotone" dataKey="band" stroke="#3b82f6" strokeWidth={3} dot={{ fill: '#3b82f6', r: 4 }} />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* Accuracy */}
+        <div className="card p-6">
+          <h3 className="font-semibold text-slate-900 dark:text-white mb-4">Exercise Accuracy Rate (%)</h3>
+          <ResponsiveContainer width="100%" height={220}>
+            <BarChart data={accuracyData} barSize={32}>
+              <XAxis dataKey="type" tick={{ fontSize: 11 }} />
+              <YAxis domain={[0, 100]} tick={{ fontSize: 12 }} />
+              <Tooltip contentStyle={{ background: '#1e293b', border: 'none', borderRadius: 12, color: '#f1f5f9', fontSize: 12 }} formatter={(v) => [`${v}%`, 'Accuracy']} />
+              <Bar dataKey="rate" fill="#8b5cf6" radius={[6, 6, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* Time spent */}
+        <div className="card p-6">
+          <h3 className="font-semibold text-slate-900 dark:text-white mb-4">Time Spent by Module (hours)</h3>
+          <ResponsiveContainer width="100%" height={220}>
+            <BarChart data={timeData} barSize={40} layout="vertical">
+              <XAxis type="number" tick={{ fontSize: 12 }} />
+              <YAxis type="category" dataKey="module" tick={{ fontSize: 12 }} width={80} />
+              <Tooltip contentStyle={{ background: '#1e293b', border: 'none', borderRadius: 12, color: '#f1f5f9', fontSize: 12 }} formatter={(v) => [`${v}h`, 'Study time']} />
+              <Bar dataKey="hours" fill="#10b981" radius={[0, 6, 6, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+
+      {/* Stats row */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {[
+          { label: 'Total Study Hours', value: '48h' },
+          { label: 'Essays Submitted',  value: '24' },
+          { label: 'Quiz Accuracy',     value: '76%' },
+          { label: 'Words Mastered',    value: '342' },
+        ].map(({ label, value }) => (
+          <div key={label} className="card p-4 text-center">
+            <div className="text-2xl font-bold text-slate-900 dark:text-white">{value}</div>
+            <div className="text-xs text-slate-500 mt-1">{label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}

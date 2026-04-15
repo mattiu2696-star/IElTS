@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+
+  # Placeholder for future backend
+  # backend:
+  #   build: ./backend
+  #   ports:
+  #     - "3001:3001"
+  #   environment:
+  #     - DATABASE_URL=postgresql://...
+  #     - CLAUDE_API_KEY=...
+  #   restart: unless-stopped

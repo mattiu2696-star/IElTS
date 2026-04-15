@@ -9,6 +9,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -17,4 +20,17 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            bash /opt/deploy.sh
+            set -e
+            cd /opt/ielts-hub
+
+            # Pull latest code
+            git pull origin main
+
+            # Build & restart frontend container
+            docker compose build frontend
+            docker compose up -d --force-recreate frontend
+
+            # Clean up old images
+            docker image prune -f
+
+            echo "✅ Deploy completed at $(date)"
