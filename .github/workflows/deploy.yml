@@ -53,16 +53,10 @@ jobs:
             docker compose --env-file .env build
             docker compose --env-file .env up -d
 
-            # Chạy migrations
+            # Chạy migrations & seed
             sleep 5
-            docker compose exec -T backend node -e "
-              require('dotenv').config();
-              const knex = require('./src/config/db');
-              knex.migrate.latest()
-                .then(() => knex.seed.run())
-                .then(() => { console.log('✅ Migrations done'); process.exit(0); })
-                .catch(e => { console.error(e); process.exit(1); });
-            "
+            docker compose exec -T backend npx knex migrate:latest --env production
+            docker compose exec -T backend npx knex seed:run --env production
 
             # Clean up
             docker image prune -f
