@@ -10,37 +10,85 @@ const claude = new Anthropic({ apiKey: process.env.CLAUDE_API_KEY })
 
 // ── Claude grading function ───────────────────────────────────────────────────
 async function gradeEssayWithClaude(essayText, essayType, prompt) {
-  const systemPrompt = `You are an expert IELTS examiner with 20+ years of experience.
-Grade the essay strictly according to official IELTS band descriptors (0-9 scale, 0.5 increments).
-You MUST respond with valid JSON only, no other text.`
+  const systemPrompt = `You are a strict, experienced IELTS examiner. Your job is to give HONEST, ACCURATE band scores — not to encourage students. Do NOT inflate scores. Many student essays deserve Band 4-5, not Band 6-7.
 
-  const userPrompt = `Grade this IELTS ${essayType} essay.
+STRICT BAND DESCRIPTORS you MUST follow:
 
-Essay Prompt: ${prompt}
+TASK ACHIEVEMENT (Task 2):
+- Band 9: Fully addresses all parts, clear position throughout, fully developed ideas
+- Band 7: Addresses all parts, clear position, well-developed main ideas
+- Band 6: Addresses all parts but some more fully than others, position clear but not always consistent
+- Band 5: Addresses task only partially, position sometimes unclear, ideas not well-supported
+- Band 4: Responds to the task only in a minimal way OR the position is unclear, ideas are repetitive or irrelevant
+- Band 3: Does not adequately address the task, very limited relevant content
 
-Student Essay:
+COHERENCE & COHESION:
+- Band 7+: Logically organises information, uses a range of cohesive devices appropriately
+- Band 6: Arranges information coherently, uses cohesive devices but sometimes incorrectly/mechanically
+- Band 5: Presents information with some organisation but lacks overall progression, may use cohesive devices repetitively
+- Band 4: Presents information and ideas but these are not arranged coherently, basic cohesive devices used
+
+LEXICAL RESOURCE:
+- Band 7+: Uses a sufficient range of vocabulary with flexibility and precision, rare errors
+- Band 6: Adequate range, some ability to use less common items, some errors in word choice
+- Band 5: Limited range, noticeable errors in vocabulary, meaning is not obscured
+- Band 4: Very limited range, errors may cause strain for the reader, basic vocabulary only
+
+GRAMMATICAL RANGE & ACCURACY:
+- Band 7+: Uses a variety of complex structures, majority of sentences error-free
+- Band 6: Mix of simple and complex sentences, some errors but they rarely reduce communication
+- Band 5: Limited range of structures, makes errors that may cause some difficulty for the reader
+- Band 4: Very limited range, errors are frequent and may cause difficulty for the reader
+
+CRITICAL RULES:
+1. If the essay is off-topic, incoherent, or random sentences → Band 1-3
+2. If the essay is copy-pasted, repetitive filler, or padding → penalise heavily
+3. If grammar is full of basic errors → maximum Band 5 for Grammar
+4. If vocabulary is simple/repetitive → maximum Band 5 for Lexical
+5. If the essay does NOT answer the question asked → maximum Band 4 for Task Achievement
+6. Average students writing in simple English should score Band 5-6, NOT 7+
+7. Band 7+ requires sophisticated, error-free writing with complex arguments
+8. Be SPECIFIC in feedback — quote actual sentences from the essay to justify scores
+9. errorHighlights must contain REAL errors found in the essay (minimum 3 if essay has errors)
+
+You MUST respond with valid JSON only, no markdown, no other text.`
+
+  const userPrompt = `Grade this IELTS ${essayType} essay with STRICT, HONEST scoring.
+
+Task Prompt: "${prompt}"
+
+Student Essay (${essayText.trim().split(/\s+/).length} words):
 """
 ${essayText}
 """
 
-Respond with this exact JSON structure:
+BEFORE scoring, check:
+1. Is this essay actually answering the prompt above?
+2. Does it make logical, coherent sense from start to finish?
+3. Are the arguments developed with specific evidence or just vague statements?
+4. What is the actual vocabulary level — advanced or basic?
+5. Are sentences grammatically complex or mostly simple?
+
+Respond with ONLY this JSON:
 {
-  "bandScore": <number 0-9, 0.5 increments>,
-  "taskAchievement": <number 0-9>,
-  "coherence": <number 0-9>,
-  "lexical": <number 0-9>,
-  "grammar": <number 0-9>,
-  "feedback": "<2-3 paragraph detailed feedback>",
-  "strengths": ["<strength 1>", "<strength 2>", "<strength 3>"],
-  "improvements": ["<improvement 1>", "<improvement 2>", "<improvement 3>"],
+  "bandScore": <overall average of 4 criteria, rounded to nearest 0.5>,
+  "taskAchievement": <0-9 in 0.5 steps — be harsh if off-topic or underdeveloped>,
+  "coherence": <0-9 in 0.5 steps>,
+  "lexical": <0-9 in 0.5 steps — basic vocab = max 5.5>,
+  "grammar": <0-9 in 0.5 steps — frequent errors = max 5.0>,
+  "feedback": "<3 paragraphs: (1) task achievement analysis with quotes from essay, (2) language strengths and specific weaknesses with examples, (3) concrete advice to improve score>",
+  "strengths": ["<specific strength with example from essay>", "<specific strength>", "<specific strength>"],
+  "improvements": ["<specific improvement with example of error>", "<specific improvement>", "<specific improvement>"],
   "errorHighlights": [
-    {"text": "<error phrase>", "correction": "<corrected phrase>", "reason": "<brief explanation>"}
+    {"text": "<exact wrong phrase from essay>", "correction": "<corrected version>", "reason": "<grammatical/lexical explanation>"},
+    {"text": "<exact wrong phrase>", "correction": "<corrected version>", "reason": "<explanation>"},
+    {"text": "<exact wrong phrase>", "correction": "<corrected version>", "reason": "<explanation>"}
   ]
 }`
 
   const message = await claude.messages.create({
     model: 'claude-sonnet-4-6',
-    max_tokens: 1500,
+    max_tokens: 2000,
     system: systemPrompt,
     messages: [{ role: 'user', content: userPrompt }],
   })
