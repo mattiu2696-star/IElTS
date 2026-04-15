@@ -3,22 +3,19 @@ import { TrendingUp, BookOpen, PenLine, Clock, Target, Flame, ChevronRight, Star
 import { Link } from 'react-router-dom'
 import clsx from 'clsx'
 
-// Mock data
-const bandHistory = [
-  { week: 'W1', score: 5.5 }, { week: 'W2', score: 5.5 }, { week: 'W3', score: 6.0 },
-  { week: 'W4', score: 6.0 }, { week: 'W5', score: 6.5 }, { week: 'W6', score: 6.5 },
-]
+// Empty state — no activity yet
+const bandHistory = []
 
 const skillBreakdown = [
-  { skill: 'Listening', score: 7.0, color: '#3b82f6' },
-  { skill: 'Reading',   score: 6.5, color: '#8b5cf6' },
-  { skill: 'Writing',   score: 6.0, color: '#f59e0b' },
-  { skill: 'Speaking',  score: 6.5, color: '#10b981' },
+  { skill: 'Listening', score: 0, color: '#3b82f6' },
+  { skill: 'Reading',   score: 0, color: '#8b5cf6' },
+  { skill: 'Writing',   score: 0, color: '#f59e0b' },
+  { skill: 'Speaking',  score: 0, color: '#10b981' },
 ]
 
 const weekActivity = [
-  { day: 'T2', mins: 45 }, { day: 'T3', mins: 30 }, { day: 'T4', mins: 60 },
-  { day: 'T5', mins: 20 }, { day: 'T6', mins: 75 }, { day: 'T7', mins: 50 }, { day: 'CN', mins: 15 },
+  { day: 'T2', mins: 0 }, { day: 'T3', mins: 0 }, { day: 'T4', mins: 0 },
+  { day: 'T5', mins: 0 }, { day: 'T6', mins: 0 }, { day: 'T7', mins: 0 }, { day: 'CN', mins: 0 },
 ]
 
 const recommendedLessons = [
@@ -63,21 +60,21 @@ export default function DashboardPage() {
             {greeting} 👋
           </h1>
           <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">
-            Bạn đang có chuỗi <span className="text-orange-500 font-semibold">7 ngày liên tiếp!</span> Tiếp tục phát huy.
+            Bắt đầu hành trình luyện IELTS của bạn ngay hôm nay!
           </p>
         </div>
-        <div className="hidden md:flex items-center gap-2 bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 px-4 py-2 rounded-xl font-semibold text-sm">
+        <div className="hidden md:flex items-center gap-2 bg-slate-100 dark:bg-slate-700/50 text-slate-500 dark:text-slate-400 px-4 py-2 rounded-xl font-semibold text-sm">
           <Flame className="w-5 h-5" />
-          7 day streak
+          0 day streak
         </div>
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard icon={Star}      label="Band hiện tại"    value="6.5"   sub="+0.5 tháng này"    color="bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400" />
-        <StatCard icon={PenLine}   label="Bài viết đã nộp"  value="24"    sub="3 bài tuần này"    color="bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400" />
-        <StatCard icon={BookOpen}  label="Từ đã học"         value="842"   sub="+58 tuần này"      color="bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400" />
-        <StatCard icon={Clock}     label="Thời gian học"     value="48h"   sub="12h tuần này"      color="bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400" />
+        <StatCard icon={Star}      label="Band hiện tại"    value="—"     color="bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400" />
+        <StatCard icon={PenLine}   label="Bài viết đã nộp"  value="0"     color="bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400" />
+        <StatCard icon={BookOpen}  label="Từ đã học"         value="0"     color="bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400" />
+        <StatCard icon={Clock}     label="Thời gian học"     value="0h"    color="bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400" />
       </div>
 
       {/* Charts row */}
@@ -86,21 +83,13 @@ export default function DashboardPage() {
         <div className="card p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-semibold text-slate-900 dark:text-white">Tiến độ Band Score</h3>
-            <span className="badge bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 flex items-center gap-1">
-              <TrendingUp className="w-3 h-3" /> +1.0 band
+            <span className="badge bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-400 flex items-center gap-1">
+              <TrendingUp className="w-3 h-3" /> Chưa có dữ liệu
             </span>
           </div>
-          <ResponsiveContainer width="100%" height={180}>
-            <LineChart data={bandHistory}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" className="dark:stroke-slate-700" />
-              <XAxis dataKey="week" tick={{ fontSize: 12 }} />
-              <YAxis domain={[5, 9]} tick={{ fontSize: 12 }} />
-              <Tooltip
-                contentStyle={{ background: '#1e293b', border: 'none', borderRadius: 12, color: '#f1f5f9', fontSize: 12 }}
-              />
-              <Line type="monotone" dataKey="score" stroke="#3b82f6" strokeWidth={3} dot={{ fill: '#3b82f6', r: 4 }} />
-            </LineChart>
-          </ResponsiveContainer>
+          <div className="flex items-center justify-center h-[180px] text-slate-400 text-sm">
+            Chưa có bài nộp. Hãy làm bài Writing để xem tiến độ!
+          </div>
         </div>
 
         {/* Weekly activity */}
@@ -151,9 +140,9 @@ export default function DashboardPage() {
             <div className="flex-1">
               <p className="text-xs font-semibold text-primary-700 dark:text-primary-300">Mục tiêu tiếp theo: Band 7.0</p>
               <div className="mt-1.5 h-1.5 bg-primary-100 dark:bg-primary-800/50 rounded-full">
-                <div className="h-full bg-primary-500 rounded-full" style={{ width: '72%' }} />
+                <div className="h-full bg-primary-500 rounded-full" style={{ width: '0%' }} />
               </div>
-              <p className="text-xs text-primary-500 mt-1">72% — Tiếp tục cố lên!</p>
+              <p className="text-xs text-primary-500 mt-1">0% — Bắt đầu luyện tập để đạt mục tiêu!</p>
             </div>
           </div>
         </div>

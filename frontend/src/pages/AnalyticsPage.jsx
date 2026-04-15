@@ -1,26 +1,23 @@
 import { RadarChart, Radar, PolarGrid, PolarAngleAxis, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, LineChart, Line } from 'recharts'
 
 const radarData = [
-  { skill: 'Nghe',     score: 7.0 }, { skill: 'Đọc',      score: 6.5 },
-  { skill: 'Viết',     score: 6.0 }, { skill: 'Nói',      score: 6.5 },
-  { skill: 'Từ vựng',  score: 7.0 }, { skill: 'Ngữ pháp', score: 6.0 },
+  { skill: 'Nghe',     score: 0 }, { skill: 'Đọc',      score: 0 },
+  { skill: 'Viết',     score: 0 }, { skill: 'Nói',      score: 0 },
+  { skill: 'Từ vựng',  score: 0 }, { skill: 'Ngữ pháp', score: 0 },
 ]
 
-const monthlyData = [
-  { month: 'T11', band: 5.5 }, { month: 'T12', band: 5.5 }, { month: 'T1', band: 6.0 },
-  { month: 'T2',  band: 6.0 }, { month: 'T3',  band: 6.5 }, { month: 'T4', band: 6.5 },
-]
+const monthlyData = []
 
 const accuracyData = [
-  { type: 'Task 1', rate: 78 }, { type: 'Task 2',   rate: 65 },
-  { type: 'Đọc',    rate: 72 }, { type: 'Nghe',     rate: 80 },
-  { type: 'Từ vựng',rate: 85 }, { type: 'Nói',      rate: 68 },
+  { type: 'Task 1', rate: 0 }, { type: 'Task 2',   rate: 0 },
+  { type: 'Đọc',    rate: 0 }, { type: 'Nghe',     rate: 0 },
+  { type: 'Từ vựng',rate: 0 }, { type: 'Nói',      rate: 0 },
 ]
 
 const timeData = [
-  { module: 'Viết',     hours: 12 }, { module: 'Từ vựng', hours: 8 },
-  { module: 'Đọc',      hours: 15 }, { module: 'Nghe',    hours: 6 },
-  { module: 'Nói',      hours: 7  },
+  { module: 'Viết',     hours: 0 }, { module: 'Từ vựng', hours: 0 },
+  { module: 'Đọc',      hours: 0 }, { module: 'Nghe',    hours: 0 },
+  { module: 'Nói',      hours: 0  },
 ]
 
 export default function AnalyticsPage() {
@@ -47,15 +44,9 @@ export default function AnalyticsPage() {
         {/* Band trend */}
         <div className="card p-6">
           <h3 className="font-semibold text-slate-900 dark:text-white mb-4">Tiến độ Band Score</h3>
-          <ResponsiveContainer width="100%" height={260}>
-            <LineChart data={monthlyData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-              <XAxis dataKey="month" tick={{ fontSize: 12 }} />
-              <YAxis domain={[5, 9]} tick={{ fontSize: 12 }} />
-              <Tooltip contentStyle={{ background: '#1e293b', border: 'none', borderRadius: 12, color: '#f1f5f9', fontSize: 12 }} />
-              <Line type="monotone" dataKey="band" stroke="#3b82f6" strokeWidth={3} dot={{ fill: '#3b82f6', r: 4 }} />
-            </LineChart>
-          </ResponsiveContainer>
+          <div className="flex items-center justify-center h-[260px] text-slate-400 text-sm">
+            Chưa có dữ liệu. Hãy nộp bài Writing để theo dõi tiến độ!
+          </div>
         </div>
 
         {/* Accuracy */}
@@ -87,10 +78,10 @@ export default function AnalyticsPage() {
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { label: 'Tổng giờ học',    value: '48h' },
-          { label: 'Bài viết đã nộp', value: '24'  },
-          { label: 'Độ chính xác',    value: '76%' },
-          { label: 'Từ đã thuộc',     value: '342' },
+          { label: 'Tổng giờ học',    value: '0h' },
+          { label: 'Bài viết đã nộp', value: '0'  },
+          { label: 'Độ chính xác',    value: '—'  },
+          { label: 'Từ đã thuộc',     value: '0'  },
         ].map(({ label, value }) => (
           <div key={label} className="card p-4 text-center">
             <div className="text-2xl font-bold text-slate-900 dark:text-white">{value}</div>
