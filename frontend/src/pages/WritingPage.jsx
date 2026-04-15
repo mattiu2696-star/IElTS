@@ -4,12 +4,11 @@ import { useState } from 'react'
 import clsx from 'clsx'
 
 const lessons = [
-  { id: 1, title: 'Bài luận ý kiến — Công nghệ',       type: 'Task 2', difficulty: 'Trung bình', duration: '40 phút', topic: 'Công nghệ' },
-  { id: 2, title: 'Bài luận thảo luận — Giáo dục',     type: 'Task 2', difficulty: 'Khó',        duration: '40 phút', topic: 'Giáo dục' },
-  { id: 3, title: 'Mô tả biểu đồ cột',                 type: 'Task 1', difficulty: 'Dễ',         duration: '20 phút', topic: 'Học thuật' },
-  { id: 4, title: 'Bài luận vấn đề — Giải pháp',       type: 'Task 2', difficulty: 'Khó',        duration: '40 phút', topic: 'Xã hội' },
-  { id: 5, title: 'Mô tả biểu đồ tròn',                type: 'Task 1', difficulty: 'Dễ',         duration: '20 phút', topic: 'Học thuật' },
-  { id: 6, title: 'Bài luận đồng ý / không đồng ý',    type: 'Task 2', difficulty: 'Trung bình', duration: '40 phút', topic: 'Môi trường' },
+  { id: 1, title: 'Bài luận ý kiến — Công nghệ',     type: 'Task 2', difficulty: 'Trung bình', duration: '40 phút', topic: 'Công nghệ' },
+  { id: 2, title: 'Bài luận thảo luận — Giáo dục',   type: 'Task 2', difficulty: 'Khó',        duration: '40 phút', topic: 'Giáo dục' },
+  { id: 3, title: 'Mô tả biểu đồ cột',               type: 'Task 1', difficulty: 'Dễ',         duration: '20 phút', topic: 'Học thuật' },
+  { id: 4, title: 'Bài luận vấn đề — Giải pháp',     type: 'Task 2', difficulty: 'Khó',        duration: '40 phút', topic: 'Xã hội' },
+  { id: 5, title: 'Đồng ý / Không đồng ý — Môi trường', type: 'Task 2', difficulty: 'Trung bình', duration: '40 phút', topic: 'Môi trường' },
 ]
 
 const diffColors = {

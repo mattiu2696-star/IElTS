@@ -5,7 +5,8 @@ import toast from 'react-hot-toast'
 import clsx from 'clsx'
 import { writingApi } from '../lib/api'
 
-const DB_IDS = { 1: 11, 2: 12, 3: 13, 4: 14, 5: 15, 6: 15 }
+// DB lesson IDs on VPS
+const DB_IDS = { 1: 11, 2: 12, 3: 13, 4: 14, 5: 15 }
 
 const LESSONS = {
   1: {
@@ -63,20 +64,7 @@ Urban planning also plays a crucial role. Designing mixed-use neighbourhoods whe
 In conclusion, tackling traffic congestion requires a combination of improved public transport, financial disincentives for driving, and smarter urban planning.`,
   },
   5: {
-    title: 'Mô tả biểu đồ tròn',
-    type: 'Task 1',
-    prompt: 'The pie charts below show the percentage of household expenditure in two different countries. Summarise the information by selecting and reporting the main features.',
-    minWords: 150,
-    modelAnswer: `The pie charts compare household spending patterns in two countries. While both nations allocate the largest share of expenditure to housing, notable differences exist in other categories.
-
-In Country A, housing accounts for 35% of household budgets, followed by food at 25% and transportation at 20%. Entertainment and other expenses make up the remaining 20%.
-
-Country B presents a contrasting picture. Although housing remains the dominant expense at 30%, food represents a considerably larger proportion at 35%, suggesting a lower standard of living. Transportation is markedly lower at just 12%, while other expenses account for 23%.
-
-The most striking difference between the two countries is the proportion spent on food, which is 10 percentage points higher in Country B. This likely reflects lower average incomes, where a greater share of earnings must be devoted to basic necessities.`,
-  },
-  6: {
-    title: 'Bài luận đồng ý / không đồng ý',
+    title: 'Bài luận đồng ý / không đồng ý — Môi trường',
     type: 'Task 2',
     prompt: 'Protecting the environment is the responsibility of the government, not individuals. To what extent do you agree or disagree?',
     minWords: 250,
@@ -147,7 +135,7 @@ function ResultsPanel({ result, modelAnswer, onReset }) {
             <div className="space-y-4">
               <div>
                 <p className="text-sm font-semibold text-slate-900 dark:text-white mb-2">Nhận xét tổng quan</p>
-                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{result.feedback}</p>
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed whitespace-pre-line">{result.feedback}</p>
               </div>
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-xl">
@@ -230,7 +218,12 @@ export default function WritingExercisePage() {
     }
     setSubmitting(true)
     try {
-      const { data } = await writingApi.submit({ essay_text: essay, lesson_id: DB_IDS[Number(id)] ?? 11 })
+      const { data } = await writingApi.submit({
+        essay_text:   essay,
+        lesson_id:    DB_IDS[Number(id)] ?? null,
+        essay_prompt: lesson.prompt,
+        essay_type:   lesson.type,
+      })
       setResult(data.grading)
       setTimerActive(false)
       toast.success('Đã chấm bài xong!')
