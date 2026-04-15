@@ -1,20 +1,58 @@
 services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: ielts-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB:       ielts_hub
+      POSTGRES_USER:     ielts_user
+      POSTGRES_PASSWORD: ielts_pass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ielts_user -d ielts_hub"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ielts-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      NODE_ENV:          production
+      PORT:              3001
+      DB_HOST:           postgres
+      DB_PORT:           5432
+      DB_NAME:           ielts_hub
+      DB_USER:           ielts_user
+      DB_PASSWORD:       ielts_pass
+      JWT_SECRET:        ${JWT_SECRET:-change-this-secret-in-production}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET:-change-this-refresh-secret}
+      JWT_EXPIRES_IN:    15m
+      JWT_REFRESH_EXPIRES_IN: 7d
+      CLAUDE_API_KEY:    ${CLAUDE_API_KEY:-}
+      FRONTEND_URL:      ${FRONTEND_URL:-http://160.191.85.127}
+    ports:
+      - "3001:3001"
+
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL:-http://160.191.85.127:3001}
+    container_name: ielts-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
     ports:
       - "80:80"
-    restart: unless-stopped
-    labels:
-      - "traefik.enable=true"
 
-  # Placeholder for future backend
-  # backend:
-  #   build: ./backend
-  #   ports:
-  #     - "3001:3001"
-  #   environment:
-  #     - DATABASE_URL=postgresql://...
-  #     - CLAUDE_API_KEY=...
-  #   restart: unless-stopped
+volumes:
+  postgres_data:

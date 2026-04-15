@@ -1,16 +1,7 @@
 import { createContext, useContext, useState } from 'react'
+import { authApi } from '../lib/api'
 
 const AuthContext = createContext()
-
-// Mock user — replace with real API calls later
-const MOCK_USER = {
-  id: 1,
-  name: 'Alex Johnson',
-  email: 'alex@example.com',
-  level: 'Intermediate',
-  bandScore: 6.5,
-  avatar: null,
-}
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => {
@@ -23,27 +14,42 @@ export function AuthProvider({ children }) {
   })
 
   const login = async (email, password) => {
-    // Mock login — accepts any credentials
-    const u = { ...MOCK_USER, email }
-    setUser(u)
-    localStorage.setItem('ielts_user', JSON.stringify(u))
-    return u
+    const { data } = await authApi.login(email, password)
+    const { user, accessToken, refreshToken } = data
+    setUser(user)
+    localStorage.setItem('ielts_user',    JSON.stringify(user))
+    localStorage.setItem('access_token',  accessToken)
+    localStorage.setItem('refresh_token', refreshToken)
+    return user
   }
 
   const signup = async (name, email, password) => {
-    const u = { ...MOCK_USER, name, email }
-    setUser(u)
-    localStorage.setItem('ielts_user', JSON.stringify(u))
-    return u
+    const { data } = await authApi.signup(name, email, password)
+    const { user, accessToken, refreshToken } = data
+    setUser(user)
+    localStorage.setItem('ielts_user',    JSON.stringify(user))
+    localStorage.setItem('access_token',  accessToken)
+    localStorage.setItem('refresh_token', refreshToken)
+    return user
   }
 
-  const logout = () => {
+  const logout = async () => {
+    const refreshToken = localStorage.getItem('refresh_token')
+    try { await authApi.logout(refreshToken) } catch {}
     setUser(null)
     localStorage.removeItem('ielts_user')
+    localStorage.removeItem('access_token')
+    localStorage.removeItem('refresh_token')
+  }
+
+  const updateUser = (updates) => {
+    const updated = { ...user, ...updates }
+    setUser(updated)
+    localStorage.setItem('ielts_user', JSON.stringify(updated))
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout }}>
+    <AuthContext.Provider value={{ user, login, signup, logout, updateUser }}>
       {children}
     </AuthContext.Provider>
   )

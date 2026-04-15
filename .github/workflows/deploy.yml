@@ -22,6 +22,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
+          command_timeout: 15m
           script: |
             set -e
 
@@ -33,11 +34,37 @@ jobs:
             cd /opt/ielts-hub
             git pull origin main
 
-            # Build & restart frontend container
-            docker compose build frontend
-            docker compose up -d --force-recreate frontend
+            # Tạo .env nếu chưa có
+            if [ ! -f .env ]; then
+              cat > .env << 'ENVEOF'
+            JWT_SECRET=ielts-hub-jwt-secret-change-me
+            JWT_REFRESH_SECRET=ielts-hub-refresh-secret-change-me
+            CLAUDE_API_KEY=
+            FRONTEND_URL=http://160.191.85.127
+            VITE_API_URL=http://160.191.85.127:3001
+            ENVEOF
+            fi
 
-            # Clean up old images
+            # Dừng container cũ (nếu có)
+            docker stop ielts-hub 2>/dev/null || true
+            docker rm   ielts-hub 2>/dev/null || true
+
+            # Build & start full stack
+            docker compose --env-file .env build
+            docker compose --env-file .env up -d
+
+            # Chạy migrations
+            sleep 5
+            docker compose exec -T backend node -e "
+              require('dotenv').config();
+              const knex = require('./src/config/db');
+              knex.migrate.latest()
+                .then(() => knex.seed.run())
+                .then(() => { console.log('✅ Migrations done'); process.exit(0); })
+                .catch(e => { console.error(e); process.exit(1); });
+            "
+
+            # Clean up
             docker image prune -f
 
             echo "✅ Deploy completed at $(date)"
