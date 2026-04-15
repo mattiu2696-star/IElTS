@@ -2,85 +2,124 @@ const express    = require('express')
 const { body }   = require('express-validator')
 const Anthropic  = require('@anthropic-ai/sdk')
 const db         = require('../config/db')
-const { authenticate } = require('../middleware/auth')
-const { validate }     = require('../middleware/validate')
+const { validate } = require('../middleware/validate')
 
 const router = express.Router()
 const claude = new Anthropic({ apiKey: process.env.CLAUDE_API_KEY })
 
 // ── Claude grading function ───────────────────────────────────────────────────
 async function gradeEssayWithClaude(essayText, essayType, prompt) {
-  const systemPrompt = `You are a strict, experienced IELTS examiner. Your job is to give HONEST, ACCURATE band scores — not to encourage students. Do NOT inflate scores. Many student essays deserve Band 4-5, not Band 6-7.
+  const systemPrompt = `You are a senior IELTS examiner with 20 years of experience at the British Council. You grade with surgical precision — your scores are used for official band reporting so they must be ACCURATE and HONEST. You never inflate scores to make students feel better. Your role is to identify exactly what is wrong and give a realistic band that matches official IELTS standards.
 
-STRICT BAND DESCRIPTORS you MUST follow:
+═══════════════════════════════════════
+OFFICIAL IELTS BAND DESCRIPTORS
+═══════════════════════════════════════
 
-TASK ACHIEVEMENT (Task 2):
-- Band 9: Fully addresses all parts, clear position throughout, fully developed ideas
-- Band 7: Addresses all parts, clear position, well-developed main ideas
-- Band 6: Addresses all parts but some more fully than others, position clear but not always consistent
-- Band 5: Addresses task only partially, position sometimes unclear, ideas not well-supported
-- Band 4: Responds to the task only in a minimal way OR the position is unclear, ideas are repetitive or irrelevant
-- Band 3: Does not adequately address the task, very limited relevant content
+TASK ACHIEVEMENT / TASK RESPONSE (Task 2):
+Band 9: Fully addresses all parts. Sophisticated, fully-developed position. All ideas are extended with precise, relevant support.
+Band 8: Sufficiently addresses all parts. Well-developed position. Ideas are relevant and extended.
+Band 7: Addresses all parts. Clear position throughout. Main ideas extended and supported, though not always precisely.
+Band 6: Addresses all parts but some more than others. Position clear but conclusions may be unclear. Main ideas relevant but not always sufficiently developed.
+Band 5: Addresses task only partially. Format may be inappropriate. Position hard to identify. Ideas limited or not developed. Irrelevant details.
+Band 4: Responds only minimally. Position unclear. Ideas are insufficient or irrelevant. Conclusion missing or contradicts position.
+Band 3: Does not adequately address the task. Very limited relevant content.
 
 COHERENCE & COHESION:
-- Band 7+: Logically organises information, uses a range of cohesive devices appropriately
-- Band 6: Arranges information coherently, uses cohesive devices but sometimes incorrectly/mechanically
-- Band 5: Presents information with some organisation but lacks overall progression, may use cohesive devices repetitively
-- Band 4: Presents information and ideas but these are not arranged coherently, basic cohesive devices used
+Band 9: Seamless, skillfully manages paragraphing. Wide range of cohesive devices used with full flexibility.
+Band 7: Logically organises info. Uses a variety of cohesive devices, though some may be faulty or mechanical.
+Band 6: Arranges info coherently, clear overall progression. Uses cohesive devices but not always appropriately. May over-use or under-use linking words.
+Band 5: Some organisation but lacks clear progression. Inadequate or inaccurate use of cohesive devices. May use repetitive linking words (e.g., "furthermore", "moreover" in every paragraph).
+Band 4: Not arranged coherently. Uses only basic cohesive devices. Lacks paragraph unity.
 
 LEXICAL RESOURCE:
-- Band 7+: Uses a sufficient range of vocabulary with flexibility and precision, rare errors
-- Band 6: Adequate range, some ability to use less common items, some errors in word choice
-- Band 5: Limited range, noticeable errors in vocabulary, meaning is not obscured
-- Band 4: Very limited range, errors may cause strain for the reader, basic vocabulary only
+Band 9: Full flexibility and precision. Sophisticated collocations. Virtually no spelling or word-form errors.
+Band 8: Wide range of vocabulary, flexible and accurate. Rare errors in word choice/formation.
+Band 7: Sufficient range. Uses less common items with some awareness of style. Occasional errors in word choice/collocation.
+Band 6: Adequate range but mostly common vocabulary. Some ability to use less common items, sometimes incorrectly. Some spelling/word-form errors.
+Band 5: Noticeable limitation in range. Mainly basic vocabulary. Errors in word form and spelling that may cause strain. Repetitive word use.
+Band 4: Very limited range. Errors in basic word choice may cause difficulty. Repetitive or inaccurate vocabulary.
 
 GRAMMATICAL RANGE & ACCURACY:
-- Band 7+: Uses a variety of complex structures, majority of sentences error-free
-- Band 6: Mix of simple and complex sentences, some errors but they rarely reduce communication
-- Band 5: Limited range of structures, makes errors that may cause some difficulty for the reader
-- Band 4: Very limited range, errors are frequent and may cause difficulty for the reader
+Band 9: Wide variety of structures used naturally and accurately. Virtually error-free.
+Band 8: Wide variety of structures. Most sentences error-free. Only occasional errors or inappropriacies.
+Band 7: Variety of complex structures. Majority of sentences error-free. A few grammatical errors.
+Band 6: Mix of simple and complex structures. Some errors in complex structures. Errors rarely reduce communication.
+Band 5: Limited range of structures. Attempts complex structures but with errors. Errors may cause difficulty for reader. Frequent comma splices, subject-verb agreement errors, article misuse.
+Band 4: Very limited range. Errors in basic structures. Errors may cause difficulty for reader.
 
-CRITICAL RULES:
-1. If the essay is off-topic, incoherent, or random sentences → Band 1-3
-2. If the essay is copy-pasted, repetitive filler, or padding → penalise heavily
-3. If grammar is full of basic errors → maximum Band 5 for Grammar
-4. If vocabulary is simple/repetitive → maximum Band 5 for Lexical
-5. If the essay does NOT answer the question asked → maximum Band 4 for Task Achievement
-6. Average students writing in simple English should score Band 5-6, NOT 7+
-7. Band 7+ requires sophisticated, error-free writing with complex arguments
-8. Be SPECIFIC in feedback — quote actual sentences from the essay to justify scores
-9. errorHighlights must contain REAL errors found in the essay (minimum 3 if essay has errors)
+═══════════════════════════════════════
+MANDATORY GRADING RULES
+═══════════════════════════════════════
+1. NEVER round up out of charity. If it is between 6 and 6.5, give 6.
+2. Padding (repeating ideas with different words to hit word count) MUST be penalised in both Task Achievement and Coherence.
+3. If the essay contains mainly simple sentences (Subject + Verb + Object), Grammar CANNOT exceed Band 5.5.
+4. If vocabulary is mostly IELTS band 5-6 words (good, important, because, however, therefore), Lexical CANNOT exceed Band 5.5.
+5. If arguments are vague with NO specific examples, data, or elaboration, Task Achievement CANNOT exceed Band 5.5.
+6. Missing conclusion or missing introduction = penalise Task Achievement by at least 0.5.
+7. Mechanical use of cohesive devices ("Firstly... Secondly... Thirdly... In conclusion") without true logical flow = Coherence max Band 5.5.
+8. The overall bandScore must be the MATHEMATICAL AVERAGE of the 4 criteria, rounded to the nearest 0.5.
+9. errorHighlights MUST contain a minimum of 5 real errors. If the essay has fewer than 5 real errors, it is likely Band 7.5+.
+10. Each error in errorHighlights must include: the EXACT wrong phrase, the corrected version, and a DETAILED grammatical or lexical explanation with rule reference.
 
-You MUST respond with valid JSON only, no markdown, no other text.`
+You MUST respond with valid JSON only. No markdown. No extra text.`
 
-  const userPrompt = `Grade this IELTS ${essayType} essay with STRICT, HONEST scoring.
+  const userPrompt = `Grade this IELTS ${essayType} essay. Be a strict, honest examiner.
 
-Task Prompt: "${prompt}"
+TASK PROMPT:
+"${prompt}"
 
-Student Essay (${essayText.trim().split(/\s+/).length} words):
+STUDENT ESSAY (${essayText.trim().split(/\s+/).length} words):
 """
 ${essayText}
 """
 
-BEFORE scoring, check:
-1. Is this essay actually answering the prompt above?
-2. Does it make logical, coherent sense from start to finish?
-3. Are the arguments developed with specific evidence or just vague statements?
-4. What is the actual vocabulary level — advanced or basic?
-5. Are sentences grammatically complex or mostly simple?
+BEFORE you assign scores, do this analysis step by step:
 
-Respond with ONLY this JSON:
+STEP 1 — TASK ACHIEVEMENT:
+- Does the essay directly answer the question asked, or does it go off-topic?
+- Is there a clear opinion/position stated and maintained throughout?
+- Are arguments developed with specific, concrete evidence? Or are they vague?
+- Are all parts of the task addressed?
+
+STEP 2 — COHERENCE & COHESION:
+- Is there a clear introduction, body, and conclusion?
+- Does each paragraph have a clear central idea?
+- Are cohesive devices varied and accurate, or mechanical and repetitive?
+- Is there logical progression of ideas?
+
+STEP 3 — LEXICAL RESOURCE:
+- List the most complex vocabulary used. Is it truly C1/C2 level?
+- Are there any errors in collocation, word form, or word choice?
+- Is the same vocabulary repeated frequently?
+
+STEP 4 — GRAMMATICAL RANGE & ACCURACY:
+- List all grammatical errors found: subject-verb agreement, article misuse, tense errors, preposition errors, comma splices, dangling modifiers.
+- What percentage of sentences are complex vs. simple?
+- Are complex sentences error-free?
+
+Now assign scores and respond with ONLY this JSON:
 {
-  "bandScore": <overall average of 4 criteria, rounded to nearest 0.5>,
-  "taskAchievement": <0-9 in 0.5 steps — be harsh if off-topic or underdeveloped>,
-  "coherence": <0-9 in 0.5 steps>,
-  "lexical": <0-9 in 0.5 steps — basic vocab = max 5.5>,
-  "grammar": <0-9 in 0.5 steps — frequent errors = max 5.0>,
-  "feedback": "<3 paragraphs: (1) task achievement analysis with quotes from essay, (2) language strengths and specific weaknesses with examples, (3) concrete advice to improve score>",
-  "strengths": ["<specific strength with example from essay>", "<specific strength>", "<specific strength>"],
-  "improvements": ["<specific improvement with example of error>", "<specific improvement>", "<specific improvement>"],
+  "bandScore": <exact mathematical average of 4 scores, rounded to nearest 0.5>,
+  "taskAchievement": <score 0-9 in 0.5 steps>,
+  "coherence": <score 0-9 in 0.5 steps>,
+  "lexical": <score 0-9 in 0.5 steps>,
+  "grammar": <score 0-9 in 0.5 steps>,
+  "feedback": "<DETAILED 4-paragraph feedback in Vietnamese: (1) Nhận xét Task Achievement — trích dẫn câu cụ thể từ bài; (2) Nhận xét Coherence & Cohesion — chỉ ra cách nối câu bị lặp/sai; (3) Nhận xét Lexical Resource — liệt kê từ dùng sai hoặc quá đơn giản; (4) Nhận xét Grammar — liệt kê cụ thể các lỗi ngữ pháp với ví dụ từ bài và hướng dẫn sửa>",
+  "strengths": [
+    "<điểm mạnh cụ thể 1 — trích câu từ bài làm ví dụ>",
+    "<điểm mạnh cụ thể 2>",
+    "<điểm mạnh cụ thể 3>"
+  ],
+  "improvements": [
+    "<hướng dẫn cải thiện cụ thể 1 — có ví dụ câu sai và câu sửa lại>",
+    "<hướng dẫn cải thiện cụ thể 2>",
+    "<hướng dẫn cải thiện cụ thể 3>",
+    "<hướng dẫn cải thiện cụ thể 4>"
+  ],
   "errorHighlights": [
-    {"text": "<exact wrong phrase from essay>", "correction": "<corrected version>", "reason": "<grammatical/lexical explanation>"},
+    {"text": "<exact wrong phrase copied from essay>", "correction": "<corrected version>", "reason": "<detailed grammatical/lexical rule explanation in Vietnamese>"},
+    {"text": "<exact wrong phrase>", "correction": "<corrected version>", "reason": "<explanation>"},
+    {"text": "<exact wrong phrase>", "correction": "<corrected version>", "reason": "<explanation>"},
     {"text": "<exact wrong phrase>", "correction": "<corrected version>", "reason": "<explanation>"},
     {"text": "<exact wrong phrase>", "correction": "<corrected version>", "reason": "<explanation>"}
   ]
@@ -88,13 +127,12 @@ Respond with ONLY this JSON:
 
   const message = await claude.messages.create({
     model: 'claude-sonnet-4-6',
-    max_tokens: 2000,
+    max_tokens: 3000,
     system: systemPrompt,
     messages: [{ role: 'user', content: userPrompt }],
   })
 
   const raw = message.content[0].text.trim()
-  // Strip markdown code fences if present
   const jsonStr = raw.replace(/^```json\n?/, '').replace(/\n?```$/, '').trim()
   return JSON.parse(jsonStr)
 }
@@ -135,7 +173,7 @@ router.get('/lessons/:id', async (req, res) => {
 })
 
 // ── POST /api/writing/submit ──────────────────────────────────────────────────
-router.post('/submit', authenticate, [
+router.post('/submit', [
   body('essay_text').isLength({ min: 50 }).withMessage('Essay too short'),
   body('lesson_id').optional().isInt(),
   body('time_spent').optional().isInt({ min: 0 }),
@@ -195,7 +233,6 @@ router.post('/submit', authenticate, [
 
     // Save to DB
     const [submission] = await db('writing_submissions').insert({
-      user_id:          req.user.id,
       lesson_id:        lesson_id || null,
       essay_text,
       word_count:       wordCount,
@@ -208,32 +245,6 @@ router.post('/submit', authenticate, [
       time_spent,
     }).returning('*')
 
-    // Update user progress if lesson
-    if (lesson_id) {
-      await db('user_progress')
-        .insert({
-          user_id:      req.user.id,
-          lesson_id,
-          score:        gradingResult.bandScore,
-          completed:    true,
-          time_spent,
-          completed_at: new Date(),
-        })
-        .onConflict(['user_id', 'lesson_id'])
-        .merge({ score: gradingResult.bandScore, completed: true, time_spent, completed_at: new Date() })
-    }
-
-    // Save overall score
-    await db('scores').insert({
-      user_id:    req.user.id,
-      skill:      'Writing',
-      band_score: gradingResult.bandScore,
-      breakdown_ta: gradingResult.taskAchievement,
-      breakdown_cc: gradingResult.coherence,
-      breakdown_lr: gradingResult.lexical,
-      breakdown_gr: gradingResult.grammar,
-    })
-
     res.json({ submission, grading: gradingResult })
   } catch (err) {
     console.error(err)
@@ -245,10 +256,10 @@ router.post('/submit', authenticate, [
 })
 
 // ── GET /api/writing/submissions/:id ─────────────────────────────────────────
-router.get('/submissions/:id', authenticate, async (req, res) => {
+router.get('/submissions/:id', async (req, res) => {
   try {
     const submission = await db('writing_submissions')
-      .where({ id: req.params.id, user_id: req.user.id })
+      .where({ id: req.params.id })
       .first()
 
     if (!submission) return res.status(404).json({ error: 'Submission not found' })
@@ -265,10 +276,9 @@ router.get('/submissions/:id', authenticate, async (req, res) => {
 })
 
 // ── GET /api/writing/submissions (history) ────────────────────────────────────
-router.get('/submissions', authenticate, async (req, res) => {
+router.get('/submissions', async (req, res) => {
   try {
     const submissions = await db('writing_submissions')
-      .where({ user_id: req.user.id })
       .orderBy('created_at', 'desc')
       .limit(20)
       .select('id', 'lesson_id', 'word_count', 'band_score', 'time_spent', 'created_at')

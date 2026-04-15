@@ -3,21 +3,90 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { Clock, Send, Loader2, ChevronLeft, CheckCircle, AlertCircle, Lightbulb } from 'lucide-react'
 import toast from 'react-hot-toast'
 import clsx from 'clsx'
+import { writingApi } from '../lib/api'
+
+const DB_IDS = { 1: 11, 2: 12, 3: 13, 4: 14, 5: 15, 6: 15 }
 
 const LESSONS = {
   1: {
-    title: 'Opinion Essay — Technology',
+    title: 'Bài luận ý kiến — Công nghệ',
     type: 'Task 2',
     prompt: 'Some people believe that technology has made our lives more complicated. Others think it has made life easier. Discuss both views and give your own opinion.',
     minWords: 250,
-    modelAnswer: `Technology has undeniably transformed our daily lives in profound ways. While some argue that this transformation has introduced unnecessary complexity, I believe that the benefits of modern technology significantly outweigh its drawbacks.\n\nOn one hand, critics of technology point to information overload as a primary concern. The constant barrage of notifications, emails, and social media updates can overwhelm individuals, making it difficult to focus on meaningful tasks. Furthermore, our growing dependence on devices means that technical failures or internet outages can disrupt our lives in ways that were previously unimaginable. People who lack digital literacy may also find themselves increasingly marginalised in a technology-driven society.\n\nNevertheless, I firmly believe that technology has simplified our lives in more ways than it has complicated them. Communication, for instance, has never been more convenient — we can instantly connect with people across the globe at minimal cost. Access to information has been democratised, allowing anyone with a smartphone to access the accumulated knowledge of humanity. Moreover, routine tasks such as banking, shopping, and navigation have been streamlined through digital platforms, saving individuals considerable time and effort.\n\nIn conclusion, while technology does introduce some complications, its capacity to enhance productivity, improve communication, and broaden access to information makes it an overwhelmingly positive force in modern life. The key lies in using technology mindfully and ensuring that people have the skills to navigate the digital world effectively.`,
+    modelAnswer: `Technology has undeniably transformed our daily lives in profound ways. While some argue that this transformation has introduced unnecessary complexity, I believe that the benefits of modern technology significantly outweigh its drawbacks.
+
+On one hand, critics of technology point to information overload as a primary concern. The constant barrage of notifications, emails, and social media updates can overwhelm individuals, making it difficult to focus on meaningful tasks. Furthermore, our growing dependence on devices means that technical failures can disrupt our lives in ways that were previously unimaginable.
+
+Nevertheless, I firmly believe that technology has simplified our lives in more ways than it has complicated them. Communication has never been more convenient — we can instantly connect with people across the globe at minimal cost. Access to information has been democratised, allowing anyone with a smartphone to access the accumulated knowledge of humanity.
+
+In conclusion, while technology does introduce some complications, its capacity to enhance productivity, improve communication, and broaden access to information makes it an overwhelmingly positive force in modern life.`,
   },
   2: {
-    title: 'Discussion Essay — Education',
+    title: 'Bài luận thảo luận — Giáo dục',
     type: 'Task 2',
     prompt: 'Some people think that university education should be free for all students. Others believe students should pay tuition fees. Discuss both views and give your opinion.',
     minWords: 250,
-    modelAnswer: 'Model answer for education essay...',
+    modelAnswer: `The question of whether higher education should be free or fee-paying is a matter of considerable debate. Both sides present compelling arguments that deserve careful consideration.
+
+Those who advocate for free university education argue that it promotes equal opportunity. When education is accessible regardless of financial background, society benefits from a more skilled and diverse workforce. Countries such as Germany and Norway have demonstrated that free higher education is economically viable and socially beneficial.
+
+On the other hand, proponents of tuition fees contend that students who pay for their education are more motivated and take their studies more seriously. Furthermore, fee income allows universities to maintain high academic standards and invest in research and facilities.
+
+In my view, a middle-ground approach is most sensible. Governments should subsidise higher education significantly while means-tested fees ensure that those who can afford to contribute do so. This balances accessibility with financial sustainability.`,
+  },
+  3: {
+    title: 'Mô tả biểu đồ cột',
+    type: 'Task 1',
+    prompt: 'The bar chart below shows the percentage of internet users in different countries in 2020. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.',
+    minWords: 150,
+    modelAnswer: `The bar chart illustrates the proportion of internet users across several countries in 2020. Overall, developed nations show significantly higher internet penetration rates compared to developing countries.
+
+Iceland leads with approximately 99% of its population using the internet, closely followed by the United Kingdom and Germany at around 96% and 94% respectively. The United States also demonstrates high usage at roughly 90%.
+
+In contrast, developing nations show considerably lower figures. India records approximately 45% internet usage, while Nigeria stands at around 36%. The lowest rate is observed in Ethiopia, where only about 19% of the population has internet access.
+
+The data clearly indicates a strong correlation between economic development and internet accessibility, with wealthier nations demonstrating near-universal connectivity while poorer nations continue to face significant digital divides.`,
+  },
+  4: {
+    title: 'Bài luận vấn đề — Giải pháp',
+    type: 'Task 2',
+    prompt: 'Many cities are experiencing severe traffic congestion. What are the causes of this problem and what measures could be taken to address it?',
+    minWords: 250,
+    modelAnswer: `Traffic congestion has become one of the most pressing urban challenges of the modern era. This essay will examine the principal causes of this problem and propose several practical solutions.
+
+The primary cause of urban traffic congestion is the dramatic increase in private vehicle ownership. As incomes rise, more people can afford cars, leading to overcrowded road networks that were not designed to handle such volumes. Compounding this is inadequate public transportation infrastructure, which forces commuters to rely on private vehicles even when they would prefer alternatives.
+
+To address these issues, governments must invest heavily in public transportation. Expanding metro systems, increasing bus frequencies, and introducing dedicated cycle lanes can make alternatives to driving genuinely attractive. Singapore and London have demonstrated the effectiveness of congestion charging, where drivers pay a fee to enter busy city centres, thereby reducing unnecessary journeys.
+
+Urban planning also plays a crucial role. Designing mixed-use neighbourhoods where residents can walk or cycle to work reduces the need for long commutes entirely.
+
+In conclusion, tackling traffic congestion requires a combination of improved public transport, financial disincentives for driving, and smarter urban planning.`,
+  },
+  5: {
+    title: 'Mô tả biểu đồ tròn',
+    type: 'Task 1',
+    prompt: 'The pie charts below show the percentage of household expenditure in two different countries. Summarise the information by selecting and reporting the main features.',
+    minWords: 150,
+    modelAnswer: `The pie charts compare household spending patterns in two countries. While both nations allocate the largest share of expenditure to housing, notable differences exist in other categories.
+
+In Country A, housing accounts for 35% of household budgets, followed by food at 25% and transportation at 20%. Entertainment and other expenses make up the remaining 20%.
+
+Country B presents a contrasting picture. Although housing remains the dominant expense at 30%, food represents a considerably larger proportion at 35%, suggesting a lower standard of living. Transportation is markedly lower at just 12%, while other expenses account for 23%.
+
+The most striking difference between the two countries is the proportion spent on food, which is 10 percentage points higher in Country B. This likely reflects lower average incomes, where a greater share of earnings must be devoted to basic necessities.`,
+  },
+  6: {
+    title: 'Bài luận đồng ý / không đồng ý',
+    type: 'Task 2',
+    prompt: 'Protecting the environment is the responsibility of the government, not individuals. To what extent do you agree or disagree?',
+    minWords: 250,
+    modelAnswer: `The question of environmental responsibility is one that touches every member of society. While I acknowledge that governments bear primary responsibility for environmental protection, I believe that individuals also have a significant role to play.
+
+Governments possess the legislative power and financial resources necessary to implement large-scale environmental policies. They can regulate industrial emissions, invest in renewable energy infrastructure, and enforce penalties for pollution. Without such systemic action, individual efforts will have limited impact. China's investment in solar energy and the European Union's carbon trading scheme exemplify the transformative potential of government-led initiatives.
+
+However, to argue that individuals bear no responsibility would be misguided. Consumer choices collectively shape markets and drive demand for sustainable products. When individuals reduce their meat consumption, choose public transport, or minimise single-use plastics, they send powerful market signals. Furthermore, civic pressure from environmentally conscious citizens has historically compelled governments to adopt more ambitious environmental policies.
+
+In conclusion, environmental protection is a shared responsibility. Governments must lead through legislation and investment, while individuals must complement these efforts through conscious lifestyle choices. Neither can succeed without the other.`,
   },
 }
 
@@ -31,39 +100,44 @@ function BandScoreCard({ label, score }) {
   )
 }
 
-function ResultsPanel({ result, essay, modelAnswer, onReset }) {
+function ResultsPanel({ result, modelAnswer, onReset }) {
   const [tab, setTab] = useState('feedback')
+  const tabs = [
+    { key: 'feedback', label: 'Nhận xét' },
+    { key: 'errors',   label: 'Lỗi sai' },
+    { key: 'model',    label: 'Bài mẫu' },
+  ]
 
   return (
     <div className="space-y-5 animate-slide-up">
       {/* Overall band */}
       <div className="card p-6 text-center">
-        <p className="text-sm text-slate-500 mb-2">Overall Band Score</p>
+        <p className="text-sm text-slate-500 mb-2">Điểm Band Tổng</p>
         <div className="text-6xl font-black text-primary-600 dark:text-primary-400">{result.bandScore.toFixed(1)}</div>
-        <div className="text-slate-400 text-sm mt-1">out of 9.0</div>
+        <div className="text-slate-400 text-sm mt-1">trên 9.0</div>
         <div className="grid grid-cols-4 gap-3 mt-5">
-          <BandScoreCard label="Task Achievement" score={result.taskAchievement} />
-          <BandScoreCard label="Coherence" score={result.coherence} />
-          <BandScoreCard label="Lexical Resource" score={result.lexical} />
-          <BandScoreCard label="Grammar" score={result.grammar} />
+          <BandScoreCard label="Nội dung"    score={result.taskAchievement} />
+          <BandScoreCard label="Mạch lạc"    score={result.coherence} />
+          <BandScoreCard label="Từ vựng"     score={result.lexical} />
+          <BandScoreCard label="Ngữ pháp"    score={result.grammar} />
         </div>
       </div>
 
       {/* Tabs */}
       <div className="card">
         <div className="flex border-b border-slate-100 dark:border-slate-700">
-          {['feedback', 'errors', 'model'].map(t => (
+          {tabs.map(t => (
             <button
-              key={t}
-              onClick={() => setTab(t)}
+              key={t.key}
+              onClick={() => setTab(t.key)}
               className={clsx(
-                'flex-1 py-3 text-sm font-medium capitalize transition-colors',
-                tab === t
+                'flex-1 py-3 text-sm font-medium transition-colors',
+                tab === t.key
                   ? 'text-primary-600 border-b-2 border-primary-600'
                   : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
               )}
             >
-              {t === 'model' ? 'Model Answer' : t}
+              {t.label}
             </button>
           ))}
         </div>
@@ -72,13 +146,13 @@ function ResultsPanel({ result, essay, modelAnswer, onReset }) {
           {tab === 'feedback' && (
             <div className="space-y-4">
               <div>
-                <p className="text-sm font-semibold text-slate-900 dark:text-white mb-2">Overall Feedback</p>
+                <p className="text-sm font-semibold text-slate-900 dark:text-white mb-2">Nhận xét tổng quan</p>
                 <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{result.feedback}</p>
               </div>
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-xl">
                   <p className="text-xs font-bold text-green-700 dark:text-green-400 uppercase tracking-wide mb-2 flex items-center gap-1.5">
-                    <CheckCircle className="w-3.5 h-3.5" /> Strengths
+                    <CheckCircle className="w-3.5 h-3.5" /> Điểm mạnh
                   </p>
                   <ul className="space-y-1">
                     {result.strengths.map((s, i) => <li key={i} className="text-sm text-green-700 dark:text-green-300">• {s}</li>)}
@@ -86,7 +160,7 @@ function ResultsPanel({ result, essay, modelAnswer, onReset }) {
                 </div>
                 <div className="p-4 bg-amber-50 dark:bg-amber-900/20 rounded-xl">
                   <p className="text-xs font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wide mb-2 flex items-center gap-1.5">
-                    <Lightbulb className="w-3.5 h-3.5" /> Areas to Improve
+                    <Lightbulb className="w-3.5 h-3.5" /> Cần cải thiện
                   </p>
                   <ul className="space-y-1">
                     {result.improvements.map((s, i) => <li key={i} className="text-sm text-amber-700 dark:text-amber-300">• {s}</li>)}
@@ -99,7 +173,7 @@ function ResultsPanel({ result, essay, modelAnswer, onReset }) {
           {tab === 'errors' && (
             <div className="space-y-3">
               {result.errorHighlights.length === 0
-                ? <p className="text-sm text-slate-500 text-center py-6">No major errors found!</p>
+                ? <p className="text-sm text-slate-500 text-center py-6">Không tìm thấy lỗi lớn!</p>
                 : result.errorHighlights.map((e, i) => (
                   <div key={i} className="p-3 rounded-xl border border-red-100 dark:border-red-900/30 bg-red-50/50 dark:bg-red-900/10">
                     <div className="flex items-start gap-2">
@@ -123,38 +197,9 @@ function ResultsPanel({ result, essay, modelAnswer, onReset }) {
         </div>
       </div>
 
-      <button onClick={onReset} className="btn-secondary w-full">Try Again</button>
+      <button onClick={onReset} className="btn-secondary w-full">Làm lại bài</button>
     </div>
   )
-}
-
-// Mock Claude grading
-async function gradeEssay(text, lesson) {
-  await new Promise(r => setTimeout(r, 2000)) // simulate API delay
-  const wc = text.trim().split(/\s+/).length
-  const base = Math.min(6 + wc / 500, 7.5)
-  return {
-    bandScore: parseFloat(base.toFixed(1)),
-    taskAchievement: parseFloat((base + 0.5).toFixed(1)),
-    coherence:       parseFloat((base - 0.5).toFixed(1)),
-    lexical:         parseFloat((base).toFixed(1)),
-    grammar:         parseFloat((base + 0.0).toFixed(1)),
-    feedback: `Your essay demonstrates a clear understanding of the topic and presents relevant arguments. The introduction effectively sets the context, and your conclusion restates the main points. To improve your score, focus on using a wider range of vocabulary and more complex sentence structures.`,
-    strengths: [
-      'Clear thesis statement and position',
-      'Logical paragraph structure',
-      'Relevant examples to support arguments',
-    ],
-    improvements: [
-      'Expand your range of cohesive devices',
-      'Use more sophisticated vocabulary',
-      'Develop counter-arguments more thoroughly',
-    ],
-    errorHighlights: [
-      { text: 'alot', correction: 'a lot', reason: 'Spelling error — "alot" is not a standard English word' },
-      { text: 'more easier', correction: 'easier', reason: 'Double comparative — use only one form' },
-    ],
-  }
 }
 
 export default function WritingExercisePage() {
@@ -163,7 +208,7 @@ export default function WritingExercisePage() {
   const lesson = LESSONS[id] ?? LESSONS[1]
 
   const [essay, setEssay] = useState('')
-  const [timeLeft, setTimeLeft] = useState(40 * 60) // 40 min
+  const [timeLeft, setTimeLeft] = useState((lesson.type === 'Task 1' ? 20 : 40) * 60)
   const [timerActive, setTimerActive] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [result, setResult] = useState(null)
@@ -180,23 +225,22 @@ export default function WritingExercisePage() {
 
   const handleSubmit = useCallback(async () => {
     if (wordCount < lesson.minWords) {
-      toast.error(`Minimum ${lesson.minWords} words required (you have ${wordCount})`)
+      toast.error(`Cần ít nhất ${lesson.minWords} từ (bạn đang có ${wordCount} từ)`)
       return
     }
     setSubmitting(true)
     try {
-      const r = await gradeEssay(essay, lesson)
-      setResult(r)
+      const { data } = await writingApi.submit({ essay_text: essay, lesson_id: DB_IDS[Number(id)] ?? 11 })
+      setResult(data.grading)
       setTimerActive(false)
-      toast.success('Essay graded successfully!')
+      toast.success('Đã chấm bài xong!')
     } catch {
-      toast.error('Grading failed. Please try again.')
+      toast.error('Chấm bài thất bại. Vui lòng thử lại.')
     } finally {
       setSubmitting(false)
     }
-  }, [essay, wordCount, lesson])
+  }, [essay, wordCount, lesson, id])
 
-  // Ctrl+S shortcut
   useEffect(() => {
     const handler = (e) => { if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); if (!result && !submitting) handleSubmit() } }
     window.addEventListener('keydown', handler)
@@ -205,12 +249,10 @@ export default function WritingExercisePage() {
 
   return (
     <div className="max-w-5xl mx-auto animate-slide-up">
-      {/* Back */}
       <button onClick={() => navigate('/writing')} className="flex items-center gap-1 text-sm text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 mb-4 transition-colors">
-        <ChevronLeft className="w-4 h-4" /> Back to exercises
+        <ChevronLeft className="w-4 h-4" /> Quay lại danh sách bài
       </button>
 
-      {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
         <div>
           <span className="badge bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-400 mb-2">{lesson.type}</span>
@@ -226,40 +268,40 @@ export default function WritingExercisePage() {
           </div>
           {!timerActive && !result && (
             <button onClick={() => setTimerActive(true)} className="btn-secondary text-sm py-2">
-              Start Timer
+              Bắt đầu hẹn giờ
             </button>
           )}
         </div>
       </div>
 
       {result ? (
-        <ResultsPanel result={result} essay={essay} modelAnswer={lesson.modelAnswer} onReset={() => { setResult(null); setEssay(''); setTimeLeft(40 * 60) }} />
+        <ResultsPanel result={result} modelAnswer={lesson.modelAnswer} onReset={() => { setResult(null); setEssay(''); setTimeLeft((lesson.type === 'Task 1' ? 20 : 40) * 60) }} />
       ) : (
         <div className="grid lg:grid-cols-5 gap-6">
-          {/* Prompt */}
+          {/* Đề bài */}
           <div className="lg:col-span-2">
             <div className="card p-5 sticky top-4">
-              <h3 className="text-sm font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wide mb-3">Essay Prompt</h3>
+              <h3 className="text-sm font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wide mb-3">Đề bài</h3>
               <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{lesson.prompt}</p>
               <div className="mt-4 p-3 bg-amber-50 dark:bg-amber-900/20 rounded-lg">
                 <p className="text-xs text-amber-700 dark:text-amber-400 font-medium">
-                  Write at least <span className="font-bold">{lesson.minWords} words</span>.<br />
-                  Time allowed: 40 minutes.
+                  Viết ít nhất <span className="font-bold">{lesson.minWords} từ</span>.<br />
+                  Thời gian: {lesson.type === 'Task 1' ? '20' : '40'} phút.
                 </p>
               </div>
               <div className="mt-3 text-xs text-slate-400">
-                Tip: Press <kbd className="px-1.5 py-0.5 bg-slate-200 dark:bg-slate-600 rounded text-xs font-mono">⌘S</kbd> to submit
+                Mẹo: Nhấn <kbd className="px-1.5 py-0.5 bg-slate-200 dark:bg-slate-600 rounded text-xs font-mono">⌘S</kbd> để nộp bài
               </div>
             </div>
           </div>
 
-          {/* Editor */}
+          {/* Khung viết */}
           <div className="lg:col-span-3 flex flex-col gap-4">
             <div className="card flex flex-col flex-1">
               <textarea
                 value={essay}
                 onChange={e => setEssay(e.target.value)}
-                placeholder="Start writing your essay here..."
+                placeholder="Bắt đầu viết bài của bạn ở đây..."
                 className="w-full flex-1 p-5 bg-transparent text-sm text-slate-700 dark:text-slate-200 placeholder:text-slate-300 dark:placeholder:text-slate-600 resize-none focus:outline-none leading-relaxed min-h-[400px]"
               />
               <div className="flex items-center justify-between px-5 py-3 border-t border-slate-100 dark:border-slate-700">
@@ -267,7 +309,7 @@ export default function WritingExercisePage() {
                   'text-sm font-medium',
                   wordCount >= lesson.minWords ? 'text-green-600 dark:text-green-400' : 'text-slate-400'
                 )}>
-                  {wordCount} / {lesson.minWords} words {wordCount >= lesson.minWords && '✓'}
+                  {wordCount} / {lesson.minWords} từ {wordCount >= lesson.minWords && '✓'}
                 </span>
                 <button
                   onClick={handleSubmit}
@@ -275,7 +317,7 @@ export default function WritingExercisePage() {
                   className="btn-primary text-sm py-2"
                 >
                   {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
-                  {submitting ? 'Grading with AI...' : 'Submit & Grade'}
+                  {submitting ? 'Đang chấm bài...' : 'Nộp & Chấm điểm'}
                 </button>
               </div>
             </div>

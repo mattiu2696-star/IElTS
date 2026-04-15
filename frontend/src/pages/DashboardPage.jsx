@@ -1,4 +1,3 @@
-import { useAuth } from '../contexts/AuthContext'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line, CartesianGrid } from 'recharts'
 import { TrendingUp, BookOpen, PenLine, Clock, Target, Flame, ChevronRight, Star } from 'lucide-react'
 import { Link } from 'react-router-dom'
@@ -18,20 +17,20 @@ const skillBreakdown = [
 ]
 
 const weekActivity = [
-  { day: 'Mon', mins: 45 }, { day: 'Tue', mins: 30 }, { day: 'Wed', mins: 60 },
-  { day: 'Thu', mins: 20 }, { day: 'Fri', mins: 75 }, { day: 'Sat', mins: 50 }, { day: 'Sun', mins: 15 },
+  { day: 'T2', mins: 45 }, { day: 'T3', mins: 30 }, { day: 'T4', mins: 60 },
+  { day: 'T5', mins: 20 }, { day: 'T6', mins: 75 }, { day: 'T7', mins: 50 }, { day: 'CN', mins: 15 },
 ]
 
 const recommendedLessons = [
-  { id: 1, title: 'Task 2 — Opinion Essay', type: 'Writing', difficulty: 'Medium', duration: '45 min' },
-  { id: 2, title: 'Academic Vocabulary: Environment', type: 'Vocabulary', difficulty: 'Hard', duration: '20 min' },
-  { id: 3, title: 'Passage: Climate Change', type: 'Reading', difficulty: 'Medium', duration: '60 min' },
+  { id: 1, title: 'Task 2 — Bài luận ý kiến',         type: 'Writing',    difficulty: 'Trung bình', duration: '45 phút' },
+  { id: 2, title: 'Từ vựng học thuật: Môi trường',    type: 'Vocabulary', difficulty: 'Khó',        duration: '20 phút' },
+  { id: 3, title: 'Bài đọc: Biến đổi khí hậu',       type: 'Reading',    difficulty: 'Trung bình', duration: '60 phút' },
 ]
 
 const difficultyColors = {
-  Easy:   'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400',
-  Medium: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400',
-  Hard:   'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400',
+  'Dễ':        'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400',
+  'Trung bình':'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400',
+  'Khó':       'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400',
 }
 
 const typeIcons = { Writing: PenLine, Vocabulary: BookOpen, Reading: BookOpen }
@@ -52,9 +51,8 @@ function StatCard({ icon: Icon, label, value, sub, color }) {
 }
 
 export default function DashboardPage() {
-  const { user } = useAuth()
   const hour = new Date().getHours()
-  const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening'
+  const greeting = hour < 12 ? 'Chào buổi sáng' : hour < 17 ? 'Chào buổi chiều' : 'Chào buổi tối'
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-slide-up">
@@ -62,10 +60,10 @@ export default function DashboardPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
-            {greeting}, {user?.name?.split(' ')[0]} 👋
+            {greeting} 👋
           </h1>
           <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">
-            You're on a <span className="text-orange-500 font-semibold">7-day streak!</span> Keep it up.
+            Bạn đang có chuỗi <span className="text-orange-500 font-semibold">7 ngày liên tiếp!</span> Tiếp tục phát huy.
           </p>
         </div>
         <div className="hidden md:flex items-center gap-2 bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 px-4 py-2 rounded-xl font-semibold text-sm">
@@ -76,10 +74,10 @@ export default function DashboardPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard icon={Star}      label="Current Band"   value="6.5"   sub="+0.5 this month"  color="bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400" />
-        <StatCard icon={PenLine}   label="Essays Written"  value="24"    sub="3 this week"      color="bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400" />
-        <StatCard icon={BookOpen}  label="Words Learned"   value="842"   sub="+58 this week"   color="bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400" />
-        <StatCard icon={Clock}     label="Study Time"      value="48h"   sub="12h this week"   color="bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400" />
+        <StatCard icon={Star}      label="Band hiện tại"    value="6.5"   sub="+0.5 tháng này"    color="bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400" />
+        <StatCard icon={PenLine}   label="Bài viết đã nộp"  value="24"    sub="3 bài tuần này"    color="bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400" />
+        <StatCard icon={BookOpen}  label="Từ đã học"         value="842"   sub="+58 tuần này"      color="bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400" />
+        <StatCard icon={Clock}     label="Thời gian học"     value="48h"   sub="12h tuần này"      color="bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400" />
       </div>
 
       {/* Charts row */}
@@ -87,7 +85,7 @@ export default function DashboardPage() {
         {/* Band score trend */}
         <div className="card p-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold text-slate-900 dark:text-white">Band Score Trend</h3>
+            <h3 className="font-semibold text-slate-900 dark:text-white">Tiến độ Band Score</h3>
             <span className="badge bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 flex items-center gap-1">
               <TrendingUp className="w-3 h-3" /> +1.0 band
             </span>
@@ -108,8 +106,8 @@ export default function DashboardPage() {
         {/* Weekly activity */}
         <div className="card p-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold text-slate-900 dark:text-white">Weekly Activity</h3>
-            <span className="text-xs text-slate-400">Minutes studied</span>
+            <h3 className="font-semibold text-slate-900 dark:text-white">Hoạt động tuần này</h3>
+            <span className="text-xs text-slate-400">Số phút học</span>
           </div>
           <ResponsiveContainer width="100%" height={180}>
             <BarChart data={weekActivity} barSize={28}>
@@ -117,7 +115,7 @@ export default function DashboardPage() {
               <YAxis tick={{ fontSize: 12 }} />
               <Tooltip
                 contentStyle={{ background: '#1e293b', border: 'none', borderRadius: 12, color: '#f1f5f9', fontSize: 12 }}
-                formatter={(v) => [`${v} min`, 'Study time']}
+                formatter={(v) => [`${v} phút`, 'Thời gian học']}
               />
               <Bar dataKey="mins" fill="#3b82f6" radius={[6, 6, 0, 0]} />
             </BarChart>
@@ -129,7 +127,7 @@ export default function DashboardPage() {
       <div className="grid lg:grid-cols-2 gap-6">
         {/* Skills */}
         <div className="card p-6">
-          <h3 className="font-semibold text-slate-900 dark:text-white mb-4">Skill Breakdown</h3>
+          <h3 className="font-semibold text-slate-900 dark:text-white mb-4">Điểm theo kỹ năng</h3>
           <div className="space-y-4">
             {skillBreakdown.map(({ skill, score, color }) => (
               <div key={skill}>
@@ -151,11 +149,11 @@ export default function DashboardPage() {
           <div className="mt-5 p-3 bg-primary-50 dark:bg-primary-900/20 rounded-xl flex items-center gap-3">
             <Target className="w-5 h-5 text-primary-600 dark:text-primary-400 flex-shrink-0" />
             <div className="flex-1">
-              <p className="text-xs font-semibold text-primary-700 dark:text-primary-300">Next Milestone: Band 7.0</p>
+              <p className="text-xs font-semibold text-primary-700 dark:text-primary-300">Mục tiêu tiếp theo: Band 7.0</p>
               <div className="mt-1.5 h-1.5 bg-primary-100 dark:bg-primary-800/50 rounded-full">
                 <div className="h-full bg-primary-500 rounded-full" style={{ width: '72%' }} />
               </div>
-              <p className="text-xs text-primary-500 mt-1">72% — Keep going!</p>
+              <p className="text-xs text-primary-500 mt-1">72% — Tiếp tục cố lên!</p>
             </div>
           </div>
         </div>
@@ -163,9 +161,9 @@ export default function DashboardPage() {
         {/* Recommended Lessons */}
         <div className="card p-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold text-slate-900 dark:text-white">Recommended for You</h3>
+            <h3 className="font-semibold text-slate-900 dark:text-white">Đề xuất cho bạn</h3>
             <Link to="/lessons" className="text-xs text-primary-600 hover:underline flex items-center gap-0.5">
-              View all <ChevronRight className="w-3 h-3" />
+              Xem tất cả <ChevronRight className="w-3 h-3" />
             </Link>
           </div>
           <div className="space-y-3">

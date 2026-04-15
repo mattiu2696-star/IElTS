@@ -4,32 +4,31 @@ import { useState } from 'react'
 import clsx from 'clsx'
 
 const lessons = [
-  { id: 1, title: 'Opinion Essay — Technology',    type: 'Task 2', difficulty: 'Medium', duration: '40 min', topic: 'Technology' },
-  { id: 2, title: 'Discussion Essay — Education',  type: 'Task 2', difficulty: 'Hard',   duration: '40 min', topic: 'Education' },
-  { id: 3, title: 'Graph Description — Bar Chart', type: 'Task 1', difficulty: 'Easy',   duration: '20 min', topic: 'Academic' },
-  { id: 4, title: 'Problem-Solution Essay',        type: 'Task 2', difficulty: 'Hard',   duration: '40 min', topic: 'Society' },
-  { id: 5, title: 'Pie Chart Description',         type: 'Task 1', difficulty: 'Easy',   duration: '20 min', topic: 'Academic' },
-  { id: 6, title: 'Agree/Disagree Essay',          type: 'Task 2', difficulty: 'Medium', duration: '40 min', topic: 'Environment' },
+  { id: 1, title: 'Bài luận ý kiến — Công nghệ',       type: 'Task 2', difficulty: 'Trung bình', duration: '40 phút', topic: 'Công nghệ' },
+  { id: 2, title: 'Bài luận thảo luận — Giáo dục',     type: 'Task 2', difficulty: 'Khó',        duration: '40 phút', topic: 'Giáo dục' },
+  { id: 3, title: 'Mô tả biểu đồ cột',                 type: 'Task 1', difficulty: 'Dễ',         duration: '20 phút', topic: 'Học thuật' },
+  { id: 4, title: 'Bài luận vấn đề — Giải pháp',       type: 'Task 2', difficulty: 'Khó',        duration: '40 phút', topic: 'Xã hội' },
+  { id: 5, title: 'Mô tả biểu đồ tròn',                type: 'Task 1', difficulty: 'Dễ',         duration: '20 phút', topic: 'Học thuật' },
+  { id: 6, title: 'Bài luận đồng ý / không đồng ý',    type: 'Task 2', difficulty: 'Trung bình', duration: '40 phút', topic: 'Môi trường' },
 ]
 
 const diffColors = {
-  Easy:   'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400',
-  Medium: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400',
-  Hard:   'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400',
+  'Dễ':        'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400',
+  'Trung bình':'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400',
+  'Khó':       'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400',
 }
 
 export default function WritingPage() {
-  const [filter, setFilter] = useState('All')
-
-  const filters = ['All', 'Task 1', 'Task 2']
-  const filtered = filter === 'All' ? lessons : lessons.filter(l => l.type === filter)
+  const [filter, setFilter] = useState('Tất cả')
+  const filters = ['Tất cả', 'Task 1', 'Task 2']
+  const filtered = filter === 'Tất cả' ? lessons : lessons.filter(l => l.type === filter)
 
   return (
     <div className="max-w-4xl mx-auto animate-slide-up">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-xl font-bold text-slate-900 dark:text-white">Writing Practice</h2>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Choose an exercise and get AI-powered feedback</p>
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white">Luyện Writing</h2>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Chọn bài tập và nhận phản hồi từ AI</p>
         </div>
         <div className="flex items-center gap-2">
           <Filter className="w-4 h-4 text-slate-400" />
@@ -72,7 +71,7 @@ export default function WritingPage() {
               </div>
             </div>
             <div className="flex items-center justify-end text-xs text-primary-600 dark:text-primary-400 font-medium">
-              Start practice <ChevronRight className="w-3.5 h-3.5" />
+              Bắt đầu luyện tập <ChevronRight className="w-3.5 h-3.5" />
             </div>
           </Link>
         ))}

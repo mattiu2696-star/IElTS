@@ -7,12 +7,12 @@ export default function ListeningPage() {
         <div className="w-16 h-16 bg-amber-50 dark:bg-amber-900/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
           <Headphones className="w-8 h-8 text-amber-600 dark:text-amber-400" />
         </div>
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Listening Module</h2>
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Luyện Listening</h2>
         <p className="text-slate-500 dark:text-slate-400 max-w-md mx-auto">
-          Audio exercises with transcripts, question types (MCQ, matching, gap-fill), and difficulty selection. Coming soon!
+          Bài nghe kèm transcript, các dạng câu hỏi (trắc nghiệm, nối, điền từ) và lựa chọn độ khó. Sắp ra mắt!
         </p>
         <div className="flex items-center justify-center gap-2 mt-6 text-sm text-slate-400">
-          <Clock className="w-4 h-4" /> In Development
+          <Clock className="w-4 h-4" /> Đang phát triển
         </div>
       </div>
     </div>

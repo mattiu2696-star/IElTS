@@ -3,13 +3,13 @@ import { useTheme } from '../../contexts/ThemeContext'
 import { useLocation } from 'react-router-dom'
 
 const titles = {
-  '/':           'Dashboard',
-  '/writing':    'Writing Practice',
-  '/vocabulary': 'Vocabulary',
-  '/reading':    'Reading',
-  '/listening':  'Listening',
-  '/analytics':  'Analytics',
-  '/lessons':    'Lessons Library',
+  '/':           'Tổng quan',
+  '/writing':    'Luyện Writing',
+  '/vocabulary': 'Từ vựng',
+  '/reading':    'Luyện Reading',
+  '/listening':  'Luyện Listening',
+  '/analytics':  'Thống kê',
+  '/lessons':    'Thư viện bài học',
 }
 
 export default function Navbar({ onMenuClick }) {
@@ -37,7 +37,7 @@ export default function Navbar({ onMenuClick }) {
         <Search className="w-4 h-4 text-slate-400 flex-shrink-0" />
         <input
           type="text"
-          placeholder="Search lessons..."
+          placeholder="Tìm kiếm bài học..."
           className="bg-transparent text-sm text-slate-600 dark:text-slate-300 placeholder:text-slate-400 outline-none w-full"
         />
       </div>

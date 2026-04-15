@@ -1,4 +1,4 @@
-import { BookOpen, Headphones, Clock } from 'lucide-react'
+import { BookOpen, Clock } from 'lucide-react'
 
 export default function ReadingPage() {
   return (
@@ -7,12 +7,12 @@ export default function ReadingPage() {
         <div className="w-16 h-16 bg-purple-50 dark:bg-purple-900/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
           <BookOpen className="w-8 h-8 text-purple-600 dark:text-purple-400" />
         </div>
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Reading Module</h2>
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Luyện Reading</h2>
         <p className="text-slate-500 dark:text-slate-400 max-w-md mx-auto">
-          Academic and General Training passages with timed practice, question types, and instant feedback. Coming soon!
+          Bài đọc học thuật và tổng quát với luyện tập có tính giờ, các dạng câu hỏi và phản hồi tức thì. Sắp ra mắt!
         </p>
         <div className="flex items-center justify-center gap-2 mt-6 text-sm text-slate-400">
-          <Clock className="w-4 h-4" /> In Development
+          <Clock className="w-4 h-4" /> Đang phát triển
         </div>
       </div>
     </div>

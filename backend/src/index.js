@@ -4,11 +4,9 @@ const helmet = require('helmet')
 const cors = require('cors')
 const rateLimit = require('express-rate-limit')
 
-const authRoutes    = require('./routes/auth')
 const userRoutes    = require('./routes/user')
 const writingRoutes = require('./routes/writing')
 const vocabRoutes   = require('./routes/vocab')
-const adminRoutes   = require('./routes/admin')
 const db            = require('./config/db')
 
 const app = express()
@@ -22,18 +20,11 @@ app.use(cors({
 
 // ── Rate limiting ────────────────────────────────────────────────────────────
 app.use('/api/', rateLimit({
-  windowMs: 60 * 1000, // 1 minute
+  windowMs: 60 * 1000,
   max: 100,
   standardHeaders: true,
   legacyHeaders: false,
   message: { error: 'Too many requests, please try again later.' },
-}))
-
-// Stricter limit for auth endpoints
-app.use('/auth/', rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 20,
-  message: { error: 'Too many auth attempts, please try again later.' },
 }))
 
 // ── Body parsing ─────────────────────────────────────────────────────────────
@@ -51,11 +42,8 @@ app.get('/health', async (req, res) => {
 })
 
 // ── Routes ───────────────────────────────────────────────────────────────────
-app.use('/auth',    authRoutes)
-app.use('/api/user',    userRoutes)
 app.use('/api/writing', writingRoutes)
 app.use('/api/vocab',   vocabRoutes)
-app.use('/admin',       adminRoutes)
 
 // ── Global error handler ─────────────────────────────────────────────────────
 app.use((err, req, res, next) => {
