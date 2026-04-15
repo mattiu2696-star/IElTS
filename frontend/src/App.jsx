@@ -3,6 +3,7 @@ import { Toaster } from 'react-hot-toast'
 import { ThemeProvider } from './contexts/ThemeContext'
 import { AuthProvider, useAuth } from './contexts/AuthContext'
 import Layout from './components/layout/Layout'
+import LandingPage from './pages/LandingPage'
 import LoginPage from './pages/auth/LoginPage'
 import SignupPage from './pages/auth/SignupPage'
 import DashboardPage from './pages/DashboardPage'
@@ -19,6 +20,11 @@ function PrivateRoute({ children }) {
   return user ? children : <Navigate to="/login" replace />
 }
 
+function HomeRoute() {
+  const { user } = useAuth()
+  return user ? <Navigate to="/dashboard" replace /> : <LandingPage />
+}
+
 export default function App() {
   return (
     <ThemeProvider>
@@ -29,10 +35,13 @@ export default function App() {
             toastOptions={{ duration: 3000 }}
           />
           <Routes>
+            <Route path="/"       element={<HomeRoute />} />
             <Route path="/login"  element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
-            <Route path="/" element={<PrivateRoute><Layout /></PrivateRoute>}>
+            <Route path="/dashboard" element={<PrivateRoute><Layout /></PrivateRoute>}>
               <Route index element={<DashboardPage />} />
+            </Route>
+            <Route path="/" element={<PrivateRoute><Layout /></PrivateRoute>}>
               <Route path="writing" element={<WritingPage />} />
               <Route path="writing/:id" element={<WritingExercisePage />} />
               <Route path="vocabulary" element={<VocabularyPage />} />
