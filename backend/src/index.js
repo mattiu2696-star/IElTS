@@ -10,6 +10,7 @@ const vocabRoutes   = require('./routes/vocab')
 const db            = require('./config/db')
 
 const app = express()
+app.set('trust proxy', 1)
 
 // ── Security middleware ──────────────────────────────────────────────────────
 app.use(helmet())

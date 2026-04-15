@@ -127,7 +127,7 @@ Now assign scores and respond with ONLY this JSON:
 
   const message = await claude.messages.create({
     model: 'claude-sonnet-4-6',
-    max_tokens: 3000,
+    max_tokens: 8000,
     system: systemPrompt,
     messages: [{ role: 'user', content: userPrompt }],
   })
