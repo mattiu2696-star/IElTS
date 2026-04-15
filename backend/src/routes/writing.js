@@ -179,13 +179,13 @@ router.post('/submit', [
   body('time_spent').optional().isInt({ min: 0 }),
   validate,
 ], async (req, res) => {
-  const { essay_text, lesson_id, time_spent = 0 } = req.body
+  const { essay_text, lesson_id, time_spent = 0, essay_prompt, essay_type } = req.body
 
   try {
     // Get lesson info for context
-    let lessonContent = 'General IELTS Writing Task 2'
-    let essayType     = 'Task 2'
-    let minWords      = 250
+    let lessonContent = essay_prompt || 'General IELTS Writing Task 2'
+    let essayType     = essay_type || 'Task 2'
+    let minWords      = essayType === 'Task 1' ? 150 : 250
 
     if (lesson_id) {
       const lesson = await db('lessons').where({ id: lesson_id }).first()
