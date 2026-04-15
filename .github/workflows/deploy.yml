@@ -26,39 +26,42 @@ jobs:
           script: |
             set -e
 
-            # Clone repo nếu chưa có, pull nếu đã có
+            # Clone repo nếu chưa có
             if [ ! -d /opt/ielts-hub/.git ]; then
-              git clone https://github.com/mattiu2696-star/IElTS.git /opt/ielts-hub
+              sudo git clone https://github.com/mattiu2696-star/IElTS.git /opt/ielts-hub
             fi
 
             cd /opt/ielts-hub
-            git pull origin main
+            sudo git fetch origin main
+            sudo git reset --hard origin/main
 
             # Tạo .env nếu chưa có
-            if [ ! -f .env ]; then
-              cat > .env << 'ENVEOF'
+            if [ ! -f /opt/ielts-hub/.env ]; then
+              sudo tee /opt/ielts-hub/.env > /dev/null << 'ENVEOF'
             JWT_SECRET=ielts-hub-jwt-secret-change-me
             JWT_REFRESH_SECRET=ielts-hub-refresh-secret-change-me
             CLAUDE_API_KEY=
             FRONTEND_URL=http://160.191.85.127
             VITE_API_URL=http://160.191.85.127:3001
+            DB_HOST=postgres
+            DB_PORT=5432
+            DB_NAME=ielts_hub
+            DB_USER=ielts_user
+            DB_PASSWORD=ielts_pass
             ENVEOF
             fi
 
-            # Dừng container cũ (nếu có)
-            docker stop ielts-hub 2>/dev/null || true
-            docker rm   ielts-hub 2>/dev/null || true
-
-            # Build & start full stack
-            docker compose --env-file .env build
-            docker compose --env-file .env up -d
+            # Build & deploy
+            cd /opt/ielts-hub
+            sudo docker compose --env-file .env build --no-cache
+            sudo docker compose --env-file .env up -d --force-recreate
 
             # Chạy migrations & seed
-            sleep 5
-            docker compose exec -T backend npx knex migrate:latest --env production
-            docker compose exec -T backend npx knex seed:run --env production
+            sleep 8
+            sudo docker compose --env-file .env exec -T backend npx knex migrate:latest --env production
+            sudo docker compose --env-file .env exec -T backend npx knex seed:run --env production
 
             # Clean up
-            docker image prune -f
+            sudo docker image prune -f
 
             echo "✅ Deploy completed at $(date)"
