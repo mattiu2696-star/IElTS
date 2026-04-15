@@ -21,9 +21,13 @@ jobs:
           port: 22
           script: |
             set -e
-            cd /opt/ielts-hub
 
-            # Pull latest code
+            # Clone repo nếu chưa có, pull nếu đã có
+            if [ ! -d /opt/ielts-hub/.git ]; then
+              git clone https://github.com/mattiu2696-star/IElTS.git /opt/ielts-hub
+            fi
+
+            cd /opt/ielts-hub
             git pull origin main
 
             # Build & restart frontend container
